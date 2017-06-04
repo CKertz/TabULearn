@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="139.9998779296875" prefWidth="349.9998779296875" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="UI.addGearController">
+  <children>
+    <Label layoutX="37.0" layoutY="33.0" text="Make:" />
+    <Label layoutX="32.0" layoutY="64.0" text="Model:" />
+    <TextField fx:id="textFieldMake" layoutX="95.0" layoutY="30.0" prefWidth="120.0" />
+    <TextField fx:id="textFieldModel" layoutX="95.0" layoutY="61.0" prefWidth="120.0" />
+    <Button fx:id="btnAddGear" layoutX="222.0" layoutY="105.0" mnemonicParsing="false" onAction="#addNewGear" text="Add" />
+    <Button fx:id="btnCancelGear" layoutX="280.0" layoutY="105.0" mnemonicParsing="false" onAction="#cancelGearAdd" text="Cancel" />
+  </children>
+</AnchorPane>

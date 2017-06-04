@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="140.0" prefWidth="350.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="UI.addTuningController">
+  <children>
+    <Label layoutX="41.0" layoutY="47.0" text="Tuning:" />
+    <TextField fx:id="textFieldTuning" layoutX="99.0" layoutY="44.0" prefWidth="130.0" />
+    <Button fx:id="btnAddTuning" layoutX="208.0" layoutY="106.0" mnemonicParsing="false" onAction="#addNewTuning" text="Add" />
+    <Button fx:id="btnCancelTuning" layoutX="257.0" layoutY="106.0" mnemonicParsing="false" onAction="#cancelTuningAdd" text="Cancel" />
+  </children>
+</AnchorPane>
