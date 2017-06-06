@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.web.*?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="649.999755859375" prefWidth="799.99977792969" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="UI.tabViewController">
+  <children>
+    <WebView fx:id="webViewTabs" prefHeight="499.9998558593725" prefWidth="799.9998779296875" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+    <Button layoutX="652.0" layoutY="573.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="100.0" text="Next" />
+    <Button layoutX="518.0" layoutY="573.0" mnemonicParsing="false" prefHeight="35.0001220703125" prefWidth="100.0" text="Prev" />
+    <Button layoutX="41.0" layoutY="577.0" minHeight="9.0" mnemonicParsing="false" prefHeight="36.0001220703125" prefWidth="99.9998779296875" text="Exit Tab View" />
+    <Button layoutX="297.0" layoutY="500.0" mnemonicParsing="false" text="Rewind" />
+    <Button layoutX="356.0" layoutY="500.0" mnemonicParsing="false" prefWidth="87.0" text="Play/Pause" textOverrun="ELLIPSIS" />
+    <Button layoutX="443.0" layoutY="500.0" mnemonicParsing="false" text="Next" />
+  </children>
+</AnchorPane>
