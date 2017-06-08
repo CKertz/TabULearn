@@ -7,6 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableView;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -25,6 +26,8 @@ public class mainMenuController {
     private Button btnGear;
     @FXML
     private TableView tableLibrary;
+    @FXML
+    private AnchorPane rootPane;
 
     @FXML
     public void importSong() throws Exception{ //pressing Import Button at the main menu will run this code
@@ -40,11 +43,15 @@ public class mainMenuController {
     }
     @FXML
     public void loadTabs() throws Exception{
-        Stage importStage = new Stage();
+
+        AnchorPane tabPane = FXMLLoader.load(getClass().getResource("tabView.fxml"));
+        rootPane.getChildren().setAll(tabPane);
+
+/*        Stage importStage = new Stage();
         Parent root = FXMLLoader.load(getClass().getResource("tabView.fxml"));
         importStage.setTitle("tabView");
-        importStage.setScene(new Scene(root, 800, 500));
-        importStage.show();
+        importStage.setScene(new Scene(root, 800, 650));
+        importStage.show();*/
     }
     @FXML
     public void initialize(){
