@@ -1,11 +1,13 @@
 package UI;
 
+import Models.LibraryRecord;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
@@ -28,6 +30,12 @@ public class mainMenuController {
     private TableView tableLibrary;
     @FXML
     private AnchorPane rootPane;
+    @FXML
+    private TableColumn<LibraryRecord, String> colName;
+    @FXML
+    private TableColumn<LibraryRecord, String> colArtist;
+    @FXML
+    private TableColumn<LibraryRecord, String> colAlbum;
 
     @FXML
     public void importSong() throws Exception{ //pressing Import Button at the main menu will run this code
@@ -56,6 +64,7 @@ public class mainMenuController {
     @FXML
     public void initialize(){
 
+         
 
     }
 

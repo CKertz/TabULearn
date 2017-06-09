@@ -1,9 +1,6 @@
 package DB;
 
-import Models.Gear;
-import Models.Genre;
-import Models.Song;
-import Models.Tuning;
+import Models.*;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -97,6 +94,29 @@ public class dbConnect {
         }
         //return gearList2;
         return gearList;
+    }
+    public ObservableList<LibraryRecord> populateMusicLibrary(){
+        String songSQL = "SELECT songName, songURL, songArtist, songAlbum FROM Song";
+        ObservableList<LibraryRecord> recordList = FXCollections.observableArrayList();
+
+        try(Connection conn = this.connect();
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(songSQL)){
+
+            while (rs.next()){
+                LibraryRecord tempLibraryRecord = new LibraryRecord();
+                tempLibraryRecord.setTitle(rs.getString("songName"));
+                tempLibraryRecord.setURL(rs.getString("songURL"));
+                tempLibraryRecord.setArtist(rs.getString("songArtist"));
+                tempLibraryRecord.setAlbum(rs.getString("songAlbum"));
+
+                recordList.add(tempLibraryRecord);
+            }
+
+        } catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+        return recordList;
     }
     public ObservableList<String> populateTuningComboBox(){
 
