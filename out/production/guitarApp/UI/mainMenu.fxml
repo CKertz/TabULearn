@@ -8,13 +8,13 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="649.9999000000025" prefWidth="800.9999000000025" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="UI.mainMenuController">
+<AnchorPane id="AnchorPane" fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.000199999995" prefWidth="1200.0000779296824" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="UI.mainMenuController">
   <children>
-    <SplitPane dividerPositions="0.20216052502477158" focusTraversable="true" orientation="VERTICAL" prefHeight="649.9999000000025" prefWidth="800.9999000000025" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+    <SplitPane dividerPositions="0.259398431228465" focusTraversable="true" orientation="VERTICAL" prefHeight="649.9999000000025" prefWidth="800.9999000000025" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <items>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
           <children>
-            <AnchorPane prefHeight="159.00009999999747" prefWidth="799.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <AnchorPane prefHeight="189.00009999999747" prefWidth="1004.0000999999975" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <children>
                 <Button fx:id="btnImport" layoutX="14.0" layoutY="94.0" mnemonicParsing="false" onAction="#importSong" text="Import" />
                 <HBox id="HBox" alignment="CENTER" layoutX="12.0" layoutY="43.0" spacing="0.0">
@@ -24,17 +24,17 @@
                     <Button fx:id="btnForward" mnemonicParsing="false" text="Forward" />
                   </children>
                 </HBox>
-                <TextField layoutX="619.0" layoutY="32.0" prefWidth="150.0" promptText="Search" />
+                <TextField layoutX="838.0" layoutY="32.0" prefWidth="150.0" promptText="Search" />
                 <Slider layoutX="235.0" layoutY="32.0" prefWidth="100.0" showTickLabels="false" showTickMarks="false" value="50.0" />
-                <HBox id="HBox" alignment="CENTER" layoutX="400.0" layoutY="94.0" spacing="5.0">
+                <HBox id="HBox" alignment="CENTER" layoutX="490.0" layoutY="94.0" spacing="5.0">
                   <children>
-                    <Button fx:id="btnTab" mnemonicParsing="false" text="Tab" />
+                    <Button fx:id="btnTab" mnemonicParsing="false" onAction="#loadTabs" text="Tab" />
                     <Button fx:id="btnGear" mnemonicParsing="false" text="Gear" />
                   </children>
                 </HBox>
                 <Label fx:id="labelSong" layoutX="406.0" layoutY="23.0" text="" />
                 <Label fx:id="labelArtist" layoutX="454.0" layoutY="23.0" text="" />
-                <MenuBar id="menuBar" layoutX="0.0" layoutY="0.0" prefWidth="799.0">
+                <MenuBar id="menuBar" layoutX="0.0" layoutY="0.0" prefWidth="1004.0">
                   <menus>
                     <Menu mnemonicParsing="false" text="File">
                       <items>
@@ -59,9 +59,9 @@
         </AnchorPane>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
           <children>
-            <SplitPane dividerPositions="0.24968632371392724" focusTraversable="true" prefHeight="483.0" prefWidth="799.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <SplitPane dividerPositions="0.18629908103592313" focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="483.0" prefWidth="799.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <items>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="587.0" prefWidth="273.0">
                   <children>
                     <ListView prefHeight="487.0" prefWidth="196.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0" />
                     <Hyperlink fx:id="hyperLinkNewSelist" layoutX="118.0" layoutY="3.0" text="New..." textFill="GREY" />

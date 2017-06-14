@@ -68,6 +68,9 @@ public class Song {
         this.gearID = gearID;
     }
 
+    public Song (){
+
+    }
     public Song (String songURL){
         this.songURL = songURL;
     }

@@ -38,14 +38,14 @@ public class tabViewController {
     public void loadNextTab(){
          webEngine.load(listedLinks.get(tabCounter));
          tabCounter++;
-         if (tabCounter <= 10){
-             tabCounter = 10;
+         if (tabCounter >= 10){
+             tabCounter = 0;
          }
     }
     @FXML
     public void loadPrevTab(){
         tabCounter--;
-        if (tabCounter >= 0){
+        if (tabCounter <= 0){
             tabCounter = 0;
         }
         webEngine.load(listedLinks.get(tabCounter));

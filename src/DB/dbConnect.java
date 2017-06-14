@@ -23,7 +23,7 @@ public class dbConnect {
 
     private Connection connect(){
 
-        String url = "jdbc:sqlite:C://sqlite/library.db";
+        String url = "jdbc:sqlite:D://sqlite/library.db";
         Connection conn = null;
         try{
             conn = DriverManager.getConnection(url);
@@ -137,18 +137,26 @@ public class dbConnect {
         }
         return tuningList;
     }
-    public TableColumn populateLibraryComponents() throws Exception{
+    public ObservableList<Song> populateLibraryComponents() throws Exception{
 
 
         //query 3 times, one for song details, for genre, for tuning
-        String sql = "SELECT * FROM Song WHERE songName = 'Shoot to Thrill'";
+        String sql = "SELECT * FROM Song";
         final ObservableList<Song> songList = FXCollections.observableArrayList();
         
         try(Connection conn = this.connect();
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql)){
 
-            for(int i=0 ; i<rs.getMetaData().getColumnCount(); i++){
+            while (rs.next()){
+                Song tempSong = new Song();
+                tempSong.setSongName(rs.getString("songName"));
+                tempSong.setSongArtist(rs.getString("songArtist"));
+                tempSong.setSongAlbum(rs.getString("songAlbum"));
+                songList.add(tempSong);
+            }
+
+/*            for(int i=0 ; i<rs.getMetaData().getColumnCount(); i++){
                 //We are using non property style for making dynamic table
                 final int j = i;
                 TableColumn col = new TableColumn(rs.getMetaData().getColumnName(i+1));
@@ -158,13 +166,13 @@ public class dbConnect {
                     }
                 });
                 System.out.println("Column ["+i+"] ");
-                return col;
+                //return col;
                 //tableview.getColumns().addAll(col);
 
-            }
+            }*/
             } catch (SQLException e){
                 System.out.println(e.getMessage());
         }
-        return null;
+        return songList;
     }
 }

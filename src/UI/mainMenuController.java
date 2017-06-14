@@ -1,5 +1,6 @@
 package UI;
 
+import DB.dbConnect;
 import Models.LibraryRecord;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -62,8 +63,9 @@ public class mainMenuController {
         importStage.show();*/
     }
     @FXML
-    public void initialize(){
-
+    public void initialize() throws Exception {
+        dbConnect loadSongs = new dbConnect();
+        loadSongs.populateLibraryComponents();
          
 
     }
