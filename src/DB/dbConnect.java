@@ -175,4 +175,83 @@ public class dbConnect {
         }
         return songList;
     }
+    public ObservableList<LibraryRecord> populateLibraryRecords() throws Exception{
+
+
+        //query 3 times, one for song details, for genre, for tuning
+        String sql = "SELECT * FROM Song";
+        final ObservableList<LibraryRecord> recordList = FXCollections.observableArrayList();
+
+        try(Connection conn = this.connect();
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql)){
+
+            while (rs.next()){
+
+                String title = rs.getString("songName");
+                String artist = rs.getString("songArtist");
+                String album = rs.getString("songAlbum");
+                String url = rs.getString("songURL");
+                newSong newSong = new newSong(title,album,artist,url);
+                recordList.add(newSong);
+            }
+
+/*            for(int i=0 ; i<rs.getMetaData().getColumnCount(); i++){
+                //We are using non property style for making dynamic table
+                final int j = i;
+                TableColumn col = new TableColumn(rs.getMetaData().getColumnName(i+1));
+                col.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ObservableList,String>,ObservableValue<String>>(){
+                    public ObservableValue<String> call(TableColumn.CellDataFeatures<ObservableList, String> param) {
+                        return new SimpleStringProperty(param.getValue().get(j).toString());
+                    }
+                });
+                System.out.println("Column ["+i+"] ");
+                //return col;
+                //tableview.getColumns().addAll(col);
+
+            }*/
+        } catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+        return songList;
+    }
+    public ObservableList<newSong> newPopulateLibraryComponents() throws Exception{
+
+
+        //query 3 times, one for song details, for genre, for tuning
+        String sql = "SELECT * FROM Song";
+        final ObservableList<newSong> songList = FXCollections.observableArrayList();
+
+        try(Connection conn = this.connect();
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql)){
+
+            while (rs.next()){
+
+                String title = rs.getString("songName");
+                String artist = rs.getString("songArtist");
+                String album = rs.getString("songAlbum");
+                newSong newSong = new newSong(title,album,artist);
+                songList.add(newSong);
+            }
+
+/*            for(int i=0 ; i<rs.getMetaData().getColumnCount(); i++){
+                //We are using non property style for making dynamic table
+                final int j = i;
+                TableColumn col = new TableColumn(rs.getMetaData().getColumnName(i+1));
+                col.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ObservableList,String>,ObservableValue<String>>(){
+                    public ObservableValue<String> call(TableColumn.CellDataFeatures<ObservableList, String> param) {
+                        return new SimpleStringProperty(param.getValue().get(j).toString());
+                    }
+                });
+                System.out.println("Column ["+i+"] ");
+                //return col;
+                //tableview.getColumns().addAll(col);
+
+            }*/
+        } catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+        return songList;
+    }
 }

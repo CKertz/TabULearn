@@ -68,7 +68,15 @@ public class Song {
         this.gearID = gearID;
     }
 
-    public Song (){
+    public Song(){
+
+    }
+
+    public Song (String songName, String songArtist, String songAlbum){
+
+        this.songAlbum = songAlbum;
+        this.songArtist = songArtist;
+        this.songName = songName;
 
     }
     public Song (String songURL){
