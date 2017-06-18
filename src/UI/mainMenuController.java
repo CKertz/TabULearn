@@ -3,11 +3,13 @@ package UI;
 import DB.dbConnect;
 import Models.LibraryRecord;
 import Models.Song;
+import Models.newSong;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.Parent;
@@ -22,28 +24,48 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 
 /**
  * Created by Cooper on 5/14/2017.
  */
-public class mainMenuController {
-    @FXML
-    private Button btnImport;
-    @FXML
-    private Button btnTab;
-    @FXML
-    private Button btnGear;
-    @FXML
-    private TableView<Song> tableLibrary;
+public class mainMenuController implements Initializable {
     @FXML
     private AnchorPane rootPane;
     @FXML
-    private TableColumn colName;
+    private TableView<LibraryRecord> tableLibrary;
     @FXML
-    private TableColumn colArtist;
+    private TableColumn<LibraryRecord, String> colName;
     @FXML
-    private TableColumn colAlbum;
+    private TableColumn<LibraryRecord, String> colArtist;
+    @FXML
+    private TableColumn<LibraryRecord, String> colAlbum;
+
+    dbConnect loadSongs = new dbConnect();
+    ObservableList<LibraryRecord> data = FXCollections.observableArrayList(
+            new LibraryRecord("Back in Black", "AC/DC", "Greatest Hits","7")
+    );
+    @FXML
+    public void initialize(URL Location, ResourceBundle resources) {
+
+
+        try {
+            data = loadSongs.populateLibraryRecords();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+        colName.setCellValueFactory(new PropertyValueFactory<>("Title"));
+        colAlbum.setCellValueFactory(new PropertyValueFactory<>("Album"));
+        colArtist.setCellValueFactory(new PropertyValueFactory<>("Artist"));
+
+        tableLibrary.setItems(data);
+
+
+    }
 
     @FXML
     public void importSong() throws Exception{ //pressing Import Button at the main menu will run this code
@@ -69,36 +91,6 @@ public class mainMenuController {
         importStage.setScene(new Scene(root, 800, 650));
         importStage.show();*/
     }
-    @FXML
-    public void initialize() throws Exception {
-        dbConnect loadSongs = new dbConnect();
 
-       // ObservableList<Song> songHolder = loadSongs.populateLibraryComponents();
-
-        tableLibrary = new TableView<Song>();
-
-        colName = new TableColumn<>("Title");
-        colName.setCellValueFactory(new PropertyValueFactory<Song,String>("songName"));
-
-        colAlbum = new TableColumn<>("Album");
-        colAlbum.setCellValueFactory(new PropertyValueFactory<Song,String>("songAlbum"));
-
-        colArtist = new TableColumn<>("Artist");
-        colArtist.setCellValueFactory(new PropertyValueFactory<Song,String>("songArtist"));
-
-        final ObservableList<Song> data = FXCollections.observableArrayList(new Song("Back in Black","AC/DC","Back in Black Album"));
-        //songHolder = FXCollections.observableArrayList();
-        ObservableList<Song> songHolder = loadSongs.populateLibraryComponents();
-
-        tableLibrary.setItems(songHolder);
-        tableLibrary.getColumns().addAll(colName,colArtist,colAlbum);
-        tableLibrary.setVisible(true);
-
-        final VBox vbox = new VBox();
-        vbox.setSpacing(5);
-        vbox.setPadding(new Insets(10, 0, 0, 10));
-
-
-    }
 
 }

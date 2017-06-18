@@ -95,7 +95,7 @@ public class dbConnect {
         //return gearList2;
         return gearList;
     }
-    public ObservableList<LibraryRecord> populateMusicLibrary(){
+/*    public ObservableList<LibraryRecord> populateMusicLibrary(){
         String songSQL = "SELECT songName, songURL, songArtist, songAlbum FROM Song";
         ObservableList<LibraryRecord> recordList = FXCollections.observableArrayList();
 
@@ -117,7 +117,7 @@ public class dbConnect {
             System.out.println(e.getMessage());
         }
         return recordList;
-    }
+    }*/
     public ObservableList<String> populateTuningComboBox(){
 
         String sql = "SELECT tuningName FROM Tuning";
@@ -192,28 +192,14 @@ public class dbConnect {
                 String artist = rs.getString("songArtist");
                 String album = rs.getString("songAlbum");
                 String url = rs.getString("songURL");
-                newSong newSong = new newSong(title,album,artist,url);
-                recordList.add(newSong);
+                LibraryRecord tempRecord = new LibraryRecord(title,album,artist,url);
+                recordList.add(tempRecord);
             }
 
-/*            for(int i=0 ; i<rs.getMetaData().getColumnCount(); i++){
-                //We are using non property style for making dynamic table
-                final int j = i;
-                TableColumn col = new TableColumn(rs.getMetaData().getColumnName(i+1));
-                col.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ObservableList,String>,ObservableValue<String>>(){
-                    public ObservableValue<String> call(TableColumn.CellDataFeatures<ObservableList, String> param) {
-                        return new SimpleStringProperty(param.getValue().get(j).toString());
-                    }
-                });
-                System.out.println("Column ["+i+"] ");
-                //return col;
-                //tableview.getColumns().addAll(col);
-
-            }*/
         } catch (SQLException e){
             System.out.println(e.getMessage());
         }
-        return songList;
+        return recordList;
     }
     public ObservableList<newSong> newPopulateLibraryComponents() throws Exception{
 
@@ -235,20 +221,6 @@ public class dbConnect {
                 songList.add(newSong);
             }
 
-/*            for(int i=0 ; i<rs.getMetaData().getColumnCount(); i++){
-                //We are using non property style for making dynamic table
-                final int j = i;
-                TableColumn col = new TableColumn(rs.getMetaData().getColumnName(i+1));
-                col.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ObservableList,String>,ObservableValue<String>>(){
-                    public ObservableValue<String> call(TableColumn.CellDataFeatures<ObservableList, String> param) {
-                        return new SimpleStringProperty(param.getValue().get(j).toString());
-                    }
-                });
-                System.out.println("Column ["+i+"] ");
-                //return col;
-                //tableview.getColumns().addAll(col);
-
-            }*/
         } catch (SQLException e){
             System.out.println(e.getMessage());
         }

@@ -1,17 +1,26 @@
 package Models;
 
+import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 /**
  * Created by Cooper on 6/8/2017.
  */
 public class LibraryRecord {
-    private StringProperty Title;
-    private StringProperty Artist;
-    private StringProperty Album;
-    private StringProperty Genre;
-    private StringProperty Tuning;
-    private StringProperty URL;
+    private SimpleStringProperty Title;
+    private SimpleStringProperty Artist;
+    private SimpleStringProperty Album;
+    private SimpleStringProperty Genre;
+    private SimpleStringProperty Tuning;
+    private SimpleStringProperty URL;
+
+
+    public LibraryRecord(String title, String artist, String album, String url){
+        this.Album = new SimpleStringProperty(album);
+        this.Artist = new SimpleStringProperty(artist);
+        this.Title = new SimpleStringProperty(title);
+        this.URL = new SimpleStringProperty(url);
+    }
 
     public String getTitle() {
         return Title.get();

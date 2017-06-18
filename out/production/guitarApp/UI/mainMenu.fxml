@@ -8,7 +8,7 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.000199999995" prefWidth="1200.0000779296824" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UI.newMainMenuController">
+<AnchorPane id="AnchorPane" fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.000199999995" prefWidth="1200.0000779296824" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UI.mainMenuController">
   <children>
     <SplitPane dividerPositions="0.259398431228465" focusTraversable="true" orientation="VERTICAL" prefHeight="649.9999000000025" prefWidth="800.9999000000025" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <items>
@@ -25,7 +25,7 @@
                   </children>
                 </HBox>
                 <TextField layoutX="986.0" layoutY="35.0" prefWidth="150.0" promptText="Search" />
-                <Slider layoutX="235.0" layoutY="32.0" prefWidth="100.0" showTickLabels="false" showTickMarks="false" value="50.0" />
+                <Slider layoutX="306.0" layoutY="34.0" prefWidth="100.0" showTickLabels="false" showTickMarks="false" value="50.0" />
                 <HBox id="HBox" alignment="CENTER" layoutX="490.0" layoutY="94.0" spacing="5.0">
                   <children>
                     <Button fx:id="btnTab" mnemonicParsing="false" onAction="#loadTabs" text="Tab" />
@@ -34,7 +34,7 @@
                 </HBox>
                 <Label fx:id="labelSong" layoutX="406.0" layoutY="23.0" text="" />
                 <Label fx:id="labelArtist" layoutX="454.0" layoutY="23.0" text="" />
-                <MenuBar id="menuBar" layoutX="0.0" layoutY="0.0" prefHeight="32.0" prefWidth="1200.0">
+                <MenuBar id="menuBar" layoutX="0.0" layoutY="0.0" prefHeight="32.0" prefWidth="1199.0">
                   <menus>
                     <Menu mnemonicParsing="false" text="File">
                       <items>

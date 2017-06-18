@@ -9,6 +9,8 @@ public class newSong {
     private SimpleStringProperty songName;
     private SimpleStringProperty songArtist;
     private SimpleStringProperty songAlbum;
+    private SimpleStringProperty Genre;
+    private SimpleStringProperty Tuning;
 
     public newSong(String songName, String songAlbum, String songArtist){
         this.songAlbum = new SimpleStringProperty(songAlbum);

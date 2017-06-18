@@ -5,6 +5,7 @@ import Models.Gear;
 import Models.Song;
 
 import UI.chooseFile;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -54,6 +55,7 @@ public class importMenuController {
 
     @FXML
     public void importSong(){
+
 
         Song songToBeImported = new Song(
                 textFieldSongTitle.getText(),
