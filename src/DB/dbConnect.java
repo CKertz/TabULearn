@@ -43,9 +43,20 @@ public class dbConnect {
             System.out.println(e.getMessage());
         }
     }
+    public void insertGenreIntoDB(Genre genreToBeInserted){
+        String query = "INSERT INTO Genre (genreName) VALUES (?)";
+
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+            pstmt.setString(1, genreToBeInserted.getGenreName());
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
     public void insertIntoLibrary(Song songToBeInserted){
 
-        String query = "INSERT INTO Song (songName, songURL, songArtist, songAlbum) VALUES (?,?,?,?)";
+        String query = "INSERT INTO Song (songName, songURL, songArtist, songAlbum,tuningID, genreID, gearID) VALUES (?,?,?,?,?,?,?)";
 
         try (Connection conn = this.connect();
              PreparedStatement pstmt = conn.prepareStatement(query)) {
@@ -53,6 +64,9 @@ public class dbConnect {
             pstmt.setString(2, songToBeInserted.getSongURL());
             pstmt.setString(3, songToBeInserted.getSongArtist());
             pstmt.setString(4, songToBeInserted.getSongAlbum());
+            pstmt.setInt(5, songToBeInserted.getGenreID());
+            pstmt.setInt(6, songToBeInserted.getGearID());
+
 
             pstmt.executeUpdate();
         } catch (SQLException e) {
@@ -75,7 +89,6 @@ public class dbConnect {
     public ObservableList<String> populateGearComboBox(){
         String sql = "SELECT gearMake, gearModel FROM Gear";
         ObservableList<String> gearList = FXCollections.observableArrayList();
-        ObservableList<Gear> gearList2 = FXCollections.observableArrayList();
 
         try(Connection conn = this.connect();
             Statement stmt = conn.createStatement();
@@ -86,38 +99,33 @@ public class dbConnect {
                 tempGear.setGearMake(rs.getString("gearMake"));
                 tempGear.setGearModel(rs.getString("gearModel"));
                 gearList.add(tempGear.getGearMake() + " " + tempGear.getGearModel()); //populate arrayList with make/model pairs. ex: 'Roland Cube30'
-                gearList2.add(tempGear);
+
             }
 
         } catch (SQLException e){
             System.out.println(e.getMessage());
         }
-        //return gearList2;
         return gearList;
     }
-/*    public ObservableList<LibraryRecord> populateMusicLibrary(){
-        String songSQL = "SELECT songName, songURL, songArtist, songAlbum FROM Song";
-        ObservableList<LibraryRecord> recordList = FXCollections.observableArrayList();
+    public ObservableList<String> populateGenreComboBox(){
+
+        String sql = "SELECT genreName FROM Genre";
+        final ObservableList<String> genreList = FXCollections.observableArrayList();
 
         try(Connection conn = this.connect();
             Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery(songSQL)){
+            ResultSet rs = stmt.executeQuery(sql)){
 
             while (rs.next()){
-                LibraryRecord tempLibraryRecord = new LibraryRecord();
-                tempLibraryRecord.setTitle(rs.getString("songName"));
-                tempLibraryRecord.setURL(rs.getString("songURL"));
-                tempLibraryRecord.setArtist(rs.getString("songArtist"));
-                tempLibraryRecord.setAlbum(rs.getString("songAlbum"));
+                genreList.add(rs.getString("genreName"));
 
-                recordList.add(tempLibraryRecord);
             }
 
         } catch (SQLException e){
             System.out.println(e.getMessage());
         }
-        return recordList;
-    }*/
+        return genreList;
+    }
     public ObservableList<String> populateTuningComboBox(){
 
         String sql = "SELECT tuningName FROM Tuning";
@@ -192,7 +200,7 @@ public class dbConnect {
                 String artist = rs.getString("songArtist");
                 String album = rs.getString("songAlbum");
                 String url = rs.getString("songURL");
-                LibraryRecord tempRecord = new LibraryRecord(title,album,artist,url);
+                LibraryRecord tempRecord = new LibraryRecord(title,artist,album,url);
                 recordList.add(tempRecord);
             }
 
@@ -201,7 +209,7 @@ public class dbConnect {
         }
         return recordList;
     }
-    public ObservableList<newSong> newPopulateLibraryComponents() throws Exception{
+    public ObservableList<newSong> newPopulateLibraryComponents() throws Exception{ //@TODO to be deleted once LibraryRecord is implemented
 
 
         //query 3 times, one for song details, for genre, for tuning

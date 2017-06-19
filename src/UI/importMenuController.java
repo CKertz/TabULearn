@@ -38,7 +38,7 @@ public class importMenuController {
     @FXML
     private TextField textFieldSongArtist;
     @FXML
-    private TextField textfieldArtistGenre;
+    private ComboBox comboBoxGenre;
     @FXML
     private Hyperlink hyperlinkSongURL;
     @FXML
@@ -56,12 +56,15 @@ public class importMenuController {
     @FXML
     public void importSong(){
 
-
+//@TODO alter this to insert songs with all fields correctly 
         Song songToBeImported = new Song(
                 textFieldSongTitle.getText(),
                 textFieldSongURL.getText(),
                 textFieldSongArtist.getText(),
-                textFieldSongAlbum.getText());
+                textFieldSongAlbum.getText(),
+                comboBoxGenre.getSelectionModel().getSelectedItem().toString()
+        );
+
         dbConnect insertingSong = new dbConnect();
 
 
@@ -87,6 +90,8 @@ public class importMenuController {
 
         ObservableList<String> gearList = FXCollections.observableArrayList();
         ObservableList<String> tuningList = FXCollections.observableArrayList();
+        ObservableList<String> genreList = FXCollections.observableArrayList();
+
         dbConnect getData = new dbConnect();
         tuningList = getData.populateTuningComboBox();
         comboBoxTuning.getItems().removeAll(comboBoxTuning.getItems());
@@ -103,6 +108,27 @@ public class importMenuController {
                         e.printStackTrace();
                     }
                     importStage.setTitle("Add New Tuning");
+                    importStage.setScene(new Scene(root, 505, 235));
+                    importStage.show();
+                }
+
+            }
+        });
+        genreList = getData.populateGenreComboBox();
+        comboBoxGenre.getItems().removeAll(comboBoxGenre.getItems());
+        comboBoxGenre.getItems().addAll(genreList);
+        comboBoxGenre.valueProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue observable, String oldValue, String newValue) {
+                if (newValue.equals("Add a genre...")){
+                    Stage importStage = new Stage();
+                    Parent root = null;
+                    try {
+                        root = FXMLLoader.load(getClass().getResource("addGenre.fxml"));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    importStage.setTitle("Add New Genre");
                     importStage.setScene(new Scene(root, 505, 235));
                     importStage.show();
                 }

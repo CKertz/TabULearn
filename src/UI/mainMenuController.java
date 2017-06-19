@@ -42,10 +42,12 @@ public class mainMenuController implements Initializable {
     private TableColumn<LibraryRecord, String> colArtist;
     @FXML
     private TableColumn<LibraryRecord, String> colAlbum;
-
+    @FXML
+    private TableColumn<LibraryRecord, String> colGenre;
+    @FXML
+    private TableColumn<LibraryRecord, String> colTuning;
     dbConnect loadSongs = new dbConnect();
     ObservableList<LibraryRecord> data = FXCollections.observableArrayList(
-            new LibraryRecord("Back in Black", "AC/DC", "Greatest Hits","7")
     );
     @FXML
     public void initialize(URL Location, ResourceBundle resources) {
@@ -59,8 +61,10 @@ public class mainMenuController implements Initializable {
 
 
         colName.setCellValueFactory(new PropertyValueFactory<>("Title"));
-        colAlbum.setCellValueFactory(new PropertyValueFactory<>("Album"));
         colArtist.setCellValueFactory(new PropertyValueFactory<>("Artist"));
+        colAlbum.setCellValueFactory(new PropertyValueFactory<>("Album"));
+/*        colAlbum.setCellValueFactory(new PropertyValueFactory<>("Genre"));
+        colAlbum.setCellValueFactory(new PropertyValueFactory<>("Tuning"));*/
 
         tableLibrary.setItems(data);
 

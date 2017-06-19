@@ -25,7 +25,7 @@
                   </children>
                 </HBox>
                 <TextField layoutX="986.0" layoutY="35.0" prefWidth="150.0" promptText="Search" />
-                <Slider layoutX="306.0" layoutY="34.0" prefWidth="100.0" showTickLabels="false" showTickMarks="false" value="50.0" />
+                <Slider layoutX="306.0" layoutY="34.0" prefHeight="18.0" prefWidth="150.0" showTickLabels="false" showTickMarks="false" value="50.0" />
                 <HBox id="HBox" alignment="CENTER" layoutX="490.0" layoutY="94.0" spacing="5.0">
                   <children>
                     <Button fx:id="btnTab" mnemonicParsing="false" onAction="#loadTabs" text="Tab" />
@@ -76,9 +76,11 @@
                   <children>
                     <TableView fx:id="tableLibrary" prefHeight="481.0" prefWidth="595.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <columns>
-                                    <TableColumn fx:id="colName" prefWidth="241.0" text="Title" />
-                                    <TableColumn fx:id="colArtist" minWidth="0.0" prefWidth="225.0" text="Artist" />
-                                    <TableColumn fx:id="colAlbum" prefWidth="226.0" text="Album" />
+                                    <TableColumn fx:id="colName" prefWidth="225.0" text="Title" />
+                                    <TableColumn fx:id="colArtist" minWidth="0.0" prefWidth="214.0" text="Artist" />
+                                    <TableColumn fx:id="colAlbum" prefWidth="194.0" text="Album" />
+                                    <TableColumn fx:id="colGenre" prefWidth="163.0" text="Genre" />
+                                    <TableColumn fx:id="colTuning" prefWidth="173.0" text="Tuning" />
                                  </columns></TableView>
                   </children>
                 </AnchorPane>

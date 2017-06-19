@@ -29,6 +29,14 @@ public class Song {
         setSongAlbum(songAlbum);
         setSongURL(songURL);
     }
+    public Song(String songName, String songURL, String songArtist, String songAlbum, String genre){
+        setSongName(songName);
+        setSongArtist(songArtist);
+        setSongAlbum(songAlbum);
+        setSongURL(songURL);
+        setSongGenre(genre);
+
+    }
 
     private SimpleIntegerProperty songID;
     private SimpleStringProperty songName;
@@ -38,6 +46,19 @@ public class Song {
     private SimpleIntegerProperty tuningID;
     private SimpleIntegerProperty genreID;
     private SimpleIntegerProperty gearID;
+    private SimpleStringProperty songGenre;
+
+    public String getSongGenre() {
+        return songGenre.get();
+    }
+
+    public SimpleStringProperty songGenreProperty() {
+        return songGenre;
+    }
+
+    public void setSongGenre(String songGenre) {
+        this.songGenre.set(songGenre);
+    }
 
     public int getSongID() {
         return songID.get();
