@@ -22,6 +22,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -55,20 +56,25 @@ public class importMenuController {
 
     @FXML
     public void importSong(){
+        List<String>gearAdded = listViewAddedGear.getItems();
+        System.out.println(comboBoxGenre.getSelectionModel().getSelectedItem());
+        //String test = comboBoxGenre.getSelectionModel().getSelectedItem().toString();
+        Song song = new Song();
+        song.setSongURL(textFieldSongURL.getText());
 
-//@TODO alter this to insert songs with all fields correctly 
+//@TODO alter this to insert songs with all fields correctly
         Song songToBeImported = new Song(
                 textFieldSongTitle.getText(),
                 textFieldSongURL.getText(),
                 textFieldSongArtist.getText(),
-                textFieldSongAlbum.getText(),
-                comboBoxGenre.getSelectionModel().getSelectedItem().toString()
+                textFieldSongAlbum.getText()
+
         );
 
         dbConnect insertingSong = new dbConnect();
 
 
-        insertingSong.insertIntoLibrary(songToBeImported);
+        insertingSong.insertIntoLibrary(songToBeImported,gearAdded);
 
     }
     @FXML

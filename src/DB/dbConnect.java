@@ -11,6 +11,7 @@ import playSongTest.playSong;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Cooper on 5/18/2017.
@@ -54,26 +55,47 @@ public class dbConnect {
             System.out.println(e.getMessage());
         }
     }
-    public void insertIntoLibrary(Song songToBeInserted){
+    public String getSongID(String url){
+        String sql = "SELECT songID FROM Song WHERE songURL = '"+url+"'";
+        String result = null;
+        try(Connection conn = this.connect();
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql)){
 
-        String query = "INSERT INTO Song (songName, songURL, songArtist, songAlbum,tuningID, genreID, gearID) VALUES (?,?,?,?,?,?,?)";
+            while (rs.next()){
+                result = rs.getString("songID");
+            }
 
-        try (Connection conn = this.connect();
-             PreparedStatement pstmt = conn.prepareStatement(query)) {
-            pstmt.setString(1, songToBeInserted.getSongName());
-            pstmt.setString(2, songToBeInserted.getSongURL());
-            pstmt.setString(3, songToBeInserted.getSongArtist());
-            pstmt.setString(4, songToBeInserted.getSongAlbum());
-            pstmt.setInt(5, songToBeInserted.getGenreID());
-            pstmt.setInt(6, songToBeInserted.getGearID());
-
-
-            pstmt.executeUpdate();
-        } catch (SQLException e) {
+        } catch (SQLException e){
             System.out.println(e.getMessage());
         }
+        return result;
     }
-    public void insertGearIntoDB(Gear gearToBeInserted){
+    public void insertIntoLibrary(Song songToBeInserted, List<String> gearList){
+
+            String songURLInserted = songToBeInserted.getSongURL();
+
+            String query = "INSERT INTO Song (songName, songURL, songArtist, songAlbum,tuningID, genreID, gearID) VALUES (?,?,?,?,?,?,?)";
+
+            try (Connection conn = this.connect();
+                 PreparedStatement pstmt = conn.prepareStatement(query)) {
+                 pstmt.setString(1, songToBeInserted.getSongName());
+                 pstmt.setString(2, songToBeInserted.getSongURL());
+                 pstmt.setString(3, songToBeInserted.getSongArtist());
+                 pstmt.setString(4, songToBeInserted.getSongAlbum());
+                 pstmt.setInt(5, songToBeInserted.getGenreID());
+                 pstmt.setInt(6, songToBeInserted.getGearID());
+
+                pstmt.executeUpdate();
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+            String currentSongID = getSongID(songURLInserted);
+            System.out.println(currentSongID);
+
+    }
+
+    public void insertNewGearIntoDB(Gear gearToBeInserted){
         String query = "INSERT INTO Gear (gearMake, gearModel) VALUES (?,?)";
 
         try (Connection conn = this.connect();

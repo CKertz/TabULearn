@@ -80,8 +80,9 @@ public class Song {
         return songName;
     }
 
-    public void setSongName(String songName) {
-        this.songName.set(songName);
+    public void setSongName(String songNamer) {
+        //this.songName.set(songName);
+        songName.set(songNamer);
     }
 
     public String getSongURL() {

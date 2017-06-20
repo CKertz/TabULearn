@@ -28,7 +28,7 @@ public class addGearController {
         gear.setGearModel(textFieldModel.getText());
         gear.setGearMake(textFieldMake.getText());
         dbConnect DB = new dbConnect();
-        DB.insertGearIntoDB(gear);
+        DB.insertNewGearIntoDB(gear);
     }
     @FXML
     public void cancelGearAdd(ActionEvent event){
