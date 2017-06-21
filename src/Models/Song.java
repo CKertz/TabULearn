@@ -38,15 +38,15 @@ public class Song {
 
     }
 
-    private SimpleIntegerProperty songID;
-    private SimpleStringProperty songName;
-    private SimpleStringProperty songURL;
-    private SimpleStringProperty songArtist;
-    private SimpleStringProperty songAlbum;
-    private SimpleIntegerProperty tuningID;
-    private SimpleIntegerProperty genreID;
-    private SimpleIntegerProperty gearID;
-    private SimpleStringProperty songGenre;
+    private SimpleIntegerProperty songID = new SimpleIntegerProperty();
+    private SimpleStringProperty songName = new SimpleStringProperty();
+    private SimpleStringProperty songURL= new SimpleStringProperty();
+    private SimpleStringProperty songArtist= new SimpleStringProperty();
+    private SimpleStringProperty songAlbum= new SimpleStringProperty();
+    private SimpleIntegerProperty tuningID = new SimpleIntegerProperty();
+    private SimpleIntegerProperty genreID =new SimpleIntegerProperty();
+    private SimpleIntegerProperty gearID =new SimpleIntegerProperty();
+    private SimpleStringProperty songGenre= new SimpleStringProperty();
 
     public String getSongGenre() {
         return songGenre.get();

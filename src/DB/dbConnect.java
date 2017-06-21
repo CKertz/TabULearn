@@ -91,10 +91,10 @@ public class dbConnect {
                 System.out.println(e.getMessage());
             }
             String currentSongID = getSongID(songURLInserted);
-            System.out.println(currentSongID);
+
 
     }
-
+    
     public void insertNewGearIntoDB(Gear gearToBeInserted){
         String query = "INSERT INTO Gear (gearMake, gearModel) VALUES (?,?)";
 

@@ -57,25 +57,26 @@ public class importMenuController {
     @FXML
     public void importSong(){
         List<String>gearAdded = listViewAddedGear.getItems();
-        System.out.println(comboBoxGenre.getSelectionModel().getSelectedItem());
+/*        System.out.println(comboBoxGenre.getSelectionModel().getSelectedItem());
         //String test = comboBoxGenre.getSelectionModel().getSelectedItem().toString();
         Song song = new Song();
-        song.setSongURL(textFieldSongURL.getText());
+        song.setSongURL(textFieldSongURL.getText());*/
 
 //@TODO alter this to insert songs with all fields correctly
         Song songToBeImported = new Song(
                 textFieldSongTitle.getText(),
                 textFieldSongURL.getText(),
                 textFieldSongArtist.getText(),
-                textFieldSongAlbum.getText()
-
+                textFieldSongAlbum.getText(),
+                comboBoxGenre.getSelectionModel().getSelectedItem().toString()
         );
 
         dbConnect insertingSong = new dbConnect();
 
 
         insertingSong.insertIntoLibrary(songToBeImported,gearAdded);
-
+        Stage stage = (Stage) btnCancel.getScene().getWindow();
+        stage.close();
     }
     @FXML
     public void removeSelectedGear(){

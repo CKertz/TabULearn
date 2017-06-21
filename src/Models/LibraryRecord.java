@@ -7,12 +7,12 @@ import javafx.beans.property.StringProperty;
  * Created by Cooper on 6/8/2017.
  */
 public class LibraryRecord {
-    private SimpleStringProperty Title;
-    private SimpleStringProperty Artist;
-    private SimpleStringProperty Album;
-    private SimpleStringProperty Genre;
-    private SimpleStringProperty Tuning;
-    private SimpleStringProperty URL;
+    private SimpleStringProperty Title = new SimpleStringProperty();
+    private SimpleStringProperty Artist = new SimpleStringProperty();;
+    private SimpleStringProperty Album = new SimpleStringProperty();;
+    private SimpleStringProperty Genre = new SimpleStringProperty();;
+    private SimpleStringProperty Tuning = new SimpleStringProperty();;
+    private SimpleStringProperty URL = new SimpleStringProperty();;
 
 
     public LibraryRecord(String title, String artist, String album, String url){
