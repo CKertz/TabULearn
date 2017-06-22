@@ -24,10 +24,11 @@ public class dbConnect {
 
     private Connection connect(){
 
-        String url = "jdbc:sqlite:D://sqlite/library.db";
+        //String url = "jdbc:sqlite:D://sqlite/library.db";
+        String testurl = "jdbc:sqlite:D://Old PC Transfer//Old PC Transfer/SQLite/library.db";
         Connection conn = null;
         try{
-            conn = DriverManager.getConnection(url);
+            conn = DriverManager.getConnection(testurl);
         } catch (SQLException e){
             System.out.println(e.getMessage());
         }
@@ -55,15 +56,15 @@ public class dbConnect {
             System.out.println(e.getMessage());
         }
     }
-    public String getSongID(String url){
+    public int getSongID(String url){
         String sql = "SELECT songID FROM Song WHERE songURL = '"+url+"'";
-        String result = null;
+        int result = 0;
         try(Connection conn = this.connect();
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql)){
 
             while (rs.next()){
-                result = rs.getString("songID");
+                result = rs.getInt("songID");
             }
 
         } catch (SQLException e){
@@ -90,11 +91,25 @@ public class dbConnect {
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
             }
-            String currentSongID = getSongID(songURLInserted);
+
 
 
     }
-    
+    public void insertGearLayoutIntoDB(List<String> gearList, int songID){
+        String query = "INSERT INTO GearLayout (gearPiece, songID) VALUES (?,?)";
+
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+            for (int i = 0; i < gearList.size(); i++){
+                pstmt.setString(1,gearList.get(i));
+                pstmt.setInt(2, songID);
+                pstmt.executeUpdate();
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
     public void insertNewGearIntoDB(Gear gearToBeInserted){
         String query = "INSERT INTO Gear (gearMake, gearModel) VALUES (?,?)";
 
@@ -109,7 +124,7 @@ public class dbConnect {
     }
 
     public ObservableList<String> populateGearComboBox(){
-        String sql = "SELECT gearMake, gearModel FROM Gear";
+        String sql = "SELECT distinct gearMake, gearModel FROM Gear";
         ObservableList<String> gearList = FXCollections.observableArrayList();
 
         try(Connection conn = this.connect();

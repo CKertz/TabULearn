@@ -72,9 +72,9 @@ public class importMenuController {
         );
 
         dbConnect insertingSong = new dbConnect();
-
-
         insertingSong.insertIntoLibrary(songToBeImported,gearAdded);
+        int songID = insertingSong.getSongID(textFieldSongURL.getText());
+        insertingSong.insertGearLayoutIntoDB(gearAdded,songID);
         Stage stage = (Stage) btnCancel.getScene().getWindow();
         stage.close();
     }
