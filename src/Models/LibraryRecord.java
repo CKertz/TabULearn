@@ -15,11 +15,12 @@ public class LibraryRecord {
     private SimpleStringProperty URL = new SimpleStringProperty();;
 
 
-    public LibraryRecord(String title, String artist, String album, String url){
+    public LibraryRecord(String title, String artist, String album, String url, String tuning){
         this.Album = new SimpleStringProperty(album);
         this.Artist = new SimpleStringProperty(artist);
         this.Title = new SimpleStringProperty(title);
         this.URL = new SimpleStringProperty(url);
+        this.Tuning = new SimpleStringProperty(tuning);
     }
 
     public String getTitle() {

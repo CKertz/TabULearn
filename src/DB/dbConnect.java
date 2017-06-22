@@ -233,11 +233,13 @@ public class dbConnect {
 
             while (rs.next()){
 
+                int tuningID = rs.getInt("tuningID");
+                String tuning = getTuningName(tuningID);
                 String title = rs.getString("songName");
                 String artist = rs.getString("songArtist");
                 String album = rs.getString("songAlbum");
                 String url = rs.getString("songURL");
-                LibraryRecord tempRecord = new LibraryRecord(title,artist,album,url);
+                LibraryRecord tempRecord = new LibraryRecord(title,artist,album,url,tuning);
                 recordList.add(tempRecord);
             }
 
@@ -245,6 +247,22 @@ public class dbConnect {
             System.out.println(e.getMessage());
         }
         return recordList;
+    }
+    public String getTuningName(int tuningID){
+        String sql = "SELECT tuningName FROM Tuning WHERE tuningID = '"+tuningID+"'";
+        String result = null;
+        try(Connection conn = this.connect();
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql)){
+
+            while (rs.next()){
+                result = rs.getString("tuningName");
+            }
+
+        } catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+        return result;
     }
     public ObservableList<newSong> newPopulateLibraryComponents() throws Exception{ //@TODO to be deleted once LibraryRecord is implemented
 
