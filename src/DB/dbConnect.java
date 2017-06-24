@@ -72,11 +72,47 @@ public class dbConnect {
         }
         return result;
     }
+    public String getGenreNameFromDB(int genreID){
+
+        String sql = "SELECT genreName FROM Genre WHERE genreID = ?";
+        String result = null;
+        try {
+            Connection conn = connect();
+            PreparedStatement ptsmt = conn.prepareStatement(sql);
+            ptsmt.setInt(1,genreID);
+            ResultSet rs = ptsmt.executeQuery();
+            while (rs.next()){
+                result = rs.getString("genreName");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+    public int getGenreID(String genre){
+
+        String sql = "SELECT genreID FROM Genre WHERE genreName = ?";
+        int result = 0;
+        try {
+            Connection conn = connect();
+            PreparedStatement ptsmt = conn.prepareStatement(sql);
+            ptsmt.setString(1,genre);
+            ResultSet rs = ptsmt.executeQuery();
+            while (rs.next()){
+                result = rs.getInt("genreID");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
     public void insertIntoLibrary(Song songToBeInserted, List<String> gearList){
 
             String songURLInserted = songToBeInserted.getSongURL();
 
-            String query = "INSERT INTO Song (songName, songURL, songArtist, songAlbum,tuningID, genreID, gearID) VALUES (?,?,?,?,?,?,?)";
+            String query = "INSERT INTO Song (songName, songURL, songArtist, songAlbum, genreID, tuningID) VALUES (?,?,?,?,?,?)";
 
             try (Connection conn = this.connect();
                  PreparedStatement pstmt = conn.prepareStatement(query)) {
@@ -85,7 +121,7 @@ public class dbConnect {
                  pstmt.setString(3, songToBeInserted.getSongArtist());
                  pstmt.setString(4, songToBeInserted.getSongAlbum());
                  pstmt.setInt(5, songToBeInserted.getGenreID());
-                 pstmt.setInt(6, songToBeInserted.getGearID());
+                 pstmt.setInt(6, songToBeInserted.getTuningID());
 
                 pstmt.executeUpdate();
             } catch (SQLException e) {
@@ -235,11 +271,13 @@ public class dbConnect {
 
                 int tuningID = rs.getInt("tuningID");
                 String tuning = getTuningName(tuningID);
+                int genreID = rs.getInt("genreID");
+                String genre = getGenreNameFromDB(genreID);
                 String title = rs.getString("songName");
                 String artist = rs.getString("songArtist");
                 String album = rs.getString("songAlbum");
                 String url = rs.getString("songURL");
-                LibraryRecord tempRecord = new LibraryRecord(title,artist,album,url,tuning);
+                LibraryRecord tempRecord = new LibraryRecord(title,artist,album,url,tuning,genre);
                 recordList.add(tempRecord);
             }
 

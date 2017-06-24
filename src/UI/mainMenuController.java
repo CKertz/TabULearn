@@ -63,7 +63,7 @@ public class mainMenuController implements Initializable {
         colName.setCellValueFactory(new PropertyValueFactory<>("Title"));
         colArtist.setCellValueFactory(new PropertyValueFactory<>("Artist"));
         colAlbum.setCellValueFactory(new PropertyValueFactory<>("Album"));
-        //colAlbum.setCellValueFactory(new PropertyValueFactory<>("Genre"));
+        colGenre.setCellValueFactory(new PropertyValueFactory<>("Genre"));
         colTuning.setCellValueFactory(new PropertyValueFactory<>("Tuning"));
 
         tableLibrary.setItems(data);
