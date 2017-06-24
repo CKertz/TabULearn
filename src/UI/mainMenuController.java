@@ -13,8 +13,11 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -43,7 +46,10 @@ public class mainMenuController implements Initializable {
     @FXML
     public void initialize(URL Location, ResourceBundle resources) {
 
-
+        //@TODO implement double click playability
+        Media title = new Media(new File("C:/Users/Cooper/Desktop/01_courage.mp3").toURI().toString());
+        MediaPlayer mediaPlayer = new MediaPlayer(title);
+        mediaPlayer.play();
         try {
             data = loadSongs.populateLibraryRecords();
         } catch (Exception e) {
