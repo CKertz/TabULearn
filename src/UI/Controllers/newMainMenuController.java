@@ -1,9 +1,7 @@
-package UI;
+package UI.Controllers;
 
 import DB.dbConnect;
-import Models.Song;
 import Models.newSong;
-import com.sun.org.apache.xml.internal.security.Init;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -59,7 +57,7 @@ public class newMainMenuController implements Initializable {
 
 
         Stage importStage = new Stage();
-        Parent root = FXMLLoader.load(getClass().getResource("import.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("FXML_Layouts/import.fxml"));
         importStage.setTitle("Import");
         importStage.setScene(new Scene(root, 600, 300));
         importStage.show();
@@ -69,7 +67,7 @@ public class newMainMenuController implements Initializable {
     @FXML
     public void loadTabs() throws Exception{
 
-        AnchorPane tabPane = FXMLLoader.load(getClass().getResource("tabView.fxml"));
+        AnchorPane tabPane = FXMLLoader.load(getClass().getResource("FXML_Layouts/tabView.fxml"));
         rootPane.getChildren().setAll(tabPane);
 
 /*        Stage importStage = new Stage();

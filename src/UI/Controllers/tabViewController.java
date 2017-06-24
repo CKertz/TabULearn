@@ -1,4 +1,4 @@
-package UI;
+package UI.Controllers;
 
 import TabSearch.googleSearch;
 import javafx.fxml.FXML;
@@ -52,7 +52,7 @@ public class tabViewController {
     }
     @FXML
     public void exitTabView() throws Exception{
-        AnchorPane rootPane = FXMLLoader.load(getClass().getResource("mainMenu.fxml"));
+        AnchorPane rootPane = FXMLLoader.load(getClass().getResource("../FXML_Layouts/mainMenu.fxml"));
         tabPane.getChildren().setAll(rootPane);
     }
 }

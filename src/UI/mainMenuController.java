@@ -2,28 +2,19 @@ package UI;
 
 import DB.dbConnect;
 import Models.LibraryRecord;
-import Models.Song;
-import Models.newSong;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
-import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -76,7 +67,7 @@ public class mainMenuController implements Initializable {
 
 
         Stage importStage = new Stage();
-        Parent root = FXMLLoader.load(getClass().getResource("import.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("FXML_Layouts/import.fxml"));
         importStage.setTitle("Import");
         importStage.setScene(new Scene(root, 600, 300));
         importStage.show();
@@ -86,7 +77,7 @@ public class mainMenuController implements Initializable {
     @FXML
     public void loadTabs() throws Exception{
 
-        AnchorPane tabPane = FXMLLoader.load(getClass().getResource("tabView.fxml"));
+        AnchorPane tabPane = FXMLLoader.load(getClass().getResource("FXML_Layouts/tabView.fxml"));
         rootPane.getChildren().setAll(tabPane);
 
 /*        Stage importStage = new Stage();

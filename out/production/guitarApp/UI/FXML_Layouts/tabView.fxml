@@ -7,7 +7,7 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.web.*?>
 
-<AnchorPane id="AnchorPane" fx:id="tabPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.99955585938" prefWidth="1201.999755859375" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="UI.tabViewController">
+<AnchorPane id="AnchorPane" fx:id="tabPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.99955585938" prefWidth="1201.999755859375" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="UI.Controllers.tabViewController">
   <children>
     <WebView fx:id="webViewTabs" prefHeight="600.0" prefWidth="1201.999755859375" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
     <HBox id="HBox" alignment="CENTER" layoutX="853.0" layoutY="733.0" spacing="5.0">

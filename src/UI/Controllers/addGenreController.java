@@ -1,4 +1,4 @@
-package UI;
+package UI.Controllers;
 
 import DB.dbConnect;
 import Models.Genre;

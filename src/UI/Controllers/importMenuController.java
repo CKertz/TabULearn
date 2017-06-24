@@ -1,15 +1,12 @@
-package UI;
+package UI.Controllers;
 
 import DB.dbConnect;
-import Models.Gear;
 import Models.Song;
 
 import UI.chooseFile;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableArray;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableSet;
 import javafx.fxml.FXML;
@@ -21,7 +18,6 @@ import javafx.stage.Stage;
 
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -110,7 +106,7 @@ public class importMenuController {
                     Stage importStage = new Stage();
                     Parent root = null;
                     try {
-                        root = FXMLLoader.load(getClass().getResource("addTuning.fxml"));
+                        root = FXMLLoader.load(getClass().getResource("FXML_Layouts/addTuning.fxml"));
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -131,7 +127,7 @@ public class importMenuController {
                     Stage importStage = new Stage();
                     Parent root = null;
                     try {
-                        root = FXMLLoader.load(getClass().getResource("addGenre.fxml"));
+                        root = FXMLLoader.load(getClass().getResource("FXML_Layouts/addGenre.fxml"));
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -157,7 +153,7 @@ public class importMenuController {
                     Stage importStage = new Stage();
                     Parent root = null;
                     try {
-                        root = FXMLLoader.load(getClass().getResource("addGear.fxml"));
+                        root = FXMLLoader.load(getClass().getResource("FXML_Layouts/addGear.fxml"));
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
