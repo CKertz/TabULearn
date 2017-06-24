@@ -58,15 +58,17 @@ public class importMenuController {
     public void importSong(){
         List<String>gearAdded = listViewAddedGear.getItems();
         dbConnect insertingSong = new dbConnect();
-        int id = insertingSong.getGenreID(comboBoxGenre.getSelectionModel().getSelectedItem().toString());
-        System.out.print(id);
+        int genreId = insertingSong.getGenreID(comboBoxGenre.getSelectionModel().getSelectedItem().toString());
+        int tuningId = insertingSong.getTuningIDFromDB(comboBoxTuning.getSelectionModel().getSelectedItem().toString());
+
      //@TODO handle nulls smoothly
         Song songToBeImported = new Song(
                 textFieldSongTitle.getText(),
                 textFieldSongURL.getText(),
                 textFieldSongArtist.getText(),
                 textFieldSongAlbum.getText(),
-                id
+                genreId,
+                tuningId
         );
 
 

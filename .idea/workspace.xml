@@ -21,8 +21,8 @@
       <file leaf-file-name="importMenuController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/UI/importMenuController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="351">
-              <caret line="72" column="47" lean-forward="true" selection-start-line="72" selection-start-column="47" selection-end-line="72" selection-end-column="47" />
+            <state relative-caret-position="624">
+              <caret line="70" column="24" lean-forward="false" selection-start-line="70" selection-start-column="24" selection-end-line="70" selection-end-column="24" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -30,11 +30,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="mainMenuController.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="mainMenuController.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/UI/mainMenuController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="321">
-              <caret line="56" column="36" lean-forward="true" selection-start-line="56" selection-start-column="36" selection-end-line="56" selection-end-column="36" />
+            <state relative-caret-position="384">
+              <caret line="68" column="0" lean-forward="false" selection-start-line="68" selection-start-column="0" selection-end-line="68" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -53,8 +53,8 @@
       <file leaf-file-name="Song.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Models/Song.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="399">
-              <caret line="36" column="26" lean-forward="true" selection-start-line="36" selection-start-column="26" selection-end-line="36" selection-end-column="26" />
+            <state relative-caret-position="609">
+              <caret line="37" column="26" lean-forward="false" selection-start-line="37" selection-start-column="26" selection-end-line="37" selection-end-column="26" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -82,11 +82,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="dbConnect.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="dbConnect.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/DB/dbConnect.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="498">
-              <caret line="279" column="96" lean-forward="false" selection-start-line="279" selection-start-column="96" selection-end-line="279" selection-end-column="96" />
+            <state relative-caret-position="134">
+              <caret line="309" column="51" lean-forward="true" selection-start-line="309" selection-start-column="51" selection-end-line="309" selection-end-column="51" />
               <folding />
             </state>
           </provider>
@@ -129,6 +129,7 @@
       <find>libraryre</find>
       <find>insertinto</find>
       <find>gettuningname</find>
+      <find>gett</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -179,10 +180,10 @@
         <option value="$PROJECT_DIR$/src/UI/addGenreController.java" />
         <option value="$PROJECT_DIR$/src/UI/addGenre.fxml" />
         <option value="$PROJECT_DIR$/src/UI/addGearController.java" />
-        <option value="$PROJECT_DIR$/src/Models/Song.java" />
-        <option value="$PROJECT_DIR$/src/UI/importMenuController.java" />
         <option value="$PROJECT_DIR$/src/UI/mainMenuController.java" />
         <option value="$PROJECT_DIR$/src/Models/LibraryRecord.java" />
+        <option value="$PROJECT_DIR$/src/UI/importMenuController.java" />
+        <option value="$PROJECT_DIR$/src/Models/Song.java" />
         <option value="$PROJECT_DIR$/src/DB/dbConnect.java" />
       </list>
     </option>
@@ -354,7 +355,7 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="SearchEverywhereHistoryKey" value="getsongid&#9;PSI&#9;JAVA://DB.dbConnect#getSongID&#10;System&#9;PSI&#9;JAVA://java.lang.System&#10;system.out&#9;null&#9;null&#10;insertgear&#9;PSI&#9;JAVA://DB.dbConnect#insertGearIntoDB&#10;insertg&#9;PSI&#9;JAVA://DB.dbConnect#insertGenreIntoDB&#10;todo&#9;ACTION&#9;ActivateTODOToolWindow" />
+    <property name="SearchEverywhereHistoryKey" value="@TODO&#9;null&#9;null&#10;getsongid&#9;PSI&#9;JAVA://DB.dbConnect#getSongID&#10;System&#9;PSI&#9;JAVA://java.lang.System&#10;system.out&#9;null&#9;null&#10;insertgear&#9;PSI&#9;JAVA://DB.dbConnect#insertGearIntoDB&#10;insertg&#9;PSI&#9;JAVA://DB.dbConnect#insertGenreIntoDB&#10;todo&#9;ACTION&#9;ActivateTODOToolWindow" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -796,12 +797,6 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Models/Song.java</url>
-          <line>26</line>
-          <properties />
-          <option name="timeStamp" value="75" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/UI/mainMenuController.java</url>
           <line>68</line>
           <properties />
@@ -1124,34 +1119,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Models/Song.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="36" column="26" lean-forward="true" selection-start-line="36" selection-start-column="26" selection-end-line="36" selection-end-column="26" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/UI/importMenuController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="351">
-          <caret line="72" column="47" lean-forward="true" selection-start-line="72" selection-start-column="47" selection-end-line="72" selection-end-column="47" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/UI/mainMenuController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="321">
-          <caret line="56" column="36" lean-forward="true" selection-start-line="56" selection-start-column="36" selection-end-line="56" selection-end-column="36" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Models/LibraryRecord.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="462">
@@ -1160,10 +1127,38 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Models/Song.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="609">
+          <caret line="37" column="26" lean-forward="false" selection-start-line="37" selection-start-column="26" selection-end-line="37" selection-end-column="26" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/UI/importMenuController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="624">
+          <caret line="70" column="24" lean-forward="false" selection-start-line="70" selection-start-column="24" selection-end-line="70" selection-end-column="24" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/DB/dbConnect.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="498">
-          <caret line="279" column="96" lean-forward="false" selection-start-line="279" selection-start-column="96" selection-end-line="279" selection-end-column="96" />
+        <state relative-caret-position="134">
+          <caret line="309" column="51" lean-forward="true" selection-start-line="309" selection-start-column="51" selection-end-line="309" selection-end-column="51" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/UI/mainMenuController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="384">
+          <caret line="68" column="0" lean-forward="false" selection-start-line="68" selection-start-column="0" selection-end-line="68" selection-end-column="0" />
           <folding />
         </state>
       </provider>

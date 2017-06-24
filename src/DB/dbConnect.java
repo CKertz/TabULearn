@@ -72,6 +72,24 @@ public class dbConnect {
         }
         return result;
     }
+    public String getTuningNameFromDB(int tuningID){
+
+        String sql = "SELECT tuningName FROM Tuning WHERE tuningID = ?";
+        String result = null;
+        try {
+            Connection conn = connect();
+            PreparedStatement ptsmt = conn.prepareStatement(sql);
+            ptsmt.setInt(1,tuningID);
+            ResultSet rs = ptsmt.executeQuery();
+            while (rs.next()){
+                result = rs.getString("tuningName");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
     public String getGenreNameFromDB(int genreID){
 
         String sql = "SELECT genreName FROM Genre WHERE genreID = ?";
@@ -83,6 +101,24 @@ public class dbConnect {
             ResultSet rs = ptsmt.executeQuery();
             while (rs.next()){
                 result = rs.getString("genreName");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+    public int getTuningIDFromDB(String tuning){
+
+        String sql = "SELECT tuningID FROM Tuning WHERE tuningName = ?";
+        int result = 0;
+        try {
+            Connection conn = connect();
+            PreparedStatement ptsmt = conn.prepareStatement(sql);
+            ptsmt.setString(1,tuning);
+            ResultSet rs = ptsmt.executeQuery();
+            while (rs.next()){
+                result = rs.getInt("tuningID");
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -270,7 +306,7 @@ public class dbConnect {
             while (rs.next()){
 
                 int tuningID = rs.getInt("tuningID");
-                String tuning = getTuningName(tuningID);
+                String tuning = getTuningNameFromDB(tuningID);
                 int genreID = rs.getInt("genreID");
                 String genre = getGenreNameFromDB(genreID);
                 String title = rs.getString("songName");
@@ -286,22 +322,7 @@ public class dbConnect {
         }
         return recordList;
     }
-    public String getTuningName(int tuningID){
-        String sql = "SELECT tuningName FROM Tuning WHERE tuningID = '"+tuningID+"'";
-        String result = null;
-        try(Connection conn = this.connect();
-            Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery(sql)){
 
-            while (rs.next()){
-                result = rs.getString("tuningName");
-            }
-
-        } catch (SQLException e){
-            System.out.println(e.getMessage());
-        }
-        return result;
-    }
     public ObservableList<newSong> newPopulateLibraryComponents() throws Exception{ //@TODO to be deleted once LibraryRecord is implemented
 
 

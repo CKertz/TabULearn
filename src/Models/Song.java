@@ -29,13 +29,13 @@ public class Song {
         setSongAlbum(songAlbum);
         setSongURL(songURL);
     }
-    public Song(String songName, String songURL, String songArtist, String songAlbum, int genre){
+    public Song(String songName, String songURL, String songArtist, String songAlbum, int genre, int tuning){
         setSongName(songName);
         setSongArtist(songArtist);
         setSongAlbum(songAlbum);
         setSongURL(songURL);
         setGenreID(genre);
-
+        setTuningID(tuning);
     }
 
     private SimpleIntegerProperty songID = new SimpleIntegerProperty();
