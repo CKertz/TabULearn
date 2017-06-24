@@ -10,6 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
@@ -18,6 +19,7 @@ import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -43,13 +45,12 @@ public class mainMenuController implements Initializable {
     dbConnect loadSongs = new dbConnect();
     ObservableList<LibraryRecord> data = FXCollections.observableArrayList(
     );
+    private MediaPlayer mediaPlayer;
     @FXML
     public void initialize(URL Location, ResourceBundle resources) {
 
-        //@TODO implement double click playability
-        Media title = new Media(new File("C:/Users/Cooper/Desktop/01_courage.mp3").toURI().toString());
-        MediaPlayer mediaPlayer = new MediaPlayer(title);
-        mediaPlayer.play();
+
+
         try {
             data = loadSongs.populateLibraryRecords();
         } catch (Exception e) {
@@ -64,7 +65,21 @@ public class mainMenuController implements Initializable {
         colTuning.setCellValueFactory(new PropertyValueFactory<>("Tuning"));
 
         tableLibrary.setItems(data);
+        //@TODO implement double click playability
 
+
+        tableLibrary.setRowFactory( tv -> {
+            TableRow<LibraryRecord> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
+                    LibraryRecord rowData = row.getItem();
+                    Media title = new Media(new File(rowData.getURL()).toURI().toString());
+                    mediaPlayer = new MediaPlayer(title);
+                    mediaPlayer.play();
+                }
+            });
+            return row ;
+        });
 
     }
 

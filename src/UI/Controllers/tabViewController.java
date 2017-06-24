@@ -4,9 +4,12 @@ import TabSearch.googleSearch;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 
+import java.io.File;
 import java.util.ArrayList;
 
 /**
