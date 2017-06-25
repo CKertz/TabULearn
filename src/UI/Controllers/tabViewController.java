@@ -27,7 +27,7 @@ public class tabViewController {
     @FXML
     public void initialize(){
 
-        String toBeSearched = googleSearch.formatQuery("iron man");
+        String toBeSearched = googleSearch.formatQuery("iron man");// give the parameter in a bundle from mainmenu
         listedLinks = googleSearch.getLinks(toBeSearched);
         webEngine = webViewTabs.getEngine();
         //String test = "https://tabs.ultimate-guitar.com/d/deep_purple/smoke_on_the_water_tab.htm";

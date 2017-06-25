@@ -2,6 +2,10 @@ package UI;
 
 import DB.dbConnect;
 import Models.LibraryRecord;
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -9,6 +13,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Slider;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
@@ -42,12 +47,16 @@ public class mainMenuController implements Initializable {
     private TableColumn<LibraryRecord, String> colGenre;
     @FXML
     private TableColumn<LibraryRecord, String> colTuning;
+    @FXML
+    private Slider sliderVolume;
     dbConnect loadSongs = new dbConnect();
     ObservableList<LibraryRecord> data = FXCollections.observableArrayList(
     );
-    private MediaPlayer mediaPlayer;
+    private MediaPlayer mediaPlayer = null;
+    boolean songPlaying = false;
     @FXML
     public void initialize(URL Location, ResourceBundle resources) {
+        sliderVolume = new Slider(0,1,0.5);
 
 
 
@@ -65,22 +74,39 @@ public class mainMenuController implements Initializable {
         colTuning.setCellValueFactory(new PropertyValueFactory<>("Tuning"));
 
         tableLibrary.setItems(data);
-        //@TODO implement double click playability
+
 
 
         tableLibrary.setRowFactory( tv -> {
             TableRow<LibraryRecord> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
                 if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
+                    if (songPlaying == true){
+                        mediaPlayer.stop();
+                        songPlaying = false;
+                    }
+                    //mediaPlayer.stop();
                     LibraryRecord rowData = row.getItem();
                     Media title = new Media(new File(rowData.getURL()).toURI().toString());
                     mediaPlayer = new MediaPlayer(title);
                     mediaPlayer.play();
+                    songPlaying = true;
+                    //sliderVolume.setValue(mediaPlayer.getVolume()*100);
+                    System.out.println("Now Playing: " + rowData.getTitle() + " - " + rowData.getArtist());
                 }
             });
             return row ;
         });
+        sliderVolume.valueProperty().addListener(new ChangeListener<Number>() {
 
+            @Override
+            public void changed(ObservableValue<? extends Number> arg0,
+                                Number arg1, Number arg2) {
+                mediaPlayer.setVolume(arg2.doubleValue()); //new value
+                System.out.print(arg2.toString());
+            }
+
+        });
     }
 
     @FXML
