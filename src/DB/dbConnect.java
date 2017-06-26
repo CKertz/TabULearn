@@ -313,7 +313,8 @@ public class dbConnect {
                 String artist = rs.getString("songArtist");
                 String album = rs.getString("songAlbum");
                 String url = rs.getString("songURL");
-                LibraryRecord tempRecord = new LibraryRecord(title,artist,album,url,tuning,genre);
+                int id = rs.getInt("songID");
+                LibraryRecord tempRecord = new LibraryRecord(title,artist,album,url,tuning,genre,id);
                 recordList.add(tempRecord);
             }
 

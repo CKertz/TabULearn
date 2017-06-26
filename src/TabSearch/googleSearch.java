@@ -33,6 +33,8 @@ public class googleSearch {
     public static String formatQuery(String query){
         String reformattedQuery = "";
         for (int i = 0; i < query.length() ; i++) {
+            if (query.length() == 0)
+                break;
             if (query.charAt(i) == ' '){
                 reformattedQuery += "_";
 
@@ -73,8 +75,6 @@ public class googleSearch {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
-        System.out.println("Output from Server .... \n");
 
         return listedLinks;
     }

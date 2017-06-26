@@ -25,7 +25,7 @@
                   </children>
                 </HBox>
                 <TextField layoutX="986.0" layoutY="35.0" prefWidth="150.0" promptText="Search" />
-                <Slider fx:id="sliderVolume" layoutX="306.0" layoutY="34.0" prefHeight="18.0" prefWidth="150.0" showTickLabels="false" showTickMarks="false" value="50.0" />
+                <Slider fx:id="sliderVolume" layoutX="306.0" layoutY="34.0" prefHeight="18.0" prefWidth="150.0" />
                 <HBox id="HBox" alignment="CENTER" layoutX="490.0" layoutY="94.0" spacing="5.0">
                   <children>
                     <Button fx:id="btnTab" mnemonicParsing="false" onAction="#loadTabs" text="Tab" />

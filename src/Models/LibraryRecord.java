@@ -1,5 +1,6 @@
 package Models;
 
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
@@ -13,15 +14,29 @@ public class LibraryRecord {
     private SimpleStringProperty Genre = new SimpleStringProperty();;
     private SimpleStringProperty Tuning = new SimpleStringProperty();;
     private SimpleStringProperty URL = new SimpleStringProperty();;
+    private SimpleIntegerProperty ID = new SimpleIntegerProperty();
 
 
-    public LibraryRecord(String title, String artist, String album, String url, String tuning, String genre){
+    public LibraryRecord(String title, String artist, String album, String url, String tuning, String genre, int id){
         this.Album = new SimpleStringProperty(album);
         this.Artist = new SimpleStringProperty(artist);
         this.Title = new SimpleStringProperty(title);
         this.URL = new SimpleStringProperty(url);
         this.Tuning = new SimpleStringProperty(tuning);
         this.Genre = new SimpleStringProperty(genre);
+        this.ID = new SimpleIntegerProperty(id);
+    }
+
+    public int getID() {
+        return ID.get();
+    }
+
+    public SimpleIntegerProperty IDProperty() {
+        return ID;
+    }
+
+    public void setID(int ID) {
+        this.ID.set(ID);
     }
 
     public String getTitle() {
