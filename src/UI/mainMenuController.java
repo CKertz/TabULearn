@@ -23,12 +23,15 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import static javafx.util.Duration.ZERO;
 
 
 /**
@@ -121,23 +124,69 @@ public class mainMenuController implements Initializable {
 
     }
     @FXML
-    public void loadTabs() throws Exception{
+    public void rewindSong(){
+        //@TODO doubleclick means go to previous song in list
+        tableLibrary.setRowFactory(tv -> {
+            TableRow<LibraryRecord> row = new TableRow<>();
+            if (row.getIndex() == 0){
+                return row;
 
+            }else{
+                row.setOnMouseClicked(event ->{
+                    if (event.getClickCount() == 2 && (!row.isEmpty())){
+                        int index = row.getIndex();
+                        LibraryRecord prevSong = row.getTableView().getItems().get(index);
+                        Media prev = new Media(new File(prevSong.getURL()).toURI().toString());
+                        mediaPlayer = new MediaPlayer(prev);
+                    }
+                });
+
+            }
+            return row;
+        });
+        mediaPlayer.stop();
+        mediaPlayer.setStartTime(Duration.ZERO);
+        mediaPlayer.play();
+    }
+    @FXML
+    public void forwardSong(){
+
+    }
+    @FXML
+    public void pausePlaySong(){
+        if (mediaPlayer== null){
+            return;
+        }
+        if (songPlaying == true){
+            mediaPlayer.pause();
+            songPlaying = false;
+        }else{
+            mediaPlayer.play();
+            songPlaying = true;
+        }
+    }
+    @FXML
+    public void loadTabs() throws Exception{
         LibraryRecord selectedRecord = tableLibrary.getSelectionModel().getSelectedItem();
+/*
         String songID = tableLibrary.getSelectionModel().getSelectedItem().getURL();
 
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXML_Layouts/tabView.fxml"));
 
 
-        Parent root = (Parent)fxmlLoader.load();
+
+        //Parent root = (Parent)fxmlLoader.load();
+
         tabViewController controller = fxmlLoader.<tabViewController>getController();
-        controller.setQueryID(selectedRecord);
-        //Scene scene = new Scene(root);
+        controller.setQueryID(selectedRecord);*/
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXML_Layouts/tabView.fxml"));
+        AnchorPane testPane = (AnchorPane) fxmlLoader.load();
+        tabViewController controller = fxmlLoader.<tabViewController>getController();
+        controller.initData(selectedRecord);
 
+        //@TODO this code is what works/////////////////////////////////////////////////////////////
         AnchorPane tabPane = FXMLLoader.load(getClass().getResource("FXML_Layouts/tabView.fxml"));
-
-        rootPane.getChildren().setAll(root);
-
+        rootPane.getChildren().setAll(tabPane);
+        // @TODO ////////////////////////////////////////////////////////////////////////////////////////
 
     }
 

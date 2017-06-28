@@ -14,14 +14,14 @@
       <items>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
           <children>
-            <AnchorPane prefHeight="189.00009999999747" prefWidth="1004.0000999999975" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <AnchorPane prefHeight="203.0" prefWidth="1199.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <children>
                 <Button fx:id="btnImport" layoutX="14.0" layoutY="94.0" mnemonicParsing="false" onAction="#importSong" text="Import" />
                 <HBox id="HBox" alignment="CENTER" layoutX="12.0" layoutY="43.0" spacing="0.0">
                   <children>
-                    <Button id="rewindBtn" fx:id="btnRewind" mnemonicParsing="false" text="Rewind" />
-                    <Button id="btnRewind" fx:id="btnPlay" mnemonicParsing="false" text="Play/Pause" />
-                    <Button fx:id="btnForward" mnemonicParsing="false" text="Forward" />
+                    <Button id="btnRewind" fx:id="btnRewind" onAction="#rewindSong"  mnemonicParsing="false" text="Rewind" />
+                    <Button id="btnPlay" fx:id="btnPlay" mnemonicParsing="false" onAction="#pausePlaySong" text="Play/Pause" />
+                    <Button fx:id="btnForward" mnemonicParsing="false" onAction="#forwardSong" text="Forward" />
                   </children>
                 </HBox>
                 <TextField layoutX="986.0" layoutY="35.0" prefWidth="150.0" promptText="Search" />
