@@ -296,7 +296,7 @@ public class dbConnect {
 
 
         //query 3 times, one for song details, for genre, for tuning
-        String sql = "SELECT * FROM Song";
+        String sql = "SELECT * FROM Song ORDER BY songArtist ASC";
         final ObservableList<LibraryRecord> recordList = FXCollections.observableArrayList();
 
         try(Connection conn = this.connect();

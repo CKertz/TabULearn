@@ -129,6 +129,14 @@ public class mainMenuController implements Initializable {
 
     }
     @FXML
+    public void createSetlist() throws Exception{
+        Stage setlistStage = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("FXML_Layouts/createSetlist.fxml"));
+        setlistStage.setTitle("Create Setlist");
+        setlistStage.setScene(new Scene(root, 1200, 800));
+        setlistStage.show();
+    }
+    @FXML
     public void rewindSong(){
 
         btnRewind.setOnMousePressed((e) ->{

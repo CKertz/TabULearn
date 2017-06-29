@@ -64,7 +64,7 @@
                 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="587.0" prefWidth="273.0">
                   <children>
                     <ListView prefHeight="487.0" prefWidth="196.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0" />
-                    <Hyperlink fx:id="hyperLinkNewSelist" layoutX="118.0" layoutY="3.0" text="New..." textFill="GREY" />
+                    <Hyperlink fx:id="hyperLinkNewSelist" layoutX="118.0" layoutY="3.0" onAction="#createSetlist" text="New..." textFill="GREY" />
                     <Label id="labelSetlists" fx:id="labelSetlist" layoutX="14.0" layoutY="3.0" text="Setlists">
                       <font>
                         <Font name="System Bold" size="16.0" />
