@@ -14,10 +14,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Slider;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableRow;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.media.Media;
@@ -54,7 +51,15 @@ public class mainMenuController implements Initializable {
     private TableColumn<LibraryRecord, String> colTuning;
     @FXML
     private Slider sliderVolume;
+    @FXML
+    private Button btnRewind;
+    @FXML
+    private Button btnForward;
 
+    int forwardCount = 1;
+    int forwardRow = 0;
+    int prevRow = 0;
+    int rewindCount = 1;
     dbConnect loadSongs = new dbConnect();
     ObservableList<LibraryRecord> data = FXCollections.observableArrayList(
     );
@@ -125,31 +130,52 @@ public class mainMenuController implements Initializable {
     }
     @FXML
     public void rewindSong(){
-        //@TODO doubleclick means go to previous song in list
-        tableLibrary.setRowFactory(tv -> {
-            TableRow<LibraryRecord> row = new TableRow<>();
-            if (row.getIndex() == 0){
-                return row;
 
-            }else{
-                row.setOnMouseClicked(event ->{
-                    if (event.getClickCount() == 2 && (!row.isEmpty())){
-                        int index = row.getIndex();
-                        LibraryRecord prevSong = row.getTableView().getItems().get(index);
-                        Media prev = new Media(new File(prevSong.getURL()).toURI().toString());
-                        mediaPlayer = new MediaPlayer(prev);
-                    }
-                });
-
+        btnRewind.setOnMousePressed((e) ->{
+            try{
+                if (e.getClickCount() == 2 && tableLibrary.getSelectionModel().getSelectedIndex() !=0){
+                    prevRow = tableLibrary.getSelectionModel().getSelectedIndex() - rewindCount;
+                    LibraryRecord prevSong = tableLibrary.getItems().get(prevRow);
+                    Media prevMedia = new Media (new File(prevSong.getURL()).toURI().toString());
+                    mediaPlayer.stop();
+                    mediaPlayer = new MediaPlayer(prevMedia);
+                    mediaPlayer.play();
+                    rewindCount++;
+                    // prevRow--;
+                }else{
+                    mediaPlayer.stop();
+                    mediaPlayer.setStartTime(Duration.ZERO);
+                    mediaPlayer.play();
+                }
+            }catch(IndexOutOfBoundsException ex){
+                mediaPlayer.stop();
             }
-            return row;
+
         });
-        mediaPlayer.stop();
-        mediaPlayer.setStartTime(Duration.ZERO);
-        mediaPlayer.play();
+
     }
     @FXML
     public void forwardSong(){
+        btnForward.setOnMouseClicked((e) ->{
+
+            try {
+                forwardRow = tableLibrary.getSelectionModel().getSelectedIndex() + forwardCount;
+                LibraryRecord forwardSong = tableLibrary.getItems().get(forwardRow);
+                Media forwardMedia = new Media (new File(forwardSong.getURL()).toURI().toString());
+                mediaPlayer.stop();
+                mediaPlayer = new MediaPlayer(forwardMedia);
+                mediaPlayer.play();
+                forwardCount++;
+
+
+                mediaPlayer.stop();
+                mediaPlayer.setStartTime(Duration.ZERO);
+                mediaPlayer.play();
+            }catch (IndexOutOfBoundsException ex){
+                mediaPlayer.stop();
+            }
+
+        });
 
     }
     @FXML
