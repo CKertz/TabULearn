@@ -17,8 +17,8 @@
             </Label>
             <TableView fx:id="tableViewMusicLibrary" prefHeight="600.0" prefWidth="383.0">
               <columns>
-                <TableColumn prefWidth="173.0" text="Title" />
-                <TableColumn prefWidth="209.0" text="Artist" />
+                <TableColumn fx:id="colLibraryTitle" prefWidth="173.0" text="Title" />
+                <TableColumn fx:id="colLibraryArtist" prefWidth="209.0" text="Artist" />
               </columns>
             </TableView>
          </children>
@@ -49,8 +49,8 @@
             </TextField>
             <TableView fx:id="tableViewSetList" prefHeight="600.0" prefWidth="400.0">
               <columns>
-                <TableColumn prefWidth="197.0" text="Title" />
-                <TableColumn prefWidth="202.0" text="Artist" />
+                <TableColumn fx:id="colSetlistTitle" prefWidth="197.0" text="Title" />
+                <TableColumn fx:id="colSetlistArtist" prefWidth="202.0" text="Artist" />
               </columns>
             </TableView>
          </children>

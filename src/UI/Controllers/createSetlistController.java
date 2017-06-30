@@ -6,6 +6,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -18,7 +19,7 @@ import java.util.ResourceBundle;
  */
 public class createSetlistController implements Initializable {
     @FXML
-    private TableView<LibraryRecord> tableViewSetlist;
+    private TableView<LibraryRecord> tableViewSetList;
     @FXML
     private TableView<LibraryRecord> tableViewMusicLibrary;
     @FXML
@@ -29,6 +30,10 @@ public class createSetlistController implements Initializable {
     private TableColumn<LibraryRecord, String> colSetlistTitle;
     @FXML
     private TableColumn<LibraryRecord, String> colSetlistArtist;
+    @FXML
+    private Button btnAddSong;
+    @FXML
+    private Button btnRemoveSong;
 
 
     @FXML
@@ -37,6 +42,7 @@ public class createSetlistController implements Initializable {
         //@TODO walk through mainmenu code and see why this would throw an error upon load. commenting it all out works fine
         dbConnect dbLoad = new dbConnect();
         ObservableList<LibraryRecord> data = FXCollections.observableArrayList();
+        ObservableList<LibraryRecord> setlistData = FXCollections.observableArrayList();
         try {
             data = dbLoad.populateLibraryRecords();
         } catch (Exception e) {
@@ -44,7 +50,21 @@ public class createSetlistController implements Initializable {
         }
         colLibraryTitle.setCellValueFactory(new PropertyValueFactory<>("Title"));
         colLibraryArtist.setCellValueFactory(new PropertyValueFactory<>("Artist"));
+        colSetlistTitle.setCellValueFactory(new PropertyValueFactory<>("Title"));
+        colSetlistArtist.setCellValueFactory(new PropertyValueFactory<>("Artist"));
 
         tableViewMusicLibrary.setItems(data);
+
+        btnAddSong.setOnMouseClicked(event -> {
+            try{
+                LibraryRecord toBeAdded = tableViewMusicLibrary.getSelectionModel().getSelectedItem();
+
+                setlistData.add(toBeAdded);
+                tableViewSetList.setItems(setlistData);
+            }catch (NullPointerException ex){
+                return;
+            }
+
+        });
     }
 }
