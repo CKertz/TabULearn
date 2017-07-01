@@ -9,7 +9,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -34,15 +36,23 @@ public class createSetlistController implements Initializable {
     private Button btnAddSong;
     @FXML
     private Button btnRemoveSong;
+    @FXML
+    private Button btnExitSetlist;
+    @FXML
+    private Button btnConfirmSetlist;
+    @FXML
+    private TextField textFieldSetlistName;
 
-
+    private dbConnect dbLoad = new dbConnect();
+    private ObservableList<LibraryRecord> data = FXCollections.observableArrayList();
+    private ObservableList<LibraryRecord> setlistData = FXCollections.observableArrayList();
     @FXML
     public void initialize(URL Location, ResourceBundle resources ){
 
         //@TODO walk through mainmenu code and see why this would throw an error upon load. commenting it all out works fine
-        dbConnect dbLoad = new dbConnect();
+
         ObservableList<LibraryRecord> data = FXCollections.observableArrayList();
-        ObservableList<LibraryRecord> setlistData = FXCollections.observableArrayList();
+        //ObservableList<LibraryRecord> setlistData = FXCollections.observableArrayList();
         try {
             data = dbLoad.populateLibraryRecords();
         } catch (Exception e) {
@@ -66,5 +76,29 @@ public class createSetlistController implements Initializable {
             }
 
         });
+        btnRemoveSong.setOnMouseClicked(event ->{
+            try {
+                LibraryRecord toBeDeleted = tableViewSetList.getSelectionModel().getSelectedItem();
+                setlistData.remove(toBeDeleted);
+                tableViewSetList.setItems(setlistData);
+            }catch (Exception E){
+                return;
+            }
+        });
+
+    }
+    @FXML
+    public void exitSetlist(){
+        Stage stage = (Stage) btnExitSetlist.getScene().getWindow();
+        stage.close();
+    }
+    @FXML
+    public void createSetlist(){
+        String setlistName = textFieldSetlistName.getText();
+        for (int i = 0; i <setlistData.size() ; i++) {
+            dbLoad.insertSetlistIntoDB(setlistName, setlistData.get(i).getID());
+        }
+        Stage stage = (Stage) btnConfirmSetlist.getScene().getWindow();
+        stage.close();
     }
 }

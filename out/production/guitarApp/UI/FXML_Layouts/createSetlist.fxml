@@ -55,7 +55,7 @@
             </TableView>
          </children>
       </VBox>
-      <Button fx:id="btnConfirmSetlist" layoutX="948.0" layoutY="716.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="91.0" text="Confirm" />
-      <Button fx:id="btnExitSetlist" layoutX="1055.0" layoutY="716.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="91.0" text="Exit" />
+      <Button fx:id="btnConfirmSetlist" layoutX="948.0" layoutY="716.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="91.0" text="Confirm" onAction="#createSetlist" />
+      <Button fx:id="btnExitSetlist" layoutX="1055.0" layoutY="716.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="91.0" text="Exit" onAction="#exitSetlist"/>
    </children>
 </AnchorPane>

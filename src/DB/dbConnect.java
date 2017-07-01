@@ -144,6 +144,19 @@ public class dbConnect {
 
         return result;
     }
+    public void insertSetlistIntoDB(String setlistName, int songID ){
+        //int id = getSongID(songURL);
+        String query = "INSERT INTO Setlist (songID, setlistName) VALUES (?,?)";
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+            pstmt.setInt(1, songID);
+            pstmt.setString(2, setlistName);
+
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
     public void insertIntoLibrary(Song songToBeInserted, List<String> gearList){
 
             String songURLInserted = songToBeInserted.getSongURL();
@@ -234,6 +247,27 @@ public class dbConnect {
             System.out.println(e.getMessage());
         }
         return genreList;
+    }
+    public ObservableList<String> populateSetlistListView(){
+        String sql = "SELECT DISTINCT setlistName FROM Setlist";
+        final ObservableList<String> setlistList = FXCollections.observableArrayList();
+
+        try(Connection conn = this.connect();
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql)){
+
+            while (rs.next()){
+                setlistList.add(rs.getString("setlistName"));
+
+            }
+
+        } catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+        return setlistList;
+    }
+    public ObservableList<LibraryRecord> getSongsFromSetlist(){
+        
     }
     public ObservableList<String> populateTuningComboBox(){
 

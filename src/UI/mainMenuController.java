@@ -50,6 +50,8 @@ public class mainMenuController implements Initializable {
     @FXML
     private TableColumn<LibraryRecord, String> colTuning;
     @FXML
+    private ListView listViewSetlist;
+    @FXML
     private Slider sliderVolume;
     @FXML
     private Button btnRewind;
@@ -61,10 +63,11 @@ public class mainMenuController implements Initializable {
     int prevRow = 0;
     int rewindCount = 1;
     dbConnect loadSongs = new dbConnect();
-    ObservableList<LibraryRecord> data = FXCollections.observableArrayList(
-    );
+    ObservableList<String> setlists = FXCollections.observableArrayList();
+    ObservableList<LibraryRecord> data = FXCollections.observableArrayList();
     private MediaPlayer mediaPlayer = null;
     boolean songPlaying = false;
+    //TODO: BOOLEAN that is triggered when new screen is loaded. when it is triggered, requery/reload main menu
     @FXML
     public void initialize(URL Location, ResourceBundle resources) {
         //sliderVolume = new Slider(0, 1, 0.5);
@@ -76,6 +79,8 @@ public class mainMenuController implements Initializable {
             e.printStackTrace();
         }
 
+        setlists = loadSongs.populateSetlistListView();
+        listViewSetlist.setItems(setlists);
 
         colName.setCellValueFactory(new PropertyValueFactory<>("Title"));
         colArtist.setCellValueFactory(new PropertyValueFactory<>("Artist"));
@@ -112,6 +117,10 @@ public class mainMenuController implements Initializable {
             public void invalidated(Observable observable) {
                 mediaPlayer.setVolume(sliderVolume.getValue()/100);
             }
+        });
+        listViewSetlist.setOnMouseClicked(e ->{
+           String setlistName =  listViewSetlist.getSelectionModel().getSelectedItem().toString();
+
         });
     }
 
