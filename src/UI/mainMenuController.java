@@ -120,7 +120,8 @@ public class mainMenuController implements Initializable {
         });
         listViewSetlist.setOnMouseClicked(e ->{
            String setlistName =  listViewSetlist.getSelectionModel().getSelectedItem().toString();
-
+           ObservableList<LibraryRecord> setlistData = loadSongs.getSongsFromSetlist(setlistName);
+           tableLibrary.setItems(setlistData);
         });
     }
 

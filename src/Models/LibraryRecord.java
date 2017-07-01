@@ -26,6 +26,14 @@ public class LibraryRecord {
         this.Genre = new SimpleStringProperty(genre);
         this.ID = new SimpleIntegerProperty(id);
     }
+    public LibraryRecord(String title, String artist, String album, String url, String tuning, String genre){
+        this.Album = new SimpleStringProperty(album);
+        this.Artist = new SimpleStringProperty(artist);
+        this.Title = new SimpleStringProperty(title);
+        this.URL = new SimpleStringProperty(url);
+        this.Tuning = new SimpleStringProperty(tuning);
+        this.Genre = new SimpleStringProperty(genre);
+    }
 
     public int getID() {
         return ID.get();

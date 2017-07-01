@@ -266,8 +266,37 @@ public class dbConnect {
         }
         return setlistList;
     }
-    public ObservableList<LibraryRecord> getSongsFromSetlist(){
-        
+    public ObservableList<LibraryRecord> getSongsFromSetlist(String setlistName){
+        //String sql = "select A.songName, A.songURL, A.songArtist, A.songAlbum, A.tuningID, A.genreID, B.setlistName FROM Song as A, Setlist as B WHERE A.songID = B.songID AND B.setlistName = 'TestList';";
+       // String sql = "select A.songName, A.songURL, A.songArtist, A.songAlbum, A.tuningID, A.genreID, B.setlistName FROM Song as A, Setlist as B WHERE A.songID = B.songID AND  B.setlistName = '"+setlistName+"'";
+        String sql = "select A.songName, A.songURL, A.songArtist, A.songAlbum, A.tuningID, A.genreID, B.setlistName FROM Song as A, Setlist as B WHERE A.songID = B.songID AND  B.setlistName = ?";
+
+        final ObservableList<LibraryRecord> recordList = FXCollections.observableArrayList();
+
+        try(Connection conn = this.connect();
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql); PreparedStatement pstmt = conn.prepareStatement(sql)){
+            pstmt.setString(1,setlistName);
+            while (rs.next()){
+
+                int tuningID = rs.getInt("tuningID");
+                String tuning = getTuningNameFromDB(tuningID);
+                int genreID = rs.getInt("genreID");
+                String genre = getGenreNameFromDB(genreID);
+                String title = rs.getString("songName");
+                String artist = rs.getString("songArtist");
+                String album = rs.getString("songAlbum");
+                String url = rs.getString("songURL");
+              //  int id = rs.getInt("songID");
+                LibraryRecord tempRecord = new LibraryRecord(title,artist,album,url,tuning,genre);
+                recordList.add(tempRecord);
+            }
+
+        } catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+        return recordList;
+
     }
     public ObservableList<String> populateTuningComboBox(){
 
