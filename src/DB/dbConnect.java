@@ -273,10 +273,13 @@ public class dbConnect {
 
         final ObservableList<LibraryRecord> recordList = FXCollections.observableArrayList();
 
-        try(Connection conn = this.connect();
-            Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery(sql); PreparedStatement pstmt = conn.prepareStatement(sql)){
-            pstmt.setString(1,setlistName);
+        try
+            {
+            Connection conn = connect();
+            PreparedStatement ptsmt = conn.prepareStatement(sql);
+            ptsmt.setString(1,setlistName);
+            ResultSet rs = ptsmt.executeQuery();
+
             while (rs.next()){
 
                 int tuningID = rs.getInt("tuningID");
@@ -287,7 +290,6 @@ public class dbConnect {
                 String artist = rs.getString("songArtist");
                 String album = rs.getString("songAlbum");
                 String url = rs.getString("songURL");
-              //  int id = rs.getInt("songID");
                 LibraryRecord tempRecord = new LibraryRecord(title,artist,album,url,tuning,genre);
                 recordList.add(tempRecord);
             }

@@ -22,6 +22,7 @@ import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import javax.swing.event.HyperlinkListener;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -57,7 +58,10 @@ public class mainMenuController implements Initializable {
     private Button btnRewind;
     @FXML
     private Button btnForward;
+    @FXML
+    private Hyperlink hyperLinkNewSelist;
 
+    boolean setListDisplayed = false;
     int forwardCount = 1;
     int forwardRow = 0;
     int prevRow = 0;
@@ -71,7 +75,7 @@ public class mainMenuController implements Initializable {
     @FXML
     public void initialize(URL Location, ResourceBundle resources) {
         //sliderVolume = new Slider(0, 1, 0.5);
-
+        //mediaPlayer.setAutoPlay(true);
 
         try {
             data = loadSongs.populateLibraryRecords();
@@ -118,10 +122,21 @@ public class mainMenuController implements Initializable {
                 mediaPlayer.setVolume(sliderVolume.getValue()/100);
             }
         });
-        listViewSetlist.setOnMouseClicked(e ->{
-           String setlistName =  listViewSetlist.getSelectionModel().getSelectedItem().toString();
-           ObservableList<LibraryRecord> setlistData = loadSongs.getSongsFromSetlist(setlistName);
-           tableLibrary.setItems(setlistData);
+        listViewSetlist.setOnMouseClicked(e ->{ //filters Music library to only contain songs in the selected setlist
+            if (setListDisplayed == false){
+                String setlistName =  listViewSetlist.getSelectionModel().getSelectedItem().toString();
+                ObservableList<LibraryRecord> setlistData = loadSongs.getSongsFromSetlist(setlistName);
+                tableLibrary.setItems(setlistData);
+                hyperLinkNewSelist.setText("Back to library..");
+                setListDisplayed = true;
+            }/*else{
+                tableLibrary.setItems(data);
+                hyperLinkNewSelist.setText("New...");
+                setListDisplayed = false;
+            }*/
+
+
+
         });
     }
 
@@ -140,11 +155,18 @@ public class mainMenuController implements Initializable {
     }
     @FXML
     public void createSetlist() throws Exception{
-        Stage setlistStage = new Stage();
-        Parent root = FXMLLoader.load(getClass().getResource("FXML_Layouts/createSetlist.fxml"));
-        setlistStage.setTitle("Create Setlist");
-        setlistStage.setScene(new Scene(root, 1200, 800));
-        setlistStage.show();
+        if (setListDisplayed == true){
+            tableLibrary.setItems(data);
+            setListDisplayed = false;
+            hyperLinkNewSelist.setText("New...");
+        }else{
+            Stage setlistStage = new Stage();
+            Parent root = FXMLLoader.load(getClass().getResource("FXML_Layouts/createSetlist.fxml"));
+            setlistStage.setTitle("Create Setlist");
+            setlistStage.setScene(new Scene(root, 1200, 800));
+            setlistStage.show();
+        }
+
     }
     @FXML
     public void rewindSong(){
