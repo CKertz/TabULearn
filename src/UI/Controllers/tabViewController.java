@@ -6,6 +6,7 @@ import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
@@ -22,48 +23,63 @@ import java.util.ResourceBundle;
 /**
  * Created by Cooper on 6/4/2017.
  */
-public class tabViewController {
+public class tabViewController extends Application {
 
     public static int tabCounter = 0;
     WebEngine webEngine;
     ArrayList<String> listedLinks = new ArrayList<>();
-    LibraryRecord songToBeSearched;
-
+    String queryToSearch = null;
+    LibraryRecord recordToSearch;
+    @FXML
+    private Button btnFindTabs;
     @FXML
     private AnchorPane tabPane;
     @FXML
     private WebView webViewTabs;
     @FXML
     public void initialize() {
-        songToBeSearched = null;
-        webEngine = webViewTabs.getEngine();
-
-
-    }
-    public tabViewController(LibraryRecord recordGiven){
-        System.out.print("yay");
-    }
-/*    @FXML
-    public void start(Stage stage)throws Exception{
-        String toBeSearched = googleSearch.formatQuery("iron man");// give the parameter in a bundle from mainmenu
+/*        webEngine = webViewTabs.getEngine();
+        String toBeSearched = googleSearch.formatQuery("iron man");
+        //String toBeSearched = googleSearch.formatQuery(recordToSearch.getTitle() + " " + recordToSearch.getArtist());// give the parameter in a bundle from mainmenu
         listedLinks = googleSearch.getLinks(toBeSearched);
-        webEngine = webViewTabs.getEngine();
+        //webEngine = webViewTabs.getEngine();
+
         //String test = "https://tabs.ultimate-guitar.com/d/deep_purple/smoke_on_the_water_tab.htm";
         webEngine.load(listedLinks.get(tabCounter));
-        tabCounter++;
+        tabCounter++;*/
 
-    }*/
-    public void initData(LibraryRecord query){
-        songToBeSearched = query;
-        String toBeSearched = googleSearch.formatQuery("iron man");// give the parameter in a bundle from mainmenu
+    }
+
+    @FXML
+    public void start(Stage stage)throws Exception{
+ /*       webEngine = webViewTabs.getEngine();
+        String toBeSearched = googleSearch.formatQuery(recordToSearch.getTitle() + " " + recordToSearch.getArtist());// give the parameter in a bundle from mainmenu
         listedLinks = googleSearch.getLinks(toBeSearched);
         //webEngine = webViewTabs.getEngine();
 
         //String test = "https://tabs.ultimate-guitar.com/d/deep_purple/smoke_on_the_water_tab.htm";
         webEngine.load(listedLinks.get(tabCounter));
         tabCounter++;
-       System.out.print(query.getTitle());
+
+        //String toBeSearched = googleSearch.formatQuery("iron man");// give the parameter in a bundle from mainmenu
+        listedLinks = googleSearch.getLinks(toBeSearched);
+        webEngine = webViewTabs.getEngine();
+        //String test = "https://tabs.ultimate-guitar.com/d/deep_purple/smoke_on_the_water_tab.htm";
+        webEngine.load(listedLinks.get(tabCounter));
+        tabCounter++;*/
+
     }
+
+    public void setRecord(String test){
+       // given = recordToSearch;
+        queryToSearch = test;
+        btnFindTabs.setText(test);
+    }
+/*    public void initData(LibraryRecord query){
+        songToBeSearched = query;
+
+       System.out.print(query.getTitle());
+    }*/
     @FXML
     public void loadNextTab(){
          webEngine.load(listedLinks.get(tabCounter));
@@ -84,5 +100,17 @@ public class tabViewController {
     public void exitTabView() throws Exception{
         AnchorPane rootPane = FXMLLoader.load(getClass().getResource("../FXML_Layouts/mainMenu.fxml"));
         tabPane.getChildren().setAll(rootPane);
+    }
+    @FXML
+    public void getTabs(){
+        webEngine = webViewTabs.getEngine();
+        //String toBeSearched = googleSearch.formatQuery("iron man");
+        String toBeSearched = googleSearch.formatQuery(queryToSearch);// give the parameter in a bundle from mainmenu
+        listedLinks = googleSearch.getLinks(toBeSearched);
+        //webEngine = webViewTabs.getEngine();
+
+        //String test = "https://tabs.ultimate-guitar.com/d/deep_purple/smoke_on_the_water_tab.htm";
+        webEngine.load(listedLinks.get(tabCounter));
+        tabCounter++;
     }
 }

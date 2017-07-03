@@ -31,6 +31,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ListIterator;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import static javafx.util.Duration.ZERO;
 
@@ -246,8 +248,23 @@ public class mainMenuController implements Initializable {
     @FXML
     public void loadTabs() throws Exception{
         LibraryRecord selectedRecord = tableLibrary.getSelectionModel().getSelectedItem();
-/*
+        String toSearch = selectedRecord.getTitle() + " " + selectedRecord.getArtist();
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXML_Layouts/tabView.fxml"));
+        Parent root;
+        try{
+            root = fxmlLoader.load();
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            ((tabViewController)fxmlLoader.getController()).setRecord(toSearch);
+            stage.show();
+        }catch (IOException e){
+            Logger.getLogger(mainMenuController.class.getName()).log(Level.SEVERE,null,e);
+        }
+
+        /*
         String songID = tableLibrary.getSelectionModel().getSelectedItem().getURL();
+
 
 
 
@@ -256,14 +273,14 @@ public class mainMenuController implements Initializable {
 
         tabViewController controller = fxmlLoader.<tabViewController>getController();
         controller.setQueryID(selectedRecord);*/
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXML_Layouts/tabView.fxml"));
+/*        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXML_Layouts/tabView.fxml"));
         AnchorPane testPane = (AnchorPane) fxmlLoader.load();
-        tabViewController controller = fxmlLoader.<tabViewController>getController();
-        controller.initData(selectedRecord);
+        tabViewController controller = fxmlLoader.<tabViewController>getController();*/
+        //controller.initData(selectedRecord);
 
         //@TODO this code is what works/////////////////////////////////////////////////////////////
-        AnchorPane tabPane = FXMLLoader.load(getClass().getResource("FXML_Layouts/tabView.fxml"));
-        rootPane.getChildren().setAll(tabPane);
+/*        AnchorPane tabPane = FXMLLoader.load(getClass().getResource("FXML_Layouts/tabView.fxml"));
+        rootPane.getChildren().setAll(tabPane);*/
         // @TODO ////////////////////////////////////////////////////////////////////////////////////////
 
     }
@@ -275,7 +292,7 @@ public class mainMenuController implements Initializable {
         }
         return resultList;
     }
-    //push the iterator to the selected index in the tableview 
+    //push the iterator to the selected index in the tableview
     public void advanceIterator(int selectedIndex){
         while (itr.nextIndex() != selectedIndex){
             itr.next();

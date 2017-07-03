@@ -17,12 +17,13 @@
         <Button fx:id="btnNextTab" mnemonicParsing="false" onAction="#loadNextTab" prefHeight="35.0" prefWidth="100.0" text="Next" />
       </children>
     </HBox>
-    <HBox id="HBox" alignment="CENTER" layoutX="500.0" layoutY="600.0" spacing="5.0">
+    <HBox id="HBox" alignment="CENTER" layoutX="500.0" layoutY="600.0" prefHeight="31.0" prefWidth="349.0" spacing="5.0">
       <children>
         <Button mnemonicParsing="false" text="Rewind" />
-        <Button mnemonicParsing="false" prefWidth="87.0" text="Play/Pause" textOverrun="ELLIPSIS" />
-        <Button id="btnNextTab" fx:id="btnForwardSong" mnemonicParsing="false" onAction="#loadNextTab" text="Next" />
+        <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="139.0" text="Play/Pause" textOverrun="ELLIPSIS" />
+        <Button id="btnNextTab" fx:id="btnNextTab" mnemonicParsing="false" onAction="#loadNextTab" prefHeight="31.0" prefWidth="72.0" text="Next" />
       </children>
     </HBox>
+      <Button fx:id="btnFindTabs" layoutX="27.0" layoutY="600.0" mnemonicParsing="false" onAction="#getTabs" prefHeight="31.0" prefWidth="174.0" />
   </children>
 </AnchorPane>
