@@ -1,29 +1,89 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.paint.*?>
 <?import javafx.scene.web.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" fx:id="tabPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.99955585938" prefWidth="1201.999755859375" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UI.Controllers.tabViewController">
-  <children>
-    <WebView fx:id="webViewTabs" prefHeight="600.0" prefWidth="1201.999755859375" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-    <HBox id="HBox" alignment="CENTER" layoutX="791.0" layoutY="737.0" spacing="5.0">
-      <children>
-        <Button fx:id="btnExitTabView" minHeight="9.0" mnemonicParsing="false" onAction="#exitTabView" prefHeight="37.0" prefWidth="156.0" text="Exit Tab View" />
-        <Button fx:id="btnPrevTab" mnemonicParsing="false" onAction="#loadPrevTab" prefHeight="35.0001220703125" prefWidth="100.0" text="Prev" />
-        <Button fx:id="btnNextTab" mnemonicParsing="false" onAction="#loadNextTab" prefHeight="35.0" prefWidth="100.0" text="Next" />
-      </children>
-    </HBox>
-    <HBox id="HBox" alignment="CENTER" layoutX="500.0" layoutY="600.0" prefHeight="31.0" prefWidth="349.0" spacing="5.0">
-      <children>
-        <Button mnemonicParsing="false" text="Rewind" />
-        <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="139.0" text="Play/Pause" textOverrun="ELLIPSIS" />
-        <Button id="btnNextTab" fx:id="btnNextTab" mnemonicParsing="false" onAction="#loadNextTab" prefHeight="31.0" prefWidth="72.0" text="Next" />
-      </children>
-    </HBox>
-      <Button fx:id="btnFindTabs" layoutX="27.0" layoutY="600.0" mnemonicParsing="false" onAction="#getTabs" prefHeight="31.0" prefWidth="174.0" />
-  </children>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UI.Controllers.tabViewController">
+   <children>
+      <BorderPane layoutX="471.0" layoutY="300.0" prefHeight="800.0" prefWidth="1200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <center>
+            <WebView fx:id="webViewTabs" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+         </center>
+         <bottom>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <HBox layoutX="332.0" layoutY="-1.0" prefHeight="31.0" prefWidth="364.0">
+                     <children>
+                        <Button fx:id="btnEditPlayback" mnemonicParsing="false" text="Edit Playback" />
+                        <Button fx:id="btnPlayPause" mnemonicParsing="false" text="Play/Pause" />
+                        <Button fx:id="btnMute" mnemonicParsing="false" text="Mute" />
+                        <Button fx:id="btnRetreiveTabs" mnemonicParsing="false" onAction="#getTabs" text="Retrieve Tabs" />
+                     </children>
+                  </HBox>
+                  <HBox layoutX="896.0" layoutY="137.0" prefHeight="49.0" prefWidth="290.0">
+                     <children>
+                        <Button fx:id="btnPrevTab" mnemonicParsing="false" text="Previous Tab" />
+                        <Button fx:id="btnNextTab" mnemonicParsing="false" text="Next Tab" />
+                        <Button fx:id="btnExitTabView" mnemonicParsing="false" text="Exit Tabview" />
+                     </children>
+                  </HBox>
+                  <HBox layoutX="53.0" layoutY="90.0">
+                     <children>
+                        <Label layoutX="53.0" layoutY="90.0" text="Now Playing:">
+                           <font>
+                              <Font size="30.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="labelSongName" layoutX="290.0" layoutY="102.0" text="song">
+                           <font>
+                              <Font size="30.0" />
+                           </font>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <padding>
+                              <Insets left="30.0" />
+                           </padding>
+                        </Label>
+                     </children>
+                  </HBox>
+               </children>
+            </AnchorPane>
+         </bottom>
+         <right>
+            <AnchorPane prefHeight="600.0" prefWidth="260.0" BorderPane.alignment="CENTER">
+               <children>
+                  <HBox layoutX="14.0" layoutY="14.0">
+                     <children>
+                        <Label layoutX="14.0" layoutY="14.0" prefHeight="30.0" prefWidth="75.0" text="Tuning:">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="labelTuning" layoutX="120.0" layoutY="19.0" prefHeight="29.0" prefWidth="109.0" text="tuning">
+                           <padding>
+                              <Insets left="20.0" />
+                           </padding>
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <TableView fx:id="tableViewGear" layoutX="-3.0" layoutY="68.0" prefHeight="531.0" prefWidth="265.0">
+                    <columns>
+                      <TableColumn prefWidth="137.0" text="Gear" />
+                      <TableColumn prefWidth="127.0" text="Setting" />
+                    </columns>
+                  </TableView>
+               </children>
+            </AnchorPane>
+         </right>
+      </BorderPane>
+   </children>
 </AnchorPane>

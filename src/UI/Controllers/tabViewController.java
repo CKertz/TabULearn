@@ -31,7 +31,7 @@ public class tabViewController extends Application {
     String queryToSearch = null;
     LibraryRecord recordToSearch;
     @FXML
-    private Button btnFindTabs;
+    private Button btnRetreiveTabs;
     @FXML
     private AnchorPane tabPane;
     @FXML
@@ -73,7 +73,7 @@ public class tabViewController extends Application {
     public void setRecord(String test){
        // given = recordToSearch;
         queryToSearch = test;
-        btnFindTabs.setText(test);
+        btnRetreiveTabs.setText(test);
     }
 /*    public void initData(LibraryRecord query){
         songToBeSearched = query;

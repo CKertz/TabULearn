@@ -6,7 +6,6 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="503.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <HBox layoutX="35.0" layoutY="14.0">
@@ -42,10 +41,18 @@
             <TextField layoutX="409.0" layoutY="94.0" prefHeight="30.0" prefWidth="80.0" />
          </children>
       </HBox>
-      <CheckBox layoutX="85.0" layoutY="255.0" mnemonicParsing="false" prefHeight="21.0" prefWidth="174.0" text="Tempo Adjustment" />
+      <HBox layoutX="85.0" layoutY="250.0">
+         <children>
+            <CheckBox layoutX="85.0" layoutY="255.0" mnemonicParsing="false" prefHeight="21.0" prefWidth="174.0" text="Tempo Adjustment" />
+            <TextField layoutX="355.0" layoutY="250.0" prefHeight="31.0" prefWidth="80.0">
+               <padding>
+                  <Insets left="20.0" />
+               </padding>
+            </TextField>
+            <Label layoutX="435.0" layoutY="255.0" text="\%" />
+         </children>
+      </HBox>
       <CheckBox layoutX="85.0" layoutY="318.0" mnemonicParsing="false" prefHeight="21.0" prefWidth="174.0" text="Looping" />
-      <TextField layoutX="355.0" layoutY="250.0" prefHeight="31.0" prefWidth="80.0" />
-      <Label layoutX="435.0" layoutY="255.0" text="\%" />
       <Button layoutX="403.0" layoutY="447.0" mnemonicParsing="false" text="Confirm " />
       <Button layoutX="502.0" layoutY="447.0" mnemonicParsing="false" text="Exit" />
    </children>
