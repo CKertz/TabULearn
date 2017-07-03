@@ -1,12 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.*?>
-<?import java.util.*?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane id="AnchorPane" fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.000199999995" prefWidth="1200.0000779296824" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UI.mainMenuController">
   <children>
@@ -19,22 +31,27 @@
                 <Button fx:id="btnImport" layoutX="14.0" layoutY="94.0" mnemonicParsing="false" onAction="#importSong" text="Import" />
                 <HBox id="HBox" alignment="CENTER" layoutX="12.0" layoutY="43.0" spacing="0.0">
                   <children>
-                    <Button id="btnRewind" fx:id="btnRewind" onAction="#rewindSong"  mnemonicParsing="false" text="Rewind" />
+                    <Button id="btnRewind" fx:id="btnRewind" mnemonicParsing="false" onAction="#rewindSong" text="Rewind" />
                     <Button id="btnPlay" fx:id="btnPlay" mnemonicParsing="false" onAction="#pausePlaySong" text="Play/Pause" />
                     <Button fx:id="btnForward" mnemonicParsing="false" onAction="#forwardSong" text="Forward" />
                   </children>
                 </HBox>
                 <TextField layoutX="986.0" layoutY="35.0" prefWidth="150.0" promptText="Search" />
-                <Slider fx:id="sliderVolume" layoutX="306.0" layoutY="34.0" prefHeight="18.0" prefWidth="150.0" />
-                <HBox id="HBox" alignment="CENTER" layoutX="490.0" layoutY="94.0" spacing="5.0">
+                <Slider fx:id="sliderVolume" layoutX="275.0" layoutY="50.0" prefHeight="18.0" prefWidth="150.0" />
+                <HBox id="HBox" alignment="CENTER" layoutX="1017.0" layoutY="158.0" spacing="5.0">
                   <children>
                     <Button fx:id="btnTab" mnemonicParsing="false" onAction="#loadTabs" text="Tab" />
                     <Button fx:id="btnGear" mnemonicParsing="false" text="Gear" />
                   </children>
                 </HBox>
-                <Label fx:id="labelSong" layoutX="406.0" layoutY="23.0" text="" />
-                <Label fx:id="labelArtist" layoutX="454.0" layoutY="23.0" text="" />
-                <MenuBar id="menuBar" layoutX="0.0" layoutY="0.0" prefHeight="32.0" prefWidth="1199.0">
+                        <VBox layoutX="532.0" layoutY="43.0">
+                           <children>
+                      <Label fx:id="labelSong" layoutX="491.0" layoutY="40.0" prefHeight="21.0" prefWidth="81.0" text="SongName" textAlignment="CENTER" />
+                      <Label fx:id="labelArtist" layoutX="572.0" layoutY="40.0" prefHeight="21.0" prefWidth="93.0" text="SongArtist" textAlignment="CENTER" />
+                              <Label prefHeight="21.0" prefWidth="91.0" text="timeLeft" textAlignment="CENTER" />
+                           </children>
+                        </VBox>
+                <MenuBar id="menuBar" prefHeight="32.0" prefWidth="1199.0">
                   <menus>
                     <Menu mnemonicParsing="false" text="File">
                       <items>
@@ -53,6 +70,7 @@
                     </Menu>
                   </menus>
                 </MenuBar>
+                        <Button layoutX="497.0" layoutY="143.0" mnemonicParsing="false" text="Edit Playback Options" />
               </children>
             </AnchorPane>
           </children>
@@ -63,8 +81,8 @@
               <items>
                 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="587.0" prefWidth="273.0">
                   <children>
-                    <ListView  fx:id="listViewSetlist" prefHeight="487.0" prefWidth="196.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0" />
-                    <Hyperlink fx:id="hyperLinkNewSelist" layoutX="118.0" layoutY="3.0" onAction="#createSetlist" text="New..." textFill="GREY" />
+                    <ListView fx:id="listViewSetlist" prefHeight="487.0" prefWidth="196.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0" />
+                    <Hyperlink fx:id="hyperLinkNewSelist" layoutX="91.0" onAction="#createSetlist" text="New..." textFill="GREY" />
                     <Label id="labelSetlists" fx:id="labelSetlist" layoutX="14.0" layoutY="3.0" text="Setlists">
                       <font>
                         <Font name="System Bold" size="16.0" />

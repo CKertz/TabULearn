@@ -25,8 +25,11 @@ import javafx.util.Duration;
 import javax.swing.event.HyperlinkListener;
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.ListIterator;
 import java.util.ResourceBundle;
 
 import static javafx.util.Duration.ZERO;
@@ -69,6 +72,9 @@ public class mainMenuController implements Initializable {
     dbConnect loadSongs = new dbConnect();
     ObservableList<String> setlists = FXCollections.observableArrayList();
     ObservableList<LibraryRecord> data = FXCollections.observableArrayList();
+    ListIterator<String> itr;
+
+    //ListIterator<LibraryRecord> itr = data.listIterator();
     private MediaPlayer mediaPlayer = null;
     boolean songPlaying = false;
     //TODO: BOOLEAN that is triggered when new screen is loaded. when it is triggered, requery/reload main menu
@@ -91,7 +97,6 @@ public class mainMenuController implements Initializable {
         colAlbum.setCellValueFactory(new PropertyValueFactory<>("Album"));
         colGenre.setCellValueFactory(new PropertyValueFactory<>("Genre"));
         colTuning.setCellValueFactory(new PropertyValueFactory<>("Tuning"));
-
         tableLibrary.setItems(data);
 
 
@@ -106,8 +111,15 @@ public class mainMenuController implements Initializable {
                     //mediaPlayer.stop();
                     LibraryRecord rowData = row.getItem();
                     Media title = new Media(new File(rowData.getURL()).toURI().toString());
+
                     mediaPlayer = new MediaPlayer(title);
-                    mediaPlayer.play();
+                    ArrayList<String> formattedSongs = formatSongList(data);
+                    itr = formattedSongs.listIterator();
+                    advanceIterator(row.getIndex());
+                    play(itr.next());// testing this out
+
+                    //mediaPlayer.play();*/
+                    //mediaPlayer.setAutoPlay(true);
                     songPlaying = true;
 
                     sliderVolume.setValue(mediaPlayer.getVolume()*100);
@@ -255,6 +267,39 @@ public class mainMenuController implements Initializable {
         // @TODO ////////////////////////////////////////////////////////////////////////////////////////
 
     }
+    //putting all song locations into a useable URI for the MediaPlayer
+    public ArrayList<String> formatSongList(ObservableList<LibraryRecord> given){
+        ArrayList<String> resultList = new ArrayList<>();
+        for (int i = 0; i < given.size(); i++) {
+            resultList.add(new File(given.get(i).getURL()).toURI().toString());
+        }
+        return resultList;
+    }
+    //push the iterator to the selected index in the tableview 
+    public void advanceIterator(int selectedIndex){
+        while (itr.nextIndex() != selectedIndex){
+            itr.next();
+        }
+    }
+    public void play(String mediaFile){
+        Media media = new Media(mediaFile);
+        mediaPlayer.dispose();
+        mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.play();
+        mediaPlayer.setOnEndOfMedia(new Runnable() {
+            @Override
+            public void run() {
+                mediaPlayer.stop();
+                if (itr.hasNext()) {
+                    //Plays the subsequent files
+
+                    play(itr.next());
+                }
+                return;
+            }
+        });
+    }
+
 
 
 }
