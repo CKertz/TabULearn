@@ -27,6 +27,12 @@ import java.util.List;
 public class importMenuController {
 
     @FXML
+    private Label labelSong;
+    @FXML
+    private Label labelArtist;
+    @FXML
+    private Label labelTimeLeft;
+    @FXML
     private Button btnCancel;
     @FXML
     private TextField textFieldSongTitle;

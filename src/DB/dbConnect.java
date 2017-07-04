@@ -357,6 +357,37 @@ public class dbConnect {
         }
         return songList;
     }
+    public ObservableList<GearRecord> populateTabviewTable(int songID) throws Exception{
+
+
+        //query 3 times, one for song details, for genre, for tuning
+        String sql = "Select S.settingName, S.settingLocation, G.gearMake, G.gearModel FROM Setting as S, Song as A, Gear as G WHERE S.gearID = G.gearID AND S.songID = ? AND A.songID = ?;";
+        //String sql = "SELECT * FROM Song ORDER BY songArtist ASC";
+        final ObservableList<GearRecord> gearList = FXCollections.observableArrayList();
+
+        try{
+            Connection conn = connect();
+            PreparedStatement pstmt = connect().prepareStatement(sql);
+            pstmt.setInt(1,songID);
+            pstmt.setInt(2,songID);
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()){
+
+                String settingName = rs.getString("settingName");
+                String settingLocation = rs.getString("settingLocation");
+                String gearMake = rs.getString("gearMake");
+                String gearModel = rs.getString("gearModel");
+
+                GearRecord tempRecord = new GearRecord(settingName,settingLocation,gearMake,gearModel,gearMake +" " + gearModel, settingName + ":" + settingLocation);
+                gearList.add(tempRecord);
+            }
+
+        } catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+        return gearList;
+    }
     public ObservableList<LibraryRecord> populateLibraryRecords() throws Exception{
 
 

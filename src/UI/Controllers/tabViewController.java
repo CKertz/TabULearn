@@ -1,12 +1,20 @@
 package UI.Controllers;
 
+import DB.dbConnect;
+import Models.GearRecord;
 import Models.LibraryRecord;
 import TabSearch.googleSearch;
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
@@ -25,17 +33,36 @@ import java.util.ResourceBundle;
  */
 public class tabViewController extends Application {
 
+    ObservableList<GearRecord> data = FXCollections.observableArrayList();
     public static int tabCounter = 0;
     WebEngine webEngine;
     ArrayList<String> listedLinks = new ArrayList<>();
     String queryToSearch = null;
+    String tuning = null;
+    String songDisplayed = null;
+    String songURL = null;
+    private MediaPlayer mediaPlayer = null;
+    boolean songPlaying = false;
+    dbConnect loadGear = new dbConnect();
     LibraryRecord recordToSearch;
+    @FXML
+    private TableView<GearRecord> tableViewGear;
+    @FXML
+    private TableColumn<GearRecord, String> colGear;
+    @FXML
+    private TableColumn<LibraryRecord, String> colSetting;
+    @FXML
+    private Label labelTuning;
+    @FXML
+    private Label labelSongName;
     @FXML
     private Button btnRetreiveTabs;
     @FXML
     private AnchorPane tabPane;
     @FXML
     private WebView webViewTabs;
+    @FXML
+    private Button btnExitTabView;
     @FXML
     public void initialize() {
 /*        webEngine = webViewTabs.getEngine();
@@ -70,10 +97,23 @@ public class tabViewController extends Application {
 
     }
 
-    public void setRecord(String test){
+    public void setRecord(String tuningGiven, String artist, String title, String url, int songID){
        // given = recordToSearch;
-        queryToSearch = test;
-        btnRetreiveTabs.setText(test);
+        queryToSearch = title + " " + artist;
+        tuning = tuningGiven;
+        labelSongName.setText(title + " - " + artist);
+        labelTuning.setText(tuningGiven);
+        songURL = url;
+        Media titlePlaying = new Media(new File(songURL).toURI().toString());
+        mediaPlayer = new MediaPlayer(titlePlaying);
+        try {
+            data = loadGear.populateTabviewTable(songID);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        colGear.setCellValueFactory(new PropertyValueFactory<>("Gear"));
+        colSetting.setCellValueFactory(new PropertyValueFactory<>("Setting"));
+        tableViewGear.setItems(data);
     }
 /*    public void initData(LibraryRecord query){
         songToBeSearched = query;
@@ -89,6 +129,14 @@ public class tabViewController extends Application {
          }
     }
     @FXML
+    public void muteSong(){
+        if (mediaPlayer.getStatus() == MediaPlayer.Status.PLAYING && mediaPlayer.isMute() == false){
+            mediaPlayer.setMute(true);
+        }else{
+            mediaPlayer.setMute(false);
+        }
+    }
+    @FXML
     public void loadPrevTab(){
         tabCounter--;
         if (tabCounter <= 0){
@@ -98,8 +146,20 @@ public class tabViewController extends Application {
     }
     @FXML
     public void exitTabView() throws Exception{
-        AnchorPane rootPane = FXMLLoader.load(getClass().getResource("../FXML_Layouts/mainMenu.fxml"));
-        tabPane.getChildren().setAll(rootPane);
+        Stage stage = (Stage) btnExitTabView.getScene().getWindow();
+        stage.close();
+    }
+    @FXML
+    public void playPauseSong(){
+        if (songPlaying == true) {
+            mediaPlayer.pause();
+            songPlaying = false;
+        }else{
+
+            mediaPlayer.play();
+            songPlaying = true;
+        }
+
     }
     @FXML
     public void getTabs(){

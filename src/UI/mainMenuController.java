@@ -248,7 +248,12 @@ public class mainMenuController implements Initializable {
     @FXML
     public void loadTabs() throws Exception{
         LibraryRecord selectedRecord = tableLibrary.getSelectionModel().getSelectedItem();
-        String toSearch = selectedRecord.getTitle() + " " + selectedRecord.getArtist();
+        String artistToSearch = selectedRecord.getArtist();
+        String titleToSearch = selectedRecord.getTitle();
+        String tuningToSearch = selectedRecord.getTuning();
+        String songURL = selectedRecord.getURL();
+        int songID = selectedRecord.getID();
+
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXML_Layouts/tabView.fxml"));
         Parent root;
         try{
@@ -256,7 +261,7 @@ public class mainMenuController implements Initializable {
             Scene scene = new Scene(root);
             Stage stage = new Stage();
             stage.setScene(scene);
-            ((tabViewController)fxmlLoader.getController()).setRecord(toSearch);
+            ((tabViewController)fxmlLoader.getController()).setRecord(tuningToSearch,artistToSearch,titleToSearch, songURL,songID);
             stage.show();
         }catch (IOException e){
             Logger.getLogger(mainMenuController.class.getName()).log(Level.SEVERE,null,e);

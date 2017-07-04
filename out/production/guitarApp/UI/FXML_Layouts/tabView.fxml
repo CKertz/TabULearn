@@ -7,7 +7,6 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UI.Controllers.tabViewController">
    <children>
       <BorderPane layoutX="471.0" layoutY="300.0" prefHeight="800.0" prefWidth="1200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -20,16 +19,16 @@
                   <HBox layoutX="332.0" layoutY="-1.0" prefHeight="31.0" prefWidth="364.0">
                      <children>
                         <Button fx:id="btnEditPlayback" mnemonicParsing="false" text="Edit Playback" />
-                        <Button fx:id="btnPlayPause" mnemonicParsing="false" text="Play/Pause" />
-                        <Button fx:id="btnMute" mnemonicParsing="false" text="Mute" />
+                        <Button fx:id="btnPlayPause" mnemonicParsing="false" onAction="#playPauseSong" text="Play/Pause" />
+                        <Button fx:id="btnMute" mnemonicParsing="false" onAction="#muteSong" text="Mute" />
                         <Button fx:id="btnRetreiveTabs" mnemonicParsing="false" onAction="#getTabs" text="Retrieve Tabs" />
                      </children>
                   </HBox>
                   <HBox layoutX="896.0" layoutY="137.0" prefHeight="49.0" prefWidth="290.0">
                      <children>
-                        <Button fx:id="btnPrevTab" mnemonicParsing="false" text="Previous Tab" />
-                        <Button fx:id="btnNextTab" mnemonicParsing="false" text="Next Tab" />
-                        <Button fx:id="btnExitTabView" mnemonicParsing="false" text="Exit Tabview" />
+                        <Button fx:id="btnPrevTab" mnemonicParsing="false" onAction="#loadPrevTab" text="Previous Tab" />
+                        <Button fx:id="btnNextTab" mnemonicParsing="false" onAction="#loadNextTab" text="Next Tab" />
+                        <Button fx:id="btnExitTabView" mnemonicParsing="false" onAction="#exitTabView" text="Exit Tabview" />
                      </children>
                   </HBox>
                   <HBox layoutX="53.0" layoutY="90.0">
@@ -58,29 +57,27 @@
          <right>
             <AnchorPane prefHeight="600.0" prefWidth="260.0" BorderPane.alignment="CENTER">
                <children>
-                  <HBox layoutX="14.0" layoutY="14.0">
+                  <TableView fx:id="tableViewGear" layoutY="138.0" prefHeight="461.0" prefWidth="260.0">
+                    <columns>
+                      <TableColumn fx:id="colGear" prefWidth="137.0" text="Gear" />
+                      <TableColumn fx:id="colSetting" prefWidth="127.0" text="Setting" />
+                    </columns>
+                  </TableView>
+                  <VBox layoutX="14.0" layoutY="14.0" prefHeight="81.0" prefWidth="245.0">
                      <children>
-                        <Label layoutX="14.0" layoutY="14.0" prefHeight="30.0" prefWidth="75.0" text="Tuning:">
+                        <Label prefHeight="30.0" prefWidth="75.0" text="Tuning:">
                            <font>
                               <Font size="20.0" />
                            </font>
                         </Label>
-                        <Label fx:id="labelTuning" layoutX="120.0" layoutY="19.0" prefHeight="29.0" prefWidth="109.0" text="tuning">
-                           <padding>
-                              <Insets left="20.0" />
-                           </padding>
+                        <Label fx:id="labelTuning" prefHeight="30.0" prefWidth="244.0" text="tuning">
                            <font>
                               <Font size="20.0" />
                            </font>
                         </Label>
                      </children>
-                  </HBox>
-                  <TableView fx:id="tableViewGear" layoutX="-3.0" layoutY="68.0" prefHeight="531.0" prefWidth="265.0">
-                    <columns>
-                      <TableColumn prefWidth="137.0" text="Gear" />
-                      <TableColumn prefWidth="127.0" text="Setting" />
-                    </columns>
-                  </TableView>
+                  </VBox>
+                  <Button fx:id="btnModifyGear" layoutX="6.0" layoutY="107.0" mnemonicParsing="false" text="Modify Gear/Settings for this song" />
                </children>
             </AnchorPane>
          </right>
