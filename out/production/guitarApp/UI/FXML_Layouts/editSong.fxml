@@ -6,7 +6,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="503.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="503.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UI.Controllers.editSongController">
    <children>
       <HBox layoutX="35.0" layoutY="14.0">
          <children>
@@ -15,7 +15,7 @@
                   <Font size="25.0" />
                </font>
             </Label>
-            <Label fx:id="labelEditSong" layoutX="199.0" layoutY="18.0" prefHeight="62.0" prefWidth="351.0" text="test">
+            <Label fx:id="labelEditSong" layoutX="199.0" layoutY="18.0" prefHeight="69.0" prefWidth="351.0" text="test">
                <font>
                   <Font size="20.0" />
                </font>
@@ -29,7 +29,7 @@
                   <Font size="20.0" />
                </font>
             </Label>
-            <TextField layoutX="231.0" layoutY="94.0" prefHeight="30.0" prefWidth="80.0" />
+            <TextField fx:id="textFieldSelectedStart" layoutX="231.0" layoutY="94.0" prefHeight="30.0" prefWidth="80.0" />
             <Label layoutX="335.0" layoutY="99.0" prefHeight="21.0" prefWidth="35.0" text="to" textAlignment="CENTER">
                <HBox.margin>
                   <Insets top="2.0" />
@@ -38,13 +38,13 @@
                   <Insets bottom="5.0" left="10.0" right="2.0" top="2.0" />
                </padding>
             </Label>
-            <TextField layoutX="409.0" layoutY="94.0" prefHeight="30.0" prefWidth="80.0" />
+            <TextField fx:id="textFieldSelectedEnd" layoutX="409.0" layoutY="94.0" prefHeight="30.0" prefWidth="80.0" />
          </children>
       </HBox>
       <HBox layoutX="85.0" layoutY="250.0">
          <children>
-            <CheckBox layoutX="85.0" layoutY="255.0" mnemonicParsing="false" prefHeight="21.0" prefWidth="174.0" text="Tempo Adjustment" />
-            <TextField layoutX="355.0" layoutY="250.0" prefHeight="31.0" prefWidth="80.0">
+            <CheckBox fx:id="checkBoxTempo" layoutX="85.0" layoutY="255.0" mnemonicParsing="false" prefHeight="21.0" prefWidth="174.0" text="Tempo Adjustment" />
+            <TextField fx:id="textFieldTempoPercent" layoutX="355.0" layoutY="250.0" prefHeight="31.0" prefWidth="80.0">
                <padding>
                   <Insets left="20.0" />
                </padding>
@@ -52,8 +52,8 @@
             <Label layoutX="435.0" layoutY="255.0" text="\%" />
          </children>
       </HBox>
-      <CheckBox layoutX="85.0" layoutY="318.0" mnemonicParsing="false" prefHeight="21.0" prefWidth="174.0" text="Looping" />
-      <Button layoutX="403.0" layoutY="447.0" mnemonicParsing="false" text="Confirm " />
-      <Button layoutX="502.0" layoutY="447.0" mnemonicParsing="false" text="Exit" />
+      <CheckBox fx:id="checkBoxLoop" layoutX="85.0" layoutY="318.0" mnemonicParsing="false" prefHeight="21.0" prefWidth="174.0" text="Looping" />
+      <Button layoutX="403.0" layoutY="447.0" mnemonicParsing="false" onAction="#confirmEditChanges" text="Confirm " />
+      <Button fx:id="btnExitEdit" layoutX="502.0" layoutY="447.0" mnemonicParsing="false" onAction="#exitEditSong" text="Exit" />
    </children>
 </AnchorPane>

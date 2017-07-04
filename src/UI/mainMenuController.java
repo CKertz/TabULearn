@@ -2,6 +2,7 @@ package UI;
 
 import DB.dbConnect;
 import Models.LibraryRecord;
+import UI.Controllers.editSongController;
 import UI.Controllers.tabViewController;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
@@ -41,6 +42,12 @@ import static javafx.util.Duration.ZERO;
  * Created by Cooper on 5/14/2017.
  */
 public class mainMenuController implements Initializable {
+    @FXML
+    private Label labelSong;
+    @FXML
+    private Label labelArtist;
+    @FXML
+    private Label labelTimeLeft;
     @FXML
     private AnchorPane rootPane;
     @FXML
@@ -113,7 +120,8 @@ public class mainMenuController implements Initializable {
                     //mediaPlayer.stop();
                     LibraryRecord rowData = row.getItem();
                     Media title = new Media(new File(rowData.getURL()).toURI().toString());
-
+                    labelArtist.setText(rowData.getArtist());
+                    labelSong.setText(rowData.getTitle());
                     mediaPlayer = new MediaPlayer(title);
                     ArrayList<String> formattedSongs = formatSongList(data);
                     itr = formattedSongs.listIterator();
@@ -243,6 +251,27 @@ public class mainMenuController implements Initializable {
         }else{
             mediaPlayer.play();
             songPlaying = true;
+        }
+    }
+    @FXML
+    public void editSong() throws Exception{
+        LibraryRecord selectedRecord = tableLibrary.getSelectionModel().getSelectedItem();
+        String artist= selectedRecord.getArtist();
+        String title = selectedRecord.getTitle();
+
+        //mediaPlayer.getTotalDuration().toString();
+
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXML_Layouts/editSong.fxml"));
+        Parent root;
+        try{
+            root = fxmlLoader.load();
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            ((editSongController)fxmlLoader.getController()).initData(artist,title);
+            stage.show();
+        }catch (IOException e){
+            Logger.getLogger(mainMenuController.class.getName()).log(Level.SEVERE,null,e);
         }
     }
     @FXML

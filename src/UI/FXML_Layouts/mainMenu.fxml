@@ -44,11 +44,11 @@
                     <Button fx:id="btnGear" mnemonicParsing="false" text="Gear" />
                   </children>
                 </HBox>
-                        <VBox layoutX="532.0" layoutY="43.0">
+                        <VBox layoutX="509.0" layoutY="43.0" prefHeight="63.0" prefWidth="181.0">
                            <children>
-                      <Label fx:id="labelSong" layoutX="491.0" layoutY="40.0" prefHeight="21.0" prefWidth="81.0" text="SongName" textAlignment="CENTER" />
-                      <Label fx:id="labelArtist" layoutX="572.0" layoutY="40.0" prefHeight="21.0" prefWidth="93.0" text="SongArtist" textAlignment="CENTER" />
-                              <Label fx:id="labelTimeLeft" prefHeight="21.0" prefWidth="91.0" text="timeLeft" textAlignment="CENTER" />
+                      <Label fx:id="labelSong" alignment="TOP_CENTER" layoutX="491.0" layoutY="40.0" prefHeight="21.0" prefWidth="181.0" text="SongName" textAlignment="CENTER" />
+                      <Label fx:id="labelArtist" alignment="BASELINE_CENTER" layoutX="572.0" layoutY="40.0" prefHeight="21.0" prefWidth="195.0" text="SongArtist" textAlignment="CENTER" />
+                              <Label fx:id="labelTimeLeft" alignment="BOTTOM_CENTER" prefHeight="21.0" prefWidth="200.0" text="timeLeft" textAlignment="CENTER" />
                            </children>
                         </VBox>
                 <MenuBar id="menuBar" prefHeight="32.0" prefWidth="1199.0">
@@ -70,7 +70,7 @@
                     </Menu>
                   </menus>
                 </MenuBar>
-                        <Button layoutX="497.0" layoutY="143.0" mnemonicParsing="false" text="Edit Playback Options" />
+                        <Button fx:id="btnEditSong" layoutX="518.0" layoutY="143.0" mnemonicParsing="false" onAction="#editSong" text="Edit Playback Options" />
               </children>
             </AnchorPane>
           </children>
