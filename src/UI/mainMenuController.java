@@ -31,6 +31,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ListIterator;
+import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -74,6 +75,8 @@ public class mainMenuController implements Initializable {
     private Hyperlink hyperLinkNewSelist;
 
     boolean setListDisplayed = false;
+    String minTimeStr = null;
+    String secTimeStr= null;
     int forwardCount = 1;
     int forwardRow = 0;
     int prevRow = 0;
@@ -259,20 +262,47 @@ public class mainMenuController implements Initializable {
         String artist= selectedRecord.getArtist();
         String title = selectedRecord.getTitle();
 
-        //mediaPlayer.getTotalDuration().toString();
+        Media media = new Media(new File(selectedRecord.getURL()).toURI().toString());
+        mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.setOnReady(new Runnable() {
 
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXML_Layouts/editSong.fxml"));
-        Parent root;
-        try{
-            root = fxmlLoader.load();
-            Scene scene = new Scene(root);
-            Stage stage = new Stage();
-            stage.setScene(scene);
-            ((editSongController)fxmlLoader.getController()).initData(artist,title);
-            stage.show();
-        }catch (IOException e){
-            Logger.getLogger(mainMenuController.class.getName()).log(Level.SEVERE,null,e);
-        }
+            @Override
+            public void run() {
+
+                Duration newValue = media.getDuration();
+                int hTime = (int) newValue.toHours();
+                int minTime = (int) newValue.toMinutes();
+                int secTime= (int) newValue.toSeconds();
+                if(secTime/60>=1){ // this are to display later something like a clock 19:02:20
+                    secTime%=60; //if you want just the time in minutes use only the toMinutes()
+                }
+                if(minTime/60>=1){
+                    minTime%=60;
+                }
+                minTimeStr = Integer.toString(minTime);
+                secTimeStr = Integer.toString(secTime);
+                String songDuration = minTimeStr + ":" + secTimeStr;
+
+                //mediaPlayer.getTotalDuration().toString();
+
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXML_Layouts/editSong.fxml"));
+                Parent root;
+                try{
+                    root = fxmlLoader.load();
+                    Scene scene = new Scene(root);
+                    Stage stage = new Stage();
+                    stage.setScene(scene);
+                    ((editSongController)fxmlLoader.getController()).initData(artist,title,songDuration,selectedRecord);
+                    stage.show();
+                }catch (IOException e){
+                    Logger.getLogger(mainMenuController.class.getName()).log(Level.SEVERE,null,e);
+                }
+                // play if you want
+                // mediaPlayer.play();
+            }
+        });
+
+
     }
     @FXML
     public void loadTabs() throws Exception{
@@ -336,6 +366,33 @@ public class mainMenuController implements Initializable {
         Media media = new Media(mediaFile);
         mediaPlayer.dispose();
         mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.setOnReady(new Runnable() {
+
+            @Override
+            public void run() {
+
+                Duration newValue = media.getDuration();
+                int hTime = (int) newValue.toHours();
+                int minTime = (int) newValue.toMinutes();
+                int secTime= (int) newValue.toSeconds();
+                if(secTime/60>=1){ // this are to display later something like a clock 19:02:20
+                    secTime%=60; //if you want just the time in minutes use only the toMinutes()
+                }
+                if(minTime/60>=1){
+                    minTime%=60;
+                }
+                minTimeStr = Integer.toString(minTime);
+                secTimeStr = Integer.toString(secTime);
+                System.out.println(minTime+":"+secTime);
+                // display media's metadata
+                for (Map.Entry<String, Object> entry : media.getMetadata().entrySet()){
+                    System.out.println(entry.getKey() + ": " + entry.getValue());
+                }
+
+                // play if you want
+               // mediaPlayer.play();
+            }
+        });
         mediaPlayer.play();
         mediaPlayer.setOnEndOfMedia(new Runnable() {
             @Override

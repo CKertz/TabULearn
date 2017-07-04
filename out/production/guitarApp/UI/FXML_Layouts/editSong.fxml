@@ -29,7 +29,7 @@
                   <Font size="20.0" />
                </font>
             </Label>
-            <TextField fx:id="textFieldSelectedStart" layoutX="231.0" layoutY="94.0" prefHeight="30.0" prefWidth="80.0" />
+            <TextField fx:id="textFieldSelectedStart" layoutX="231.0" layoutY="94.0" prefHeight="30.0" prefWidth="80.0" text="0:00" />
             <Label layoutX="335.0" layoutY="99.0" prefHeight="21.0" prefWidth="35.0" text="to" textAlignment="CENTER">
                <HBox.margin>
                   <Insets top="2.0" />
@@ -43,17 +43,14 @@
       </HBox>
       <HBox layoutX="85.0" layoutY="250.0">
          <children>
-            <CheckBox fx:id="checkBoxTempo" layoutX="85.0" layoutY="255.0" mnemonicParsing="false" prefHeight="21.0" prefWidth="174.0" text="Tempo Adjustment" />
-            <TextField fx:id="textFieldTempoPercent" layoutX="355.0" layoutY="250.0" prefHeight="31.0" prefWidth="80.0">
-               <padding>
-                  <Insets left="20.0" />
-               </padding>
-            </TextField>
-            <Label layoutX="435.0" layoutY="255.0" text="\%" />
+            <CheckBox fx:id="checkBoxTempo" layoutX="85.0" layoutY="255.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="174.0" text="Tempo Adjustment" />
+            <TextField fx:id="textFieldTempoPercent" layoutX="355.0" layoutY="250.0" prefHeight="31.0" prefWidth="80.0" text="100" />
+            <Label layoutX="435.0" layoutY="255.0" prefHeight="29.0" prefWidth="13.0" text="\%" />
          </children>
       </HBox>
       <CheckBox fx:id="checkBoxLoop" layoutX="85.0" layoutY="318.0" mnemonicParsing="false" prefHeight="21.0" prefWidth="174.0" text="Looping" />
       <Button layoutX="403.0" layoutY="447.0" mnemonicParsing="false" onAction="#confirmEditChanges" text="Confirm " />
       <Button fx:id="btnExitEdit" layoutX="502.0" layoutY="447.0" mnemonicParsing="false" onAction="#exitEditSong" text="Exit" />
+      <Button layoutX="246.0" layoutY="447.0" mnemonicParsing="false" onAction="#previewChanges" text="Preview Changes" />
    </children>
 </AnchorPane>

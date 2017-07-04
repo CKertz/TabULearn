@@ -34,6 +34,9 @@ public class LibraryRecord {
         this.Tuning = new SimpleStringProperty(tuning);
         this.Genre = new SimpleStringProperty(genre);
     }
+    public LibraryRecord(){
+
+    }
 
     public int getID() {
         return ID.get();
