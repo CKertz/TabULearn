@@ -52,6 +52,8 @@ public class mainMenuController implements Initializable {
     @FXML
     private AnchorPane rootPane;
     @FXML
+    private Button btnEditSong;
+    @FXML
     private TableView<LibraryRecord> tableLibrary;
     @FXML
     private TableColumn<LibraryRecord, String> colName;
@@ -74,6 +76,7 @@ public class mainMenuController implements Initializable {
     @FXML
     private Hyperlink hyperLinkNewSelist;
 
+    boolean editStatus = false; //when we listen in tableview for edited song to play, if this is false we can skip scanning through URLs for the edited song
     boolean setListDisplayed = false;
     String minTimeStr = null;
     String secTimeStr= null;
@@ -85,7 +88,8 @@ public class mainMenuController implements Initializable {
     ObservableList<String> setlists = FXCollections.observableArrayList();
     ObservableList<LibraryRecord> data = FXCollections.observableArrayList();
     ListIterator<String> itr;
-
+    MediaPlayer editedSong = null;
+    int editedSongID = 0;
     //ListIterator<LibraryRecord> itr = data.listIterator();
     private MediaPlayer mediaPlayer = null;
     boolean songPlaying = false;
@@ -326,26 +330,28 @@ public class mainMenuController implements Initializable {
             Logger.getLogger(mainMenuController.class.getName()).log(Level.SEVERE,null,e);
         }
 
-        /*
-        String songID = tableLibrary.getSelectionModel().getSelectedItem().getURL();
-
-
-
-
-
-        //Parent root = (Parent)fxmlLoader.load();
-
-        tabViewController controller = fxmlLoader.<tabViewController>getController();
-        controller.setQueryID(selectedRecord);*/
-/*        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXML_Layouts/tabView.fxml"));
-        AnchorPane testPane = (AnchorPane) fxmlLoader.load();
-        tabViewController controller = fxmlLoader.<tabViewController>getController();*/
-        //controller.initData(selectedRecord);
-
         //@TODO this code is what works/////////////////////////////////////////////////////////////
 /*        AnchorPane tabPane = FXMLLoader.load(getClass().getResource("FXML_Layouts/tabView.fxml"));
         rootPane.getChildren().setAll(tabPane);*/
         // @TODO ////////////////////////////////////////////////////////////////////////////////////////
+
+    }
+    public void alterEditBtnText(String test){
+        btnEditSong.setText(test);
+
+    }
+    public void setEditedSong(String url, boolean loopingStatus, boolean tempoStatus, Duration startTime, Duration stopTime, boolean editStatus){
+        this.editStatus = editStatus;
+        Media editedMedia = new Media(new File(url).toURI().toString());
+        editedSong = new MediaPlayer(editedMedia);
+        editedSong.setStartTime(startTime);
+        editedSong.setStopTime(stopTime);
+        if(tempoStatus == true){
+
+        }
+        if(loopingStatus == true){
+
+        }
 
     }
     //putting all song locations into a useable URI for the MediaPlayer
