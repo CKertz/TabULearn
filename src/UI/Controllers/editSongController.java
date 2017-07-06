@@ -43,7 +43,7 @@ public class editSongController extends Application{
     String nowPlayingArtist = null;
     String nowPlayingSong = null;
     String songDuration = null;
-    int tempoAdjustment = 0;
+    double tempoAdjustment = 1;
     boolean loopingActive = false;
     boolean tempoAdjustmentActive = false;
     boolean changesMade = true;
@@ -96,7 +96,7 @@ public class editSongController extends Application{
         if(checkBoxTempo.isSelected() == true){
             tempoAdjustmentActive = true;
             try{
-                int tempo = Integer.parseInt(textFieldTempoPercent.getText());
+                tempoAdjustment = Integer.parseInt(textFieldTempoPercent.getText());
             }catch (Exception e){
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Invalid tempo adjustment");
@@ -117,7 +117,7 @@ public class editSongController extends Application{
             if (changesMade == true){
                 ((mainMenuController)fxmlLoader.getController()).alterEditBtnText("Revert Changes");
                 ((mainMenuController)fxmlLoader.getController()).setEditedSong(testRecord.getURL(),loopingActive,tempoAdjustmentActive, Duration.seconds(Double.parseDouble(partSeconds)+Double.parseDouble(partMinutes)*60),
-                        Duration.seconds(Double.parseDouble(endPartSeconds)+Double.parseDouble(endPartMinutes)*60),changesMade);
+                        Duration.seconds(Double.parseDouble(endPartSeconds)+Double.parseDouble(endPartMinutes)*60),changesMade,tempoAdjustment);
             }
 
             //Main.publicStage = stage;
@@ -145,7 +145,7 @@ public class editSongController extends Application{
 
         previewMedia.setStopTime(Duration.seconds(Double.parseDouble(endPartSeconds)+Double.parseDouble(endPartMinutes)*60));
 
-        if (loopingActive == true){
+/*        if (loopingActive == true){
             changesMade = true;
             previewMedia.setOnEndOfMedia(new Runnable() {
                 @Override
@@ -153,11 +153,11 @@ public class editSongController extends Application{
                     previewMedia.play();
                 }
             });
-        }
+        }*/
         if (checkBoxLoop.isSelected() == true){
             changesMade = true;
             loopingActive = true;
-            for (int i = 0; i < 100; i++){
+           // for (int i = 0; i < 100; i++){
                 previewMedia.setOnEndOfMedia(new Runnable() {
                     @Override
                     public void run() {
@@ -166,7 +166,7 @@ public class editSongController extends Application{
                     }
                 });
                 previewMedia.play();
-            }
+           // }
 
         }
         if (checkBoxTempo.isSelected() == true){

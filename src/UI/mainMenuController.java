@@ -76,6 +76,7 @@ public class mainMenuController implements Initializable {
     @FXML
     private Hyperlink hyperLinkNewSelist;
 
+    String editedSongURL = null;
     boolean editStatus = false; //when we listen in tableview for edited song to play, if this is false we can skip scanning through URLs for the edited song
     boolean setListDisplayed = false;
     String minTimeStr = null;
@@ -121,11 +122,22 @@ public class mainMenuController implements Initializable {
             row.setOnMouseClicked(event -> {
                 if (event.getClickCount() == 2 && (!row.isEmpty())) {
                     if (songPlaying == true) {
-                        mediaPlayer.stop();
-                        songPlaying = false;
+                        if (editedSong.getStatus() == MediaPlayer.Status.PLAYING){
+                            editedSong.stop();
+                            songPlaying = false;
+                        }else{
+                            mediaPlayer.stop();
+                            songPlaying = false;
+                        }
+
                     }
                     //mediaPlayer.stop();
                     LibraryRecord rowData = row.getItem();
+                    if(rowData.getURL().equals(editedSongURL)){
+                        editedSong.play();
+                        songPlaying = true;
+                        return;
+                    }
                     Media title = new Media(new File(rowData.getURL()).toURI().toString());
                     labelArtist.setText(rowData.getArtist());
                     labelSong.setText(rowData.getTitle());
@@ -262,6 +274,9 @@ public class mainMenuController implements Initializable {
     }
     @FXML
     public void editSong() throws Exception{
+        if(editStatus == true){
+            editedSong.dispose();
+        }
         LibraryRecord selectedRecord = tableLibrary.getSelectionModel().getSelectedItem();
         String artist= selectedRecord.getArtist();
         String title = selectedRecord.getTitle();
@@ -301,8 +316,6 @@ public class mainMenuController implements Initializable {
                 }catch (IOException e){
                     Logger.getLogger(mainMenuController.class.getName()).log(Level.SEVERE,null,e);
                 }
-                // play if you want
-                // mediaPlayer.play();
             }
         });
 
@@ -340,19 +353,24 @@ public class mainMenuController implements Initializable {
         btnEditSong.setText(test);
 
     }
-    public void setEditedSong(String url, boolean loopingStatus, boolean tempoStatus, Duration startTime, Duration stopTime, boolean editStatus){
+    public void setEditedSong(String url, boolean loopingStatus, boolean tempoStatus, Duration startTime, Duration stopTime, boolean editStatus, double tempo){
         this.editStatus = editStatus;
         Media editedMedia = new Media(new File(url).toURI().toString());
         editedSong = new MediaPlayer(editedMedia);
         editedSong.setStartTime(startTime);
         editedSong.setStopTime(stopTime);
-        if(tempoStatus == true){
-
-        }
+        editedSongURL = url;
+        editedSong.setRate(tempo/100);
         if(loopingStatus == true){
+                editedSong.setOnEndOfMedia(new Runnable() {
+                    @Override
+                    public void run() {
+                        editedSong.seek(startTime);
+                    }
 
+                });
+                //editedSong.play();
         }
-
     }
     //putting all song locations into a useable URI for the MediaPlayer
     public ArrayList<String> formatSongList(ObservableList<LibraryRecord> given){
