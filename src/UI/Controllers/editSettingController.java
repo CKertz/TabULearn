@@ -12,10 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
@@ -33,6 +30,10 @@ public class editSettingController {
     private TableColumn<GearRecord, String> colGearEdit;
     @FXML
     private TableColumn<LibraryRecord, String> colSettingEdit;
+    @FXML
+    private TextField textFieldEffect;
+    @FXML
+    private TextField textFieldIntensity;
     @FXML
     private Button btnExitEditSetting;
 
@@ -70,16 +71,16 @@ public class editSettingController {
     }
     @FXML
     public void addSettingChanges() {
-
+        loadGear.insertSettingIntoDB(songID,(comboBoxGearToEdit.getSelectionModel().getSelectedItem().toString()),textFieldEffect.getText(),textFieldIntensity.getText());
+        //System.out.print(getData.getGearID(comboBoxGearToEdit.getSelectionModel().getSelectedItem().toString()));
     }
     @FXML
     public void removeSetting() throws Exception {
-        //formatSettingName(tableViewEditSetting.getSelectionModel().getSelectedItem().getSetting());
-        //System.out.print(formatSettingName(tableViewEditSetting.getSelectionModel().getSelectedItem().getSetting()));
+
         getData.deleteGear(songID,formatSettingName(tableViewEditSetting.getSelectionModel().getSelectedItem().getSetting()));
 
     }
-    public void setSongID(int songID){
+    public void setSongID(int songID){ // passed from tabView
         this.songID = songID;
 
         try {
@@ -96,7 +97,7 @@ public class editSettingController {
         Stage stage = (Stage) btnExitEditSetting.getScene().getWindow();
         stage.close();
     }
-    public String formatSettingName(String given){
+    public String formatSettingName(String given){//table presents data in format of "Bass:2", or similar. reformat it to only contain "Bass" to allow for easier DB deletion
         String result = "";
         for (int i = 0; i < given.length(); i++) {
             if (given.charAt(i) != ':' && Character.isDigit(given.charAt(i)) == false ){

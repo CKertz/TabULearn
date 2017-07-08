@@ -126,6 +126,24 @@ public class dbConnect {
 
         return result;
     }
+    public int getGearID(String gear){
+
+        String sql = "Select * from Gear where gearMake  ||  ' ' || gearModel = ?;";
+        int result = 0;
+        try {
+            Connection conn = connect();
+            PreparedStatement ptsmt = conn.prepareStatement(sql);
+            ptsmt.setString(1,gear);
+            ResultSet rs = ptsmt.executeQuery();
+            while (rs.next()){
+                result = rs.getInt("gearID");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
     public int getGenreID(String genre){
 
         String sql = "SELECT genreID FROM Genre WHERE genreName = ?";
@@ -143,6 +161,20 @@ public class dbConnect {
         }
 
         return result;
+    }
+    public void insertSettingIntoDB(int songID,String gear, String settingName, String settingLocation){
+        String query = "INSERT INTO Setting (songID, gearID, settingName, settingLocation) VALUES (?,?,?,?)";
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+            pstmt.setInt(1, songID);
+            pstmt.setInt(2, getGearID(gear));
+            pstmt.setString(3,settingName);
+            pstmt.setString(4,settingLocation);
+
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
     }
     public void insertSetlistIntoDB(String setlistName, int songID ){
         //int id = getSongID(songURL);
