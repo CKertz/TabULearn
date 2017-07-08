@@ -239,12 +239,12 @@ public class mainMenuController implements Initializable {
         tableLibrary.setItems(sortedData);*/
     }
 
-
+    public static Stage importStage = new Stage();
     @FXML
     public void importSong() throws Exception{ //pressing Import Button at the main menu will run this code
 
 
-        Stage importStage = new Stage();
+        //Stage importStage = new Stage();
         Parent root = FXMLLoader.load(getClass().getResource("FXML_Layouts/import.fxml"));
         importStage.setTitle("Import");
         importStage.setScene(new Scene(root));
@@ -356,8 +356,8 @@ public class mainMenuController implements Initializable {
                 int hTime = (int) newValue.toHours();
                 int minTime = (int) newValue.toMinutes();
                 int secTime= (int) newValue.toSeconds();
-                if(secTime/60>=1){ // this are to display later something like a clock 19:02:20
-                    secTime%=60; //if you want just the time in minutes use only the toMinutes()
+                if(secTime/60>=1){
+                    secTime%=60;
                 }
                 if(minTime/60>=1){
                     minTime%=60;
@@ -366,7 +366,6 @@ public class mainMenuController implements Initializable {
                 secTimeStr = Integer.toString(secTime);
                 String songDuration = minTimeStr + ":" + secTimeStr;
 
-                //mediaPlayer.getTotalDuration().toString();
 
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXML_Layouts/editSong.fxml"));
                 Parent root;

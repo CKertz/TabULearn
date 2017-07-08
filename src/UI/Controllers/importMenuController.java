@@ -3,7 +3,9 @@ package UI.Controllers;
 import DB.dbConnect;
 import Models.Song;
 
+import UI.Main;
 import UI.chooseFile;
+import UI.mainMenuController;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -15,10 +17,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 
 import java.io.IOException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**
@@ -51,7 +56,7 @@ public class importMenuController {
 
 
     @FXML
-    public void importSong(){
+    public void importSong() throws Exception{
         List<String>gearAdded = listViewAddedGear.getItems();
         dbConnect insertingSong = new dbConnect();
         int genreId =0;
@@ -87,8 +92,21 @@ public class importMenuController {
             insertingSong.insertIntoLibrary(songToBeImported,gearAdded);
             int songID = insertingSong.getSongID(textFieldSongURL.getText());
             insertingSong.insertGearLayoutIntoDB(gearAdded,songID);
-            Stage stage = (Stage) btnCancel.getScene().getWindow();
-            stage.close();
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../FXML_Layouts/mainMenu.fxml"));
+        Parent root;
+        try{ //refresh main menu after importing a song to show it in the tableview
+            root = fxmlLoader.load();
+            Scene scene = new Scene(root);
+            Stage mainStage = new Stage();
+            mainStage.setTitle("TabULearn");
+            mainStage.setScene(scene);
+            Stage exitStage = (Stage) btnCancel.getScene().getWindow();
+            exitStage.close();
+            Main.publicStage.close();
+            mainStage.show();
+        }catch (IOException e){
+            Logger.getLogger(mainMenuController.class.getName()).log(Level.SEVERE,null,e);
+        }
 
     }
     @FXML
@@ -125,7 +143,7 @@ public class importMenuController {
                     Stage importStage = new Stage();
                     Parent root = null;
                     try {
-                        root = FXMLLoader.load(getClass().getResource("FXML_Layouts/addTuning.fxml"));
+                        root = FXMLLoader.load(getClass().getResource("../FXML_Layouts/addTuning.fxml"));
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -148,7 +166,7 @@ public class importMenuController {
                     Stage importStage = new Stage();
                     Parent root = null;
                     try {
-                        root = FXMLLoader.load(getClass().getResource("FXML_Layouts/addGenre.fxml"));
+                        root = FXMLLoader.load(getClass().getResource("../FXML_Layouts/addGenre.fxml"));
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -172,7 +190,7 @@ public class importMenuController {
                     Stage importStage = new Stage();
                     Parent root = null;
                     try {
-                        root = FXMLLoader.load(getClass().getResource("FXML_Layouts/addGear.fxml"));
+                        root = FXMLLoader.load(getClass().getResource("../FXML_Layouts/addGear.fxml"));
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
