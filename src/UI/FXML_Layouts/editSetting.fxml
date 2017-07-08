@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TableView fx:id="tableViewEditSetting" layoutX="373.0" layoutY="27.0" prefHeight="281.0" prefWidth="200.0">
+        <columns>
+          <TableColumn prefWidth="107.0" text="Gear" />
+          <TableColumn prefWidth="92.0" text="Setting" />
+        </columns>
+      </TableView>
+      <VBox layoutX="47.0" layoutY="46.0">
+         <children>
+            <Label layoutX="47.0" layoutY="46.0" text="Gear">
+               <VBox.margin>
+                  <Insets bottom="20.0" />
+               </VBox.margin>
+            </Label>
+            <Label layoutX="47.0" layoutY="86.0" text="Effect">
+               <padding>
+                  <Insets bottom="20.0" />
+               </padding>
+            </Label>
+            <Label layoutX="47.0" layoutY="146.0" text="Intensity" />
+         </children>
+      </VBox>
+      <HBox layoutX="384.0" layoutY="346.0">
+         <children>
+            <Button fx:id="btnConfirmEditSetting" layoutX="373.0" layoutY="346.0" mnemonicParsing="false" text="Confirm Changes" />
+            <Button fx:id="btnExitEditSetting" mnemonicParsing="false" text="Exit" />
+         </children>
+      </HBox>
+      <TextField fx:id="textFieldIntensity" layoutX="114.0" layoutY="118.0" opacity="0.5" promptText="(0-10)" text="(0-10)" />
+      <TextField fx:id="textFieldEffect" layoutX="114.0" layoutY="82.0" opacity="0.5" promptText="Bass, Gain, Distortion, etc." />
+      <ComboBox fx:id="comboBoxGearToEdit" layoutX="114.0" layoutY="46.0" prefHeight="31.0" prefWidth="186.0">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </ComboBox>
+   </children>
+</AnchorPane>
