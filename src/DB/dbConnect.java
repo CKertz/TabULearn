@@ -357,6 +357,18 @@ public class dbConnect {
         }
         return songList;
     }
+    public void deleteGear(int songID, String setting)throws Exception{
+        String sql = "DELETE FROM Setting WHERE songID = ? AND settingName LIKE ?";
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                pstmt.setInt(1,songID);
+                pstmt.setString(2, "%" + setting + "%");
+                pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
     public ObservableList<GearRecord> populateTabviewTable(int songID) throws Exception{
 
 

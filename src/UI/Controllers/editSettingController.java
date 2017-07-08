@@ -38,6 +38,9 @@ public class editSettingController {
 
     ObservableList<String> gearList = FXCollections.observableArrayList();
     dbConnect getData = new dbConnect();
+    dbConnect loadGear = new dbConnect();
+    ObservableList<GearRecord> data = FXCollections.observableArrayList();
+    int songID;
     @FXML
     public void initialize(){
         gearList = getData.populateGearComboBox();
@@ -45,7 +48,6 @@ public class editSettingController {
         comboBoxGearToEdit.getItems().removeAll(comboBoxGearToEdit.getItems());
         comboBoxGearToEdit.getItems().addAll(gearList);
 
-        ObservableSet<String> observableSet = FXCollections.observableSet();
 
         comboBoxGearToEdit.valueProperty().addListener(new ChangeListener<String>() {
             @Override
@@ -66,9 +68,17 @@ public class editSettingController {
             }
         });
     }
-    dbConnect loadGear = new dbConnect();
-    ObservableList<GearRecord> data = FXCollections.observableArrayList();
-    int songID;
+    @FXML
+    public void addSettingChanges() {
+
+    }
+    @FXML
+    public void removeSetting() throws Exception {
+        //formatSettingName(tableViewEditSetting.getSelectionModel().getSelectedItem().getSetting());
+        //System.out.print(formatSettingName(tableViewEditSetting.getSelectionModel().getSelectedItem().getSetting()));
+        getData.deleteGear(songID,formatSettingName(tableViewEditSetting.getSelectionModel().getSelectedItem().getSetting()));
+
+    }
     public void setSongID(int songID){
         this.songID = songID;
 
@@ -85,5 +95,14 @@ public class editSettingController {
     public void exitEditSetting(){
         Stage stage = (Stage) btnExitEditSetting.getScene().getWindow();
         stage.close();
+    }
+    public String formatSettingName(String given){
+        String result = "";
+        for (int i = 0; i < given.length(); i++) {
+            if (given.charAt(i) != ':' && Character.isDigit(given.charAt(i)) == false ){
+                result+=given.charAt(i);
+            }
+        }
+        return result;
     }
 }

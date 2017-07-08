@@ -30,7 +30,7 @@
       </VBox>
       <HBox layoutX="260.0" layoutY="344.0">
          <children>
-            <Button fx:id="btnConfirmEditSetting" layoutX="373.0" layoutY="346.0" mnemonicParsing="false" text="Confirm Changes" />
+            <Button fx:id="btnConfirmEditSetting" layoutX="373.0" layoutY="346.0" mnemonicParsing="false" onAction="#addSettingChanges" text="Confirm Changes" />
             <Button fx:id="btnRemoveSelectedSetting" mnemonicParsing="false" onAction="#removeSetting" text="Remove Selected" />
             <Button fx:id="btnExitEditSetting" mnemonicParsing="false" onAction="#exitEditSetting" text="Exit" />
          </children>
