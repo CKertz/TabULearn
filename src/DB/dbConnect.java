@@ -302,8 +302,6 @@ public class dbConnect {
         return setlistList;
     }
     public ObservableList<LibraryRecord> getSongsFromSetlist(String setlistName){
-        //String sql = "select A.songName, A.songURL, A.songArtist, A.songAlbum, A.tuningID, A.genreID, B.setlistName FROM Song as A, Setlist as B WHERE A.songID = B.songID AND B.setlistName = 'TestList';";
-       // String sql = "select A.songName, A.songURL, A.songArtist, A.songAlbum, A.tuningID, A.genreID, B.setlistName FROM Song as A, Setlist as B WHERE A.songID = B.songID AND  B.setlistName = '"+setlistName+"'";
         String sql = "select A.songName, A.songURL, A.songArtist, A.songAlbum, A.tuningID, A.genreID, B.setlistName FROM Song as A, Setlist as B WHERE A.songID = B.songID AND  B.setlistName = ?";
 
         final ObservableList<LibraryRecord> recordList = FXCollections.observableArrayList();
@@ -467,29 +465,4 @@ public class dbConnect {
         return recordList;
     }
 
-    public ObservableList<newSong> newPopulateLibraryComponents() throws Exception{ //@TODO to be deleted once LibraryRecord is implemented
-
-
-        //query 3 times, one for song details, for genre, for tuning
-        String sql = "SELECT * FROM Song";
-        final ObservableList<newSong> songList = FXCollections.observableArrayList();
-
-        try(Connection conn = this.connect();
-            Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery(sql)){
-
-            while (rs.next()){
-
-                String title = rs.getString("songName");
-                String artist = rs.getString("songArtist");
-                String album = rs.getString("songAlbum");
-                newSong newSong = new newSong(title,album,artist);
-                songList.add(newSong);
-            }
-
-        } catch (SQLException e){
-            System.out.println(e.getMessage());
-        }
-        return songList;
-    }
 }

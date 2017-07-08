@@ -26,7 +26,7 @@
             <file leaf-file-name="editSongController.java" pinned="false" current-in-tab="true">
               <entry file="file://$PROJECT_DIR$/src/UI/Controllers/editSongController.java">
                 <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="814">
+                  <state relative-caret-position="499">
                     <caret line="110" column="0" lean-forward="false" selection-start-line="110" selection-start-column="0" selection-end-line="110" selection-end-column="0" />
                     <folding>
                       <marker date="1499552824811" expanded="false" signature="6065:6088" ph=" { " />
@@ -57,11 +57,39 @@
       <file leaf-file-name="mainMenuController.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/UI/mainMenuController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="653">
-              <caret line="155" column="140" lean-forward="false" selection-start-line="155" selection-start-column="140" selection-end-line="155" selection-end-column="140" />
+            <state relative-caret-position="619">
+              <caret line="317" column="0" lean-forward="true" selection-start-line="317" selection-start-column="0" selection-end-line="317" selection-end-column="0" />
               <folding>
-                <marker date="1499553443882" expanded="true" signature="4987:6781" ph="{...}" />
+                <element signature="method#pausePlaySong#0;class#mainMenuController#0" expanded="false" />
+                <element signature="method#loadTabs#0;class#mainMenuController#0" expanded="false" />
+                <element signature="method#alterEditBtnText#0;class#mainMenuController#0" expanded="false" />
+                <element signature="method#setEditedSong#0;class#mainMenuController#0" expanded="false" />
+                <element signature="method#formatSongList#0;class#mainMenuController#0" expanded="false" />
+                <element signature="method#advanceIterator#0;class#mainMenuController#0" expanded="false" />
+                <element signature="method#getSecFromMedia#0;class#mainMenuController#0" expanded="false" />
+                <element signature="method#getMinFromMedia#0;class#mainMenuController#0" expanded="false" />
+                <marker date="1499556156701" expanded="true" signature="4876:6670" ph="{...}" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="createSetlistController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/UI/Controllers/createSetlistController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="110">
+              <caret line="49" column="68" lean-forward="false" selection-start-line="49" selection-start-column="68" selection-end-line="49" selection-end-column="68" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="dbConnect.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/DB/dbConnect.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-97">
+              <caret line="303" column="81" lean-forward="false" selection-start-line="303" selection-start-column="81" selection-end-line="303" selection-end-column="81" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -79,9 +107,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>getsong</find>
-      <find>libraryre</find>
-      <find>insertinto</find>
       <find>gettuningname</find>
       <find>gett</find>
       <find>sli</find>
@@ -109,6 +134,9 @@
       <find>image</find>
       <find>clickco</find>
       <find>imagepause</find>
+      <find>TODO</find>
+      <find>setlistDisplayed</find>
+      <find>getsongsfromse</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -149,7 +177,6 @@
         <option value="$PROJECT_DIR$/src/TabSearch/googleSearch.java" />
         <option value="D:/Java/jdk1.8.0_131/jre/lib/ext/jfxrt.jar!/javafx/application/Application.class" />
         <option value="$PROJECT_DIR$/src/UI/FXML_Layouts/createSetlist.fxml" />
-        <option value="$PROJECT_DIR$/src/UI/Controllers/createSetlistController.java" />
         <option value="$PROJECT_DIR$/src/UI/FXML_Layouts/mainMenu.fxml" />
         <option value="$PROJECT_DIR$/src/UI/FXML_Layouts/tabView.fxml" />
         <option value="$PROJECT_DIR$/src/Models/GearRecord.java" />
@@ -162,7 +189,6 @@
         <option value="C:/Program Files (x86)/Java/jdk1.8.0_131/javafx-src.zip!/javafx/scene/control/TableView.java" />
         <option value="C:/Program Files (x86)/Java/jdk1.8.0_131/javafx-src.zip!/javafx/scene/control/SelectionModel.java" />
         <option value="C:/Program Files (x86)/Java/jdk1.8.0_131/javafx-src.zip!/javafx/scene/Scene.java" />
-        <option value="$PROJECT_DIR$/src/DB/dbConnect.java" />
         <option value="C:/Program Files (x86)/Java/jdk1.8.0_131/javafx-src.zip!/javafx/scene/control/ComboBox.java" />
         <option value="$PROJECT_DIR$/src/UI/Controllers/addGearController.java" />
         <option value="$PROJECT_DIR$/src/UI/Controllers/addTuningController.java" />
@@ -172,6 +198,8 @@
         <option value="$PROJECT_DIR$/src/UI/Controllers/editSongController.java" />
         <option value="$PROJECT_DIR$/src/UI/Controllers/editSettingController.java" />
         <option value="C:/Program Files (x86)/Java/jdk1.8.0_131/javafx-src.zip!/javafx/event/Event.java" />
+        <option value="$PROJECT_DIR$/src/UI/Controllers/createSetlistController.java" />
+        <option value="$PROJECT_DIR$/src/DB/dbConnect.java" />
         <option value="$PROJECT_DIR$/src/UI/mainMenuController.java" />
       </list>
     </option>
@@ -391,7 +419,7 @@
     <property name="project.structure.last.edited" value="SDKs" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="SearchEverywhereHistoryKey" value="getL&#9;PSI&#9;JAVA://TabSearch.googleSearch#getLinks&#10;@TODO&#9;null&#9;null&#10;getsongid&#9;PSI&#9;JAVA://DB.dbConnect#getSongID&#10;System&#9;PSI&#9;JAVA://java.lang.System&#10;system.out&#9;null&#9;null&#10;insertgear&#9;PSI&#9;JAVA://DB.dbConnect#insertGearIntoDB&#10;insertg&#9;PSI&#9;JAVA://DB.dbConnect#insertGenreIntoDB&#10;todo&#9;ACTION&#9;ActivateTODOToolWindow" />
+    <property name="SearchEverywhereHistoryKey" value="TODO&#9;ACTION&#9;ActivateTODOToolWindow&#10;getL&#9;PSI&#9;JAVA://TabSearch.googleSearch#getLinks&#10;@TODO&#9;null&#9;null&#10;getsongid&#9;PSI&#9;JAVA://DB.dbConnect#getSongID&#10;System&#9;PSI&#9;JAVA://java.lang.System&#10;system.out&#9;null&#9;null&#10;insertgear&#9;PSI&#9;JAVA://DB.dbConnect#insertGearIntoDB&#10;insertg&#9;PSI&#9;JAVA://DB.dbConnect#insertGenreIntoDB&#10;todo&#9;ACTION&#9;ActivateTODOToolWindow" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -766,7 +794,7 @@
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3296617" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32904264" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30249396" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -774,18 +802,19 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32985657" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24054706" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22284795" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32870772" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1598721" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32985657" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.36122283" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.38777152" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -793,7 +822,6 @@
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32933652" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32985657" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
@@ -859,7 +887,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/DB/dbConnect.java</url>
-          <line>395</line>
+          <line>393</line>
           <properties />
           <option name="timeStamp" value="180" />
         </line-breakpoint>
@@ -871,7 +899,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/UI/mainMenuController.java</url>
-          <line>534</line>
+          <line>539</line>
           <properties />
           <option name="timeStamp" value="191" />
         </line-breakpoint>
@@ -887,8 +915,14 @@
           <properties />
           <option name="timeStamp" value="197" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/DB/dbConnect.java</url>
+          <line>304</line>
+          <properties />
+          <option name="timeStamp" value="199" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="199" />
+      <option name="time" value="204" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -942,13 +976,6 @@
     <entry file="jar://D:/Java/jdk1.8.0_131/javafx-src.zip!/javafx/event/Event.java" />
     <entry file="jar://D:/Java/jdk1.8.0_131/javafx-src.zip!/javafx/scene/Scene.java" />
     <entry file="jar://D:/Java/jdk1.8.0_131/jre/lib/ext/jfxrt.jar!/javafx/application/Application.class" />
-    <entry file="file://$PROJECT_DIR$/src/UI/Controllers/createSetlistController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1827">
-          <caret line="101" column="22" lean-forward="false" selection-start-line="101" selection-start-column="22" selection-end-line="101" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files (x86)/Java/jdk1.8.0_131/javafx-src.zip!/javafx/scene/media/Media.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="266">
@@ -1091,14 +1118,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/DB/dbConnect.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2919">
-          <caret line="150" column="21" lean-forward="false" selection-start-line="150" selection-start-column="21" selection-end-line="150" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files (x86)/Java/jdk1.8.0_131/javafx-src.zip!/javafx/scene/control/ComboBox.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="265">
@@ -1146,17 +1165,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/UI/Controllers/editSongController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="814">
-          <caret line="110" column="0" lean-forward="false" selection-start-line="110" selection-start-column="0" selection-end-line="110" selection-end-column="0" />
-          <folding>
-            <marker date="1499552824811" expanded="false" signature="6065:6088" ph=" { " />
-            <marker date="1499552824811" expanded="false" signature="6108:6126" ph=" }" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/UI/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="336">
@@ -1199,12 +1207,47 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/UI/Controllers/createSetlistController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="110">
+          <caret line="49" column="68" lean-forward="false" selection-start-line="49" selection-start-column="68" selection-end-line="49" selection-end-column="68" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/UI/Controllers/editSongController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="499">
+          <caret line="110" column="0" lean-forward="false" selection-start-line="110" selection-start-column="0" selection-end-line="110" selection-end-column="0" />
+          <folding>
+            <marker date="1499552824811" expanded="false" signature="6065:6088" ph=" { " />
+            <marker date="1499552824811" expanded="false" signature="6108:6126" ph=" }" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/DB/dbConnect.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-97">
+          <caret line="303" column="81" lean-forward="false" selection-start-line="303" selection-start-column="81" selection-end-line="303" selection-end-column="81" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/UI/mainMenuController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="653">
-          <caret line="155" column="140" lean-forward="false" selection-start-line="155" selection-start-column="140" selection-end-line="155" selection-end-column="140" />
+        <state relative-caret-position="619">
+          <caret line="317" column="0" lean-forward="true" selection-start-line="317" selection-start-column="0" selection-end-line="317" selection-end-column="0" />
           <folding>
-            <marker date="1499553443882" expanded="true" signature="4987:6781" ph="{...}" />
+            <element signature="method#pausePlaySong#0;class#mainMenuController#0" expanded="false" />
+            <element signature="method#loadTabs#0;class#mainMenuController#0" expanded="false" />
+            <element signature="method#alterEditBtnText#0;class#mainMenuController#0" expanded="false" />
+            <element signature="method#setEditedSong#0;class#mainMenuController#0" expanded="false" />
+            <element signature="method#formatSongList#0;class#mainMenuController#0" expanded="false" />
+            <element signature="method#advanceIterator#0;class#mainMenuController#0" expanded="false" />
+            <element signature="method#getSecFromMedia#0;class#mainMenuController#0" expanded="false" />
+            <element signature="method#getMinFromMedia#0;class#mainMenuController#0" expanded="false" />
+            <marker date="1499556156701" expanded="true" signature="4876:6670" ph="{...}" />
           </folding>
         </state>
       </provider>

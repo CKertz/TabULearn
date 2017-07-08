@@ -108,7 +108,7 @@ public class mainMenuController implements Initializable {
     //ListIterator<LibraryRecord> itr = data.listIterator();
     private MediaPlayer mediaPlayer = null;
     boolean songPlaying = false;
-    //TODO: BOOLEAN that is triggered when new screen is loaded. when it is triggered, requery/reload main menu
+
     @FXML
     public void initialize(URL Location, ResourceBundle resources) {
         //sliderVolume = new Slider(0, 1, 0.5);
@@ -187,19 +187,14 @@ public class mainMenuController implements Initializable {
             }
         });
         listViewSetlist.setOnMouseClicked(e ->{ //filters Music library to only contain songs in the selected setlist
-            if (setListDisplayed == false){
+
                 String setlistName =  listViewSetlist.getSelectionModel().getSelectedItem().toString();
                 ObservableList<LibraryRecord> setlistData = loadSongs.getSongsFromSetlist(setlistName);
+
                 tableLibrary.setItems(setlistData);
                 hyperLinkNewSelist.setText("Back to library..");
+
                 setListDisplayed = true;
-            }/*else{
-                tableLibrary.setItems(data);
-                hyperLinkNewSelist.setText("New...");
-                setListDisplayed = false;
-            }*/
-
-
 
         });
         //@TODO Search feature if implemented later on
@@ -256,7 +251,7 @@ public class mainMenuController implements Initializable {
     }
     @FXML
     public void createSetlist() throws Exception{
-        if (setListDisplayed == true){
+        if (hyperLinkNewSelist.getText().contains("Back to")){ //filter the setlist listview if needed
             tableLibrary.setItems(data);
             setListDisplayed = false;
             hyperLinkNewSelist.setText("New...");
@@ -311,6 +306,16 @@ public class mainMenuController implements Initializable {
 
                 mediaPlayer.stop();
                 mediaPlayer.setStartTime(Duration.ZERO);
+
+                mediaPlayer.setOnReady(new Runnable() {
+                    @Override
+                    public void run() {
+                        labelArtist.setText(forwardSong.getArtist());
+                        labelSong.setText(forwardSong.getTitle());
+                        startTimer(forwardMedia);
+                    }
+                });
+
                 mediaPlayer.play();
             }catch (IndexOutOfBoundsException ex){
                 mediaPlayer.stop();
@@ -430,10 +435,10 @@ public class mainMenuController implements Initializable {
             Logger.getLogger(mainMenuController.class.getName()).log(Level.SEVERE,null,e);
         }
 
-        //@TODO this code is what works/////////////////////////////////////////////////////////////
+        //@TODO this code opens a pane instead of a new stage
 /*        AnchorPane tabPane = FXMLLoader.load(getClass().getResource("FXML_Layouts/tabView.fxml"));
         rootPane.getChildren().setAll(tabPane);*/
-        // @TODO ////////////////////////////////////////////////////////////////////////////////////////
+
 
     }
     public void alterEditBtnText(String test){

@@ -49,8 +49,6 @@ public class createSetlistController implements Initializable {
     @FXML
     public void initialize(URL Location, ResourceBundle resources ){
 
-        //@TODO walk through mainmenu code and see why this would throw an error upon load. commenting it all out works fine
-
         ObservableList<LibraryRecord> data = FXCollections.observableArrayList();
         //ObservableList<LibraryRecord> setlistData = FXCollections.observableArrayList();
         try {
