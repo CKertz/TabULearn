@@ -38,8 +38,6 @@ public class importMenuController {
     @FXML
     private ComboBox comboBoxGenre;
     @FXML
-    private Hyperlink hyperlinkSongURL;
-    @FXML
     private TextField textFieldSongURL;
     @FXML
     private ComboBox comboBoxTuning;
@@ -56,25 +54,42 @@ public class importMenuController {
     public void importSong(){
         List<String>gearAdded = listViewAddedGear.getItems();
         dbConnect insertingSong = new dbConnect();
-        int genreId = insertingSong.getGenreID(comboBoxGenre.getSelectionModel().getSelectedItem().toString());
-        int tuningId = insertingSong.getTuningIDFromDB(comboBoxTuning.getSelectionModel().getSelectedItem().toString());
+        int genreId =0;
+        int tuningId = 0;
+        try{
+            genreId = insertingSong.getGenreID(comboBoxGenre.getSelectionModel().getSelectedItem().toString());
+        }catch (NullPointerException e){
+            genreId = 0;
+        }
+        try{
+            tuningId = insertingSong.getTuningIDFromDB(comboBoxTuning.getSelectionModel().getSelectedItem().toString());
+        }catch (NullPointerException e){
+            tuningId = 0;
+        }
+        try{
+            textFieldSongURL.getText().equals(null);
+        }catch (NullPointerException e){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("Location Needed");
+            alert.setContentText("Song location is required for importing a song. Please fill in a location and try again.");
+            alert.showAndWait();
+        }
 
-     //@TODO handle nulls smoothly
-        Song songToBeImported = new Song(
-                textFieldSongTitle.getText(),
-                textFieldSongURL.getText(),
-                textFieldSongArtist.getText(),
-                textFieldSongAlbum.getText(),
-                genreId,
-                tuningId
-        );
+            Song songToBeImported = new Song(
+                    textFieldSongTitle.getText(),
+                    textFieldSongURL.getText(),
+                    textFieldSongArtist.getText(),
+                    textFieldSongAlbum.getText(),
+                    genreId,
+                    tuningId
+            );
 
+            insertingSong.insertIntoLibrary(songToBeImported,gearAdded);
+            int songID = insertingSong.getSongID(textFieldSongURL.getText());
+            insertingSong.insertGearLayoutIntoDB(gearAdded,songID);
+            Stage stage = (Stage) btnCancel.getScene().getWindow();
+            stage.close();
 
-        insertingSong.insertIntoLibrary(songToBeImported,gearAdded);
-        int songID = insertingSong.getSongID(textFieldSongURL.getText());
-        insertingSong.insertGearLayoutIntoDB(gearAdded,songID);
-        Stage stage = (Stage) btnCancel.getScene().getWindow();
-        stage.close();
     }
     @FXML
     public void removeSelectedGear(){
@@ -98,6 +113,8 @@ public class importMenuController {
         ObservableList<String> genreList = FXCollections.observableArrayList();
 
         dbConnect getData = new dbConnect();
+
+        //Handling tuning combobox interaction
         tuningList = getData.populateTuningComboBox();
         comboBoxTuning.getItems().removeAll(comboBoxTuning.getItems());
         comboBoxTuning.getItems().addAll(tuningList);
@@ -119,6 +136,8 @@ public class importMenuController {
 
             }
         });
+
+        //Handling genre combobox interaction
         genreList = getData.populateGenreComboBox();
         comboBoxGenre.getItems().removeAll(comboBoxGenre.getItems());
         comboBoxGenre.getItems().addAll(genreList);
@@ -141,13 +160,11 @@ public class importMenuController {
             }
         });
 
+        //Handling "Added Gear" listview/combobox interaction
         gearList = getData.populateGearComboBox();
-
         comboBoxGear.getItems().removeAll(comboBoxGear.getItems());
         comboBoxGear.getItems().addAll(gearList);
-
         ObservableSet<String> observableSet = FXCollections.observableSet();
-
         comboBoxGear.valueProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue observable, String oldValue, String newValue)  {
@@ -168,12 +185,8 @@ public class importMenuController {
                     listViewAddedGear.setItems(FXCollections.observableArrayList(observableSet));
                 }
 
-
             }
         });
-
-
-
     }
 
 }

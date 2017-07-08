@@ -147,6 +147,9 @@ public class dbConnect {
     public int getGenreID(String genre){
 
         String sql = "SELECT genreID FROM Genre WHERE genreName = ?";
+        if (genre == "" || genre == null){
+            return 0;
+        }
         int result = 0;
         try {
             Connection conn = connect();

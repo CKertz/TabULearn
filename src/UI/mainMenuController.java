@@ -247,7 +247,7 @@ public class mainMenuController implements Initializable {
         Stage importStage = new Stage();
         Parent root = FXMLLoader.load(getClass().getResource("FXML_Layouts/import.fxml"));
         importStage.setTitle("Import");
-        importStage.setScene(new Scene(root, 600, 300));
+        importStage.setScene(new Scene(root));
         importStage.show();
 
 
@@ -262,7 +262,7 @@ public class mainMenuController implements Initializable {
             Stage setlistStage = new Stage();
             Parent root = FXMLLoader.load(getClass().getResource("FXML_Layouts/createSetlist.fxml"));
             setlistStage.setTitle("Create Setlist");
-            setlistStage.setScene(new Scene(root, 1200, 800));
+            setlistStage.setScene(new Scene(root));
             setlistStage.show();
         }
 
