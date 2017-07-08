@@ -4,11 +4,13 @@ import DB.dbConnect;
 import Models.GearRecord;
 import Models.LibraryRecord;
 import TabSearch.googleSearch;
+import UI.mainMenuController;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -24,9 +26,12 @@ import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Created by Cooper on 6/4/2017.
@@ -44,6 +49,7 @@ public class tabViewController extends Application {
     private MediaPlayer mediaPlayer = null;
     boolean songPlaying = false;
     dbConnect loadGear = new dbConnect();
+    int songID = 0;
     LibraryRecord recordToSearch;
     @FXML
     private TableView<GearRecord> tableViewGear;
@@ -99,6 +105,7 @@ public class tabViewController extends Application {
 
     public void setRecord(String tuningGiven, String artist, String title, String url, int songID){
        // given = recordToSearch;
+        this.songID = songID;
         queryToSearch = title + " " + artist;
         tuning = tuningGiven;
         labelSongName.setText(title + " - " + artist);
@@ -120,6 +127,21 @@ public class tabViewController extends Application {
 
        System.out.print(query.getTitle());
     }*/
+    @FXML
+    public void modifySetting(){
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../FXML_Layouts/editSetting.fxml"));
+        Parent root;
+        try{
+            root = fxmlLoader.load();
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            ((editSettingController)fxmlLoader.getController()).setSongID(songID);
+            stage.show();
+        }catch (IOException e){
+            Logger.getLogger(mainMenuController.class.getName()).log(Level.SEVERE,null,e);
+        }
+    }
     @FXML
     public void loadNextTab(){
          webEngine.load(listedLinks.get(tabCounter));

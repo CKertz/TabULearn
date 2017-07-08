@@ -59,8 +59,8 @@
                <children>
                   <TableView fx:id="tableViewGear" layoutY="138.0" prefHeight="460.0" prefWidth="280.0">
                     <columns>
-                      <TableColumn fx:id="colGear" prefWidth="144.0" text="Gear" />
-                      <TableColumn fx:id="colSetting" prefWidth="120.0" text="Setting" />
+                      <TableColumn fx:id="colGear" prefWidth="154.0" text="Gear" />
+                      <TableColumn fx:id="colSetting" prefWidth="125.0" text="Setting" />
                     </columns>
                   </TableView>
                   <VBox layoutX="14.0" layoutY="14.0" prefHeight="81.0" prefWidth="245.0">
@@ -77,7 +77,7 @@
                         </Label>
                      </children>
                   </VBox>
-                  <Button fx:id="btnModifyGear" layoutX="1.0" layoutY="107.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="280.0" text="Modify Gear/Settings for this song" />
+                  <Button fx:id="btnModifyGear" layoutX="1.0" layoutY="107.0" mnemonicParsing="false" onAction="#modifySetting" prefHeight="31.0" prefWidth="280.0" text="Modify Gear/Settings for this song" />
                </children>
             </AnchorPane>
          </right>
