@@ -28,16 +28,16 @@
           <children>
             <AnchorPane prefHeight="203.0" prefWidth="1199.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <children>
-                <Button fx:id="btnImport" layoutX="14.0" layoutY="94.0" mnemonicParsing="false" onAction="#importSong" text="Import" />
+                <Button fx:id="btnImport" layoutX="14.0" layoutY="168.0" mnemonicParsing="false" onAction="#importSong" text="Import" />
                 <HBox id="HBox" alignment="CENTER" layoutX="12.0" layoutY="43.0" spacing="0.0">
                   <children>
-                    <Button id="btnRewind" fx:id="btnRewind" mnemonicParsing="false" onAction="#rewindSong" text="Rewind" />
-                    <Button id="btnPlay" fx:id="btnPlay" mnemonicParsing="false" onAction="#pausePlaySong" text="Play/Pause" />
-                    <Button fx:id="btnForward" mnemonicParsing="false" onAction="#forwardSong" text="Forward" />
+                    <Button id="btnRewind" fx:id="btnRewind" mnemonicParsing="false" onAction="#rewindSong" />
+                    <Button id="btnPlay" fx:id="btnPlay" mnemonicParsing="false" onAction="#pausePlaySong" />
+                    <Button fx:id="btnForward" mnemonicParsing="false" onAction="#forwardSong" />
                   </children>
                 </HBox>
-                <TextField layoutX="986.0" layoutY="35.0" prefWidth="150.0" promptText="Search" />
-                <Slider fx:id="sliderVolume" layoutX="275.0" layoutY="50.0" prefHeight="18.0" prefWidth="150.0" />
+                <TextField fx:id="filterField" layoutX="986.0" layoutY="35.0" prefWidth="150.0" promptText="Search" visible="false" />
+                <Slider fx:id="sliderVolume" layoutX="235.0" layoutY="165.0" prefHeight="18.0" prefWidth="150.0" />
                 <HBox id="HBox" alignment="CENTER" layoutX="493.0" layoutY="158.0" spacing="5.0">
                   <children>
                     <Button fx:id="btnTab" mnemonicParsing="false" onAction="#loadTabs" text="Tab" />

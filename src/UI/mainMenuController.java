@@ -12,6 +12,8 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -21,6 +23,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -79,7 +83,12 @@ public class mainMenuController implements Initializable {
     @FXML
     private Button btnForward;
     @FXML
+    private Button btnPlay;
+    @FXML
     private Hyperlink hyperLinkNewSelist;
+    @FXML
+    private TextField filterField;
+
 
     String editedSongURL = null;
     boolean editStatus = false; //when we listen in tableview for edited song to play, if this is false we can skip scanning through URLs for the edited song
@@ -104,7 +113,12 @@ public class mainMenuController implements Initializable {
     public void initialize(URL Location, ResourceBundle resources) {
         //sliderVolume = new Slider(0, 1, 0.5);
         //mediaPlayer.setAutoPlay(true);
-
+        Image imagePause = new Image(getClass().getResourceAsStream("resources/play.png"));
+        btnPlay.setGraphic(new ImageView(imagePause));
+        Image imageForward = new Image(getClass().getResourceAsStream("resources/fastForward.png"));
+        btnForward.setGraphic(new ImageView(imageForward));
+        Image imageBackward = new Image(getClass().getResourceAsStream("resources/rewind.png"));
+        btnRewind.setGraphic(new ImageView(imageBackward));
         try {
             data = loadSongs.populateLibraryRecords();
         } catch (Exception e) {
@@ -127,9 +141,12 @@ public class mainMenuController implements Initializable {
             row.setOnMouseClicked(event -> {
                 if (event.getClickCount() == 2 && (!row.isEmpty())) {
                     if (songPlaying == true) {
-                        if (editedSong.getStatus() == MediaPlayer.Status.PLAYING){
-                            editedSong.stop();
-                            songPlaying = false;
+                        if (editStatus == true){
+                            if (editedSong.getStatus() == MediaPlayer.Status.PLAYING){
+                                editedSong.stop();
+                                songPlaying = false;
+                            }
+
                         }else{
                             mediaPlayer.stop();
                             songPlaying = false;
@@ -147,13 +164,12 @@ public class mainMenuController implements Initializable {
                     labelArtist.setText(rowData.getArtist());
                     labelSong.setText(rowData.getTitle());
                     mediaPlayer = new MediaPlayer(title);
-                    ArrayList<String> formattedSongs = formatSongList(data);
+                    ArrayList<String> formattedSongs = formatSongList(data); //reformat into URIs playable for mediaPlayer
                     itr = formattedSongs.listIterator();
                     advanceIterator(row.getIndex());
-                    play(itr.next());// testing this out
 
-                    //mediaPlayer.play();*/
-                    //mediaPlayer.setAutoPlay(true);
+                    play(itr.next());
+
                     songPlaying = true;
 
                     sliderVolume.setValue(mediaPlayer.getVolume()*100);
@@ -184,7 +200,43 @@ public class mainMenuController implements Initializable {
 
 
         });
-        
+        //@TODO Search feature if implemented later on
+/*        FilteredList<LibraryRecord> filteredData = new FilteredList<>(data, p -> true);
+
+
+        filterField.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredData.setPredicate(song -> {
+                // If filter text is empty, display all persons.
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+
+                // Compare first name and last name of every person with filter text.
+                String lowerCaseFilter = newValue.toLowerCase();
+
+                if (song.getArtist().toLowerCase().contains(lowerCaseFilter)) {
+                    return true; // Filter matches first name.
+                } else if (song.getTitle().toLowerCase().contains(lowerCaseFilter)) {
+                    return true; // Filter matches last name.
+                } else if (song.getAlbum().toLowerCase().contains(lowerCaseFilter)) {
+                    return true; // Filter matches last name.
+                } else if (song.getArtist().toLowerCase().contains(lowerCaseFilter)) {
+                    return true; // Filter matches last name.
+                } else if (song.getTuning().toLowerCase().contains(lowerCaseFilter)) {
+                    return true; // Filter matches last name.
+                } else if (song.getGenre().toLowerCase().contains(lowerCaseFilter)) {
+                    return true; // Filter matches last name.
+                }
+
+                return false; // Does not match.
+            });
+        });
+
+        SortedList<LibraryRecord> sortedData = new SortedList<>(filteredData);
+
+        sortedData.comparatorProperty().bind(tableLibrary.comparatorProperty());
+
+        tableLibrary.setItems(sortedData);*/
     }
 
 
@@ -271,10 +323,14 @@ public class mainMenuController implements Initializable {
             return;
         }
         if (songPlaying == true){
+            Image imagePlay = new Image(getClass().getResourceAsStream("resources/play.png"));
+            btnPlay.setGraphic(new ImageView(imagePlay));
             timeline.pause();
             mediaPlayer.pause();
             songPlaying = false;
         }else{
+            Image imagePause = new Image(getClass().getResourceAsStream("resources/pause.png"));
+            btnPlay.setGraphic(new ImageView(imagePause));
             timeline.play();
             mediaPlayer.play();
             songPlaying = true;
@@ -396,6 +452,7 @@ public class mainMenuController implements Initializable {
     }
     public void play(String mediaFile){
         Media media = new Media(mediaFile);
+
         mediaPlayer.dispose();
         mediaPlayer = new MediaPlayer(media);
         mediaPlayer.setOnReady(new Runnable() {
@@ -417,14 +474,15 @@ public class mainMenuController implements Initializable {
                 secTimeStr = Integer.toString(secTime);
                 System.out.println(minTime+":"+secTime);
                 // display media's metadata
-                for (Map.Entry<String, Object> entry : media.getMetadata().entrySet()){
+/*                for (Map.Entry<String, Object> entry : media.getMetadata().entrySet()){
                     System.out.println(entry.getKey() + ": " + entry.getValue());
-                }
-                startTimer(minTime,media);
+                }*/
+                startTimer(media);
                 // play if you want
                // mediaPlayer.play();
             }
         });
+
         mediaPlayer.play();
 
         mediaPlayer.setOnEndOfMedia(new Runnable() {
@@ -446,10 +504,14 @@ public class mainMenuController implements Initializable {
     //private Parent borderPane;
     //public BorderPane timeBorderPane;
     private boolean isRunning;
-    public void startTimer( int min, Media media) {
+    private boolean newSongRunning = false;
+    int playCount = 0;
+    public void startTimer(Media media) {
 
-        if(isRunning == false) { //Added a if statement to switch on "running"
+       // if(isRunning == false) { //Added a if statement to switch on "running"
             if (!(startTimeMin < 0)) {
+                labelTimeLeft.setText(getMinFromMedia(media)+ ":" + getSecFromMedia(media));
+                ++playCount;
                 KeyFrame keyframe = new KeyFrame(Duration.seconds(1), new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent event) {
@@ -470,24 +532,28 @@ public class mainMenuController implements Initializable {
 
                         }
 
-                        labelTimeLeft.setText(String.format("%d:%02d", startTimeMin, startTimeSec));
+                        labelTimeLeft.setText(startTimeMin + ":" +  startTimeSec);
 
                     }
                 });
                 labelTimeLeft.setTextFill(Color.BLACK);
                 startTimeSec = getSecFromMedia(media); // Change to 60!
-                startTimeMin = min;
+                startTimeMin = getMinFromMedia(media);
                 timeline.setCycleCount(Timeline.INDEFINITE);
+                if (playCount > 1){ //Prevents keyframes from stacking on each other. If you play 1 song, then another, it counts by 2's, 3's, so on
+                    timeline.playFromStart();
+                    return;
+                }
                 timeline.getKeyFrames().add(keyframe);
                 timeline.playFromStart();
                 isRunning = true;
-            } else {
+            } /*else {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION, "You have not entered a time!");
                 alert.showAndWait();
             }
         }else {
             timeline.play(); //Playes from current position in in the direction indicated by rate.
-        }
+        }*/
 
     }
     public int getSecFromMedia(Media media){
@@ -503,6 +569,20 @@ public class mainMenuController implements Initializable {
         }
 
         return secTime;
+    }
+    public int getMinFromMedia(Media media){
+        Duration newValue = media.getDuration();
+        int hTime = (int) newValue.toHours();
+        int minTime = (int) newValue.toMinutes();
+        int secTime= (int) newValue.toSeconds();
+        if(secTime/60>=1){ // this are to display later something like a clock 19:02:20
+            secTime%=60; //if you want just the time in minutes use only the toMinutes()
+        }
+        if(minTime/60>=1){
+            minTime%=60;
+        }
+
+        return minTime;
     }
 
 }
