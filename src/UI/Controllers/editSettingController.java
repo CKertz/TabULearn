@@ -3,6 +3,7 @@ package UI.Controllers;
 import DB.dbConnect;
 import Models.GearRecord;
 import Models.LibraryRecord;
+import UI.mainMenuController;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -17,6 +18,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Created by Cooper on 7/7/2017.
@@ -71,8 +74,16 @@ public class editSettingController {
     }
     @FXML
     public void addSettingChanges() {
-        loadGear.insertSettingIntoDB(songID,(comboBoxGearToEdit.getSelectionModel().getSelectedItem().toString()),textFieldEffect.getText(),textFieldIntensity.getText());
-        //System.out.print(getData.getGearID(comboBoxGearToEdit.getSelectionModel().getSelectedItem().toString()));
+        try{
+            loadGear.insertSettingIntoDB(songID,(comboBoxGearToEdit.getSelectionModel().getSelectedItem().toString()),textFieldEffect.getText(),textFieldIntensity.getText());
+            Stage stage = (Stage) btnExitEditSetting.getScene().getWindow();
+            stage.close();
+        }catch (NullPointerException e){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("Please fill in all fields before confirming changes.");
+            alert.showAndWait();
+        }
+
     }
     @FXML
     public void removeSetting() throws Exception {

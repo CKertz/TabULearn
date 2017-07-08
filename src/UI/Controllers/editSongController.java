@@ -108,6 +108,7 @@ public class editSongController extends Application{
         }
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../FXML_Layouts/mainMenu.fxml"));
         Parent root;
+
         try{
             root = fxmlLoader.load();
             Scene scene = new Scene(root);
@@ -128,6 +129,7 @@ public class editSongController extends Application{
         }catch (IOException e){
             Logger.getLogger(mainMenuController.class.getName()).log(Level.SEVERE,null,e);
         }
+
     }
     @FXML public void previewChanges(){
         Media media = new Media(new File(testRecord.getURL()).toURI().toString());

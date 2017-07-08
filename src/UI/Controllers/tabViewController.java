@@ -12,10 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
@@ -127,6 +124,7 @@ public class tabViewController extends Application {
 
        System.out.print(query.getTitle());
     }*/
+    public static Stage tabViewStage = new Stage();
     @FXML
     public void modifySetting(){
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../FXML_Layouts/editSetting.fxml"));
@@ -134,10 +132,10 @@ public class tabViewController extends Application {
         try{
             root = fxmlLoader.load();
             Scene scene = new Scene(root);
-            Stage stage = new Stage();
-            stage.setScene(scene);
+            Stage tabViewStage = new Stage();
+            tabViewStage.setScene(scene);
             ((editSettingController)fxmlLoader.getController()).setSongID(songID);
-            stage.show();
+            tabViewStage.show();
         }catch (IOException e){
             Logger.getLogger(mainMenuController.class.getName()).log(Level.SEVERE,null,e);
         }
@@ -169,6 +167,7 @@ public class tabViewController extends Application {
     @FXML
     public void exitTabView() throws Exception{
         Stage stage = (Stage) btnExitTabView.getScene().getWindow();
+        mediaPlayer.dispose();
         stage.close();
     }
     @FXML
@@ -187,12 +186,20 @@ public class tabViewController extends Application {
     public void getTabs(){
         webEngine = webViewTabs.getEngine();
         //String toBeSearched = googleSearch.formatQuery("iron man");
-        String toBeSearched = googleSearch.formatQuery(queryToSearch);// give the parameter in a bundle from mainmenu
-        listedLinks = googleSearch.getLinks(toBeSearched);
-        //webEngine = webViewTabs.getEngine();
+        try{
+            String toBeSearched = googleSearch.formatQuery(queryToSearch);// give the parameter in a bundle from mainmenu
+            listedLinks = googleSearch.getLinks(toBeSearched);
+            //webEngine = webViewTabs.getEngine();
 
-        //String test = "https://tabs.ultimate-guitar.com/d/deep_purple/smoke_on_the_water_tab.htm";
-        webEngine.load(listedLinks.get(tabCounter));
-        tabCounter++;
+            //String test = "https://tabs.ultimate-guitar.com/d/deep_purple/smoke_on_the_water_tab.htm";
+            webEngine.load(listedLinks.get(tabCounter));
+            tabCounter++;
+        }catch (IndexOutOfBoundsException e){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("No tabs found, we'll load Google if you would like to search them manually.");
+            alert.showAndWait();
+            webEngine.load("https://www.google.com");
+        }
+
     }
 }

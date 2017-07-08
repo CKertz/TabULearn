@@ -153,6 +153,8 @@ public class mainMenuController implements Initializable {
                         }
 
                     }
+                    Image imagePause1 = new Image(getClass().getResourceAsStream("resources/pause.png"));//has to be redeclared to fix a bug
+                    btnPlay.setGraphic(new ImageView(imagePause1));
                     //mediaPlayer.stop();
                     LibraryRecord rowData = row.getItem();
                     if(rowData.getURL().equals(editedSongURL)){
@@ -339,59 +341,81 @@ public class mainMenuController implements Initializable {
     @FXML
     public void editSong() throws Exception{
         if(editStatus == true){
-            editedSong.dispose();
+                editedSong.dispose();
+            return;
         }
-        LibraryRecord selectedRecord = tableLibrary.getSelectionModel().getSelectedItem();
-        String artist= selectedRecord.getArtist();
-        String title = selectedRecord.getTitle();
+        try{
+            LibraryRecord selectedRecord = tableLibrary.getSelectionModel().getSelectedItem();
+            String artist= selectedRecord.getArtist();
+            String title = selectedRecord.getTitle();
 
-        Media media = new Media(new File(selectedRecord.getURL()).toURI().toString());
-        mediaPlayer = new MediaPlayer(media);
-        mediaPlayer.setOnReady(new Runnable() {
+            Media media = new Media(new File(selectedRecord.getURL()).toURI().toString());
+            mediaPlayer = new MediaPlayer(media);
+            mediaPlayer.setOnReady(new Runnable() {
 
-            @Override
-            public void run() {
+                @Override
+                public void run() {
 
-                Duration newValue = media.getDuration();
-                int hTime = (int) newValue.toHours();
-                int minTime = (int) newValue.toMinutes();
-                int secTime= (int) newValue.toSeconds();
-                if(secTime/60>=1){
-                    secTime%=60;
+                    Duration newValue = media.getDuration();
+                    int hTime = (int) newValue.toHours();
+                    int minTime = (int) newValue.toMinutes();
+                    int secTime= (int) newValue.toSeconds();
+                    if(secTime/60>=1){
+                        secTime%=60;
+                    }
+                    if(minTime/60>=1){
+                        minTime%=60;
+                    }
+                    minTimeStr = Integer.toString(minTime);
+                    secTimeStr = Integer.toString(secTime);
+                    String songDuration = minTimeStr + ":" + secTimeStr;
+
+
+                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXML_Layouts/editSong.fxml"));
+                    Parent root;
+                    try{
+                        root = fxmlLoader.load();
+                        Scene scene = new Scene(root);
+                        Stage stage = new Stage();
+                        stage.setScene(scene);
+                        ((editSongController)fxmlLoader.getController()).initData(artist,title,songDuration,selectedRecord);
+                        stage.show();
+                    }catch (IOException e){
+                        Logger.getLogger(mainMenuController.class.getName()).log(Level.SEVERE,null,e);
+                    }
                 }
-                if(minTime/60>=1){
-                    minTime%=60;
-                }
-                minTimeStr = Integer.toString(minTime);
-                secTimeStr = Integer.toString(secTime);
-                String songDuration = minTimeStr + ":" + secTimeStr;
+            });
+        }catch(NullPointerException e){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("Click on a song in the library and try again.");
+            alert.showAndWait();
+            alert.setHeaderText("No song selected");
+        }
 
-
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXML_Layouts/editSong.fxml"));
-                Parent root;
-                try{
-                    root = fxmlLoader.load();
-                    Scene scene = new Scene(root);
-                    Stage stage = new Stage();
-                    stage.setScene(scene);
-                    ((editSongController)fxmlLoader.getController()).initData(artist,title,songDuration,selectedRecord);
-                    stage.show();
-                }catch (IOException e){
-                    Logger.getLogger(mainMenuController.class.getName()).log(Level.SEVERE,null,e);
-                }
-            }
-        });
 
 
     }
     @FXML
     public void loadTabs() throws Exception{
-        LibraryRecord selectedRecord = tableLibrary.getSelectionModel().getSelectedItem();
-        String artistToSearch = selectedRecord.getArtist();
-        String titleToSearch = selectedRecord.getTitle();
-        String tuningToSearch = selectedRecord.getTuning();
-        String songURL = selectedRecord.getURL();
-        int songID = selectedRecord.getID();
+        String artistToSearch = "";
+        String titleToSearch = "";
+        String tuningToSearch = "";
+        String songURL = "";
+        int songID = 0;
+        try{
+           LibraryRecord selectedRecord = tableLibrary.getSelectionModel().getSelectedItem();
+           artistToSearch = selectedRecord.getArtist();
+           titleToSearch = selectedRecord.getTitle();
+           tuningToSearch = selectedRecord.getTuning();
+           songURL = selectedRecord.getURL();
+           songID = selectedRecord.getID();
+
+        }catch (NullPointerException e){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("Select a song in your library to find tabs for, and try again.");
+            alert.showAndWait();
+        }
+
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXML_Layouts/tabView.fxml"));
         Parent root;
