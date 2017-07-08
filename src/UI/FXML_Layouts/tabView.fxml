@@ -16,9 +16,8 @@
          <bottom>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
-                  <HBox layoutX="332.0" layoutY="-1.0" prefHeight="31.0" prefWidth="364.0">
+                  <HBox layoutX="471.0" layoutY="-1.0" prefHeight="31.0" prefWidth="259.0">
                      <children>
-                        <Button fx:id="btnEditPlayback" mnemonicParsing="false" text="Edit Playback" />
                         <Button fx:id="btnPlayPause" mnemonicParsing="false" onAction="#playPauseSong" text="Play/Pause" />
                         <Button fx:id="btnMute" mnemonicParsing="false" onAction="#muteSong" text="Mute" />
                         <Button fx:id="btnRetreiveTabs" mnemonicParsing="false" onAction="#getTabs" text="Retrieve Tabs" />

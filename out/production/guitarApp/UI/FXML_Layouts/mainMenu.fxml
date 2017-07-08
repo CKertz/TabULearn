@@ -38,17 +38,17 @@
                 </HBox>
                 <TextField layoutX="986.0" layoutY="35.0" prefWidth="150.0" promptText="Search" />
                 <Slider fx:id="sliderVolume" layoutX="275.0" layoutY="50.0" prefHeight="18.0" prefWidth="150.0" />
-                <HBox id="HBox" alignment="CENTER" layoutX="1017.0" layoutY="158.0" spacing="5.0">
+                <HBox id="HBox" alignment="CENTER" layoutX="493.0" layoutY="158.0" spacing="5.0">
                   <children>
                     <Button fx:id="btnTab" mnemonicParsing="false" onAction="#loadTabs" text="Tab" />
-                    <Button fx:id="btnGear" mnemonicParsing="false" text="Gear" />
+                              <Button fx:id="btnEditSong" mnemonicParsing="false" onAction="#editSong" text="Edit Playback Options" />
                   </children>
                 </HBox>
                         <VBox layoutX="509.0" layoutY="43.0" prefHeight="63.0" prefWidth="181.0">
                            <children>
-                      <Label fx:id="labelSong" alignment="TOP_CENTER" layoutX="491.0" layoutY="40.0" prefHeight="21.0" prefWidth="181.0" text="SongName" textAlignment="CENTER" />
-                      <Label fx:id="labelArtist" alignment="BASELINE_CENTER" layoutX="572.0" layoutY="40.0" prefHeight="21.0" prefWidth="195.0" text="SongArtist" textAlignment="CENTER" />
-                              <Label fx:id="labelTimeLeft" alignment="BOTTOM_CENTER" prefHeight="21.0" prefWidth="200.0" text="timeLeft" textAlignment="CENTER" />
+                      <Label fx:id="labelSong" alignment="TOP_CENTER" layoutX="491.0" layoutY="40.0" prefHeight="21.0" prefWidth="181.0" text="Welcome to TabULearn!" textAlignment="CENTER" />
+                      <Label fx:id="labelArtist" alignment="BASELINE_CENTER" layoutX="572.0" layoutY="40.0" prefHeight="21.0" prefWidth="195.0" textAlignment="CENTER" />
+                              <Label fx:id="labelTimeLeft" alignment="BOTTOM_CENTER" prefHeight="21.0" prefWidth="200.0" textAlignment="CENTER" />
                            </children>
                         </VBox>
                 <MenuBar id="menuBar" prefHeight="32.0" prefWidth="1199.0">
@@ -70,7 +70,6 @@
                     </Menu>
                   </menus>
                 </MenuBar>
-                        <Button fx:id="btnEditSong" layoutX="518.0" layoutY="143.0" mnemonicParsing="false" onAction="#editSong" text="Edit Playback Options" />
               </children>
             </AnchorPane>
           </children>

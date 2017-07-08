@@ -4,12 +4,16 @@ import DB.dbConnect;
 import Models.LibraryRecord;
 import UI.Controllers.editSongController;
 import UI.Controllers.tabViewController;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -20,6 +24,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -179,6 +184,7 @@ public class mainMenuController implements Initializable {
 
 
         });
+        
     }
 
 
@@ -265,9 +271,11 @@ public class mainMenuController implements Initializable {
             return;
         }
         if (songPlaying == true){
+            timeline.pause();
             mediaPlayer.pause();
             songPlaying = false;
         }else{
+            timeline.play();
             mediaPlayer.play();
             songPlaying = true;
         }
@@ -412,12 +420,13 @@ public class mainMenuController implements Initializable {
                 for (Map.Entry<String, Object> entry : media.getMetadata().entrySet()){
                     System.out.println(entry.getKey() + ": " + entry.getValue());
                 }
-
+                startTimer(minTime,media);
                 // play if you want
                // mediaPlayer.play();
             }
         });
         mediaPlayer.play();
+
         mediaPlayer.setOnEndOfMedia(new Runnable() {
             @Override
             public void run() {
@@ -431,7 +440,69 @@ public class mainMenuController implements Initializable {
             }
         });
     }
+    private Timeline timeline = new Timeline();
+    //private int min;
+    private int startTimeSec, startTimeMin;
+    //private Parent borderPane;
+    //public BorderPane timeBorderPane;
+    private boolean isRunning;
+    public void startTimer( int min, Media media) {
 
+        if(isRunning == false) { //Added a if statement to switch on "running"
+            if (!(startTimeMin < 0)) {
+                KeyFrame keyframe = new KeyFrame(Duration.seconds(1), new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
 
+                        startTimeSec--;
+                        boolean isSecondsZero = startTimeSec == 0;
+                        boolean timeToChangeBackground = startTimeSec == 0 && startTimeMin == 0;
+
+                        if (isSecondsZero) {
+                            startTimeMin--;
+                            startTimeSec = 60;
+                        }
+                        if (timeToChangeBackground) {
+                            timeline.stop();
+                            startTimeMin = 0;
+                            startTimeSec = 0;
+                            labelTimeLeft.setTextFill(Color.RED);
+
+                        }
+
+                        labelTimeLeft.setText(String.format("%d:%02d", startTimeMin, startTimeSec));
+
+                    }
+                });
+                labelTimeLeft.setTextFill(Color.BLACK);
+                startTimeSec = getSecFromMedia(media); // Change to 60!
+                startTimeMin = min;
+                timeline.setCycleCount(Timeline.INDEFINITE);
+                timeline.getKeyFrames().add(keyframe);
+                timeline.playFromStart();
+                isRunning = true;
+            } else {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION, "You have not entered a time!");
+                alert.showAndWait();
+            }
+        }else {
+            timeline.play(); //Playes from current position in in the direction indicated by rate.
+        }
+
+    }
+    public int getSecFromMedia(Media media){
+        Duration newValue = media.getDuration();
+        int hTime = (int) newValue.toHours();
+        int minTime = (int) newValue.toMinutes();
+        int secTime= (int) newValue.toSeconds();
+        if(secTime/60>=1){ // this are to display later something like a clock 19:02:20
+            secTime%=60; //if you want just the time in minutes use only the toMinutes()
+        }
+        if(minTime/60>=1){
+            minTime%=60;
+        }
+
+        return secTime;
+    }
 
 }

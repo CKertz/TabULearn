@@ -35,7 +35,7 @@
             <Button fx:id="btnExitEditSetting" mnemonicParsing="false" onAction="#exitEditSetting" text="Exit" />
          </children>
       </HBox>
-      <TextField fx:id="textFieldIntensity" layoutX="114.0" layoutY="118.0" opacity="0.5" promptText="(0-10)" text="(0-10)" />
+      <TextField fx:id="textFieldIntensity" layoutX="114.0" layoutY="118.0" opacity="0.5" promptText="(0-10), ON, Activated" />
       <TextField fx:id="textFieldEffect" layoutX="114.0" layoutY="82.0" opacity="0.5" promptText="Bass, Gain, Distortion, etc." />
       <ComboBox fx:id="comboBoxGearToEdit" layoutX="114.0" layoutY="46.0" prefHeight="31.0" prefWidth="186.0">
          <opaqueInsets>
