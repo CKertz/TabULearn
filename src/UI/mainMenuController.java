@@ -89,7 +89,12 @@ public class mainMenuController implements Initializable {
     @FXML
     private TextField filterField;
 
+    private Timeline timeline = new Timeline();
 
+    private int startTimeSec, startTimeMin;
+    private boolean isRunning;
+    private boolean newSongRunning = false;
+    int playCount = 0;
     String editedSongURL = null;
     boolean editStatus = false; //when we listen in tableview for edited song to play, if this is false we can skip scanning through URLs for the edited song
     boolean setListDisplayed = false;
@@ -105,14 +110,13 @@ public class mainMenuController implements Initializable {
     ListIterator<String> itr;
     MediaPlayer editedSong = null;
     int editedSongID = 0;
-    //ListIterator<LibraryRecord> itr = data.listIterator();
+    ListIterator<LibraryRecord> itrData = data.listIterator();
     private MediaPlayer mediaPlayer = null;
     boolean songPlaying = false;
-
+    public static Stage importStage = new Stage();
     @FXML
     public void initialize(URL Location, ResourceBundle resources) {
-        //sliderVolume = new Slider(0, 1, 0.5);
-        //mediaPlayer.setAutoPlay(true);
+
         Image imagePause = new Image(getClass().getResourceAsStream("resources/play.png"));
         btnPlay.setGraphic(new ImageView(imagePause));
         Image imageForward = new Image(getClass().getResourceAsStream("resources/fastForward.png"));
@@ -121,6 +125,7 @@ public class mainMenuController implements Initializable {
         btnRewind.setGraphic(new ImageView(imageBackward));
         try {
             data = loadSongs.populateLibraryRecords();
+            itrData = data.listIterator();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -155,7 +160,6 @@ public class mainMenuController implements Initializable {
                     }
                     Image imagePause1 = new Image(getClass().getResourceAsStream("resources/pause.png"));//has to be redeclared to fix a bug
                     btnPlay.setGraphic(new ImageView(imagePause1));
-                    //mediaPlayer.stop();
                     LibraryRecord rowData = row.getItem();
                     if(rowData.getURL().equals(editedSongURL)){
                         editedSong.play();
@@ -169,7 +173,7 @@ public class mainMenuController implements Initializable {
                     ArrayList<String> formattedSongs = formatSongList(data); //reformat into URIs playable for mediaPlayer
                     itr = formattedSongs.listIterator();
                     advanceIterator(row.getIndex());
-
+                    //itrData.next();
                     play(itr.next());
 
                     songPlaying = true;
@@ -236,12 +240,10 @@ public class mainMenuController implements Initializable {
         tableLibrary.setItems(sortedData);*/
     }
 
-    public static Stage importStage = new Stage();
+
     @FXML
     public void importSong() throws Exception{ //pressing Import Button at the main menu will run this code
 
-
-        //Stage importStage = new Stage();
         Parent root = FXMLLoader.load(getClass().getResource("FXML_Layouts/import.fxml"));
         importStage.setTitle("Import");
         importStage.setScene(new Scene(root));
@@ -265,7 +267,25 @@ public class mainMenuController implements Initializable {
 
     }
     @FXML
-    public void rewindSong(){
+    public void rewindSongtest(){ //@TODO testing this as a replacement
+        btnRewind.setOnMousePressed((e) ->{
+                if (e.getClickCount() == 2 && tableLibrary.getSelectionModel().getSelectedIndex() !=0){
+                    play(itr.previous());
+/*                    Media prevMedia = new Media (new File(prevSong.getURL()).toURI().toString());
+                    mediaPlayer.stop();
+                    mediaPlayer = new MediaPlayer(prevMedia);
+                    mediaPlayer.play();
+                    rewindCount++;*/
+                    // prevRow--;
+                }else{
+                    mediaPlayer.stop();
+                    mediaPlayer.setStartTime(Duration.ZERO);
+                    mediaPlayer.play();
+                }
+        });
+    }
+    @FXML
+    public void rewindSong(){//@TODO is the current implementation of rewindSong, may be altered to test a new one
 
         btnRewind.setOnMousePressed((e) ->{
             try{
@@ -277,7 +297,6 @@ public class mainMenuController implements Initializable {
                     mediaPlayer = new MediaPlayer(prevMedia);
                     mediaPlayer.play();
                     rewindCount++;
-                    // prevRow--;
                 }else{
                     mediaPlayer.stop();
                     mediaPlayer.setStartTime(Duration.ZERO);
@@ -289,6 +308,16 @@ public class mainMenuController implements Initializable {
 
         });
 
+    }
+    @FXML
+    public void forwardSongtest(){
+        if (itrData.nextIndex() == 0){
+
+        }
+        labelSong.setText(itrData.next().getTitle());
+        itrData.previous();
+        labelArtist.setText(itrData.next().getArtist());
+        play(itr.next());
     }
     @FXML
     public void forwardSong(){
@@ -396,9 +425,6 @@ public class mainMenuController implements Initializable {
             alert.showAndWait();
             alert.setHeaderText("No song selected");
         }
-
-
-
     }
     @FXML
     public void loadTabs() throws Exception{
@@ -461,7 +487,6 @@ public class mainMenuController implements Initializable {
                     }
 
                 });
-                //editedSong.play();
         }
     }
     //putting all song locations into a useable URI for the MediaPlayer
@@ -492,8 +517,8 @@ public class mainMenuController implements Initializable {
                 int hTime = (int) newValue.toHours();
                 int minTime = (int) newValue.toMinutes();
                 int secTime= (int) newValue.toSeconds();
-                if(secTime/60>=1){ // this are to display later something like a clock 19:02:20
-                    secTime%=60; //if you want just the time in minutes use only the toMinutes()
+                if(secTime/60>=1){
+                    secTime%=60;
                 }
                 if(minTime/60>=1){
                     minTime%=60;
@@ -506,8 +531,6 @@ public class mainMenuController implements Initializable {
                     System.out.println(entry.getKey() + ": " + entry.getValue());
                 }*/
                 startTimer(media);
-                // play if you want
-               // mediaPlayer.play();
             }
         });
 
@@ -526,17 +549,9 @@ public class mainMenuController implements Initializable {
             }
         });
     }
-    private Timeline timeline = new Timeline();
-    //private int min;
-    private int startTimeSec, startTimeMin;
-    //private Parent borderPane;
-    //public BorderPane timeBorderPane;
-    private boolean isRunning;
-    private boolean newSongRunning = false;
-    int playCount = 0;
+
     public void startTimer(Media media) {
 
-       // if(isRunning == false) { //Added a if statement to switch on "running"
             if (!(startTimeMin < 0)) {
                 labelTimeLeft.setText(getMinFromMedia(media)+ ":" + getSecFromMedia(media));
                 ++playCount;
@@ -560,7 +575,12 @@ public class mainMenuController implements Initializable {
 
                         }
 
-                        labelTimeLeft.setText(startTimeMin + ":" +  startTimeSec);
+                        if (startTimeSec < 10){
+                            labelTimeLeft.setText(startTimeMin + ":0" +  startTimeSec);//to work around displaying a timer of 3:8 instead of 3:08
+                        }else{
+                            labelTimeLeft.setText(startTimeMin + ":" +  startTimeSec);
+
+                        }
 
                     }
                 });
@@ -575,13 +595,7 @@ public class mainMenuController implements Initializable {
                 timeline.getKeyFrames().add(keyframe);
                 timeline.playFromStart();
                 isRunning = true;
-            } /*else {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION, "You have not entered a time!");
-                alert.showAndWait();
             }
-        }else {
-            timeline.play(); //Playes from current position in in the direction indicated by rate.
-        }*/
 
     }
     public int getSecFromMedia(Media media){
